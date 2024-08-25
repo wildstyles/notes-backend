@@ -1,22 +1,27 @@
 import { Controller } from '@nestjs/common';
-import {
-  Ctx,
-  KafkaContext,
-  MessagePattern,
-  Payload,
-} from '@nestjs/microservices';
+import { KafkaContext, Payload } from '@nestjs/microservices';
+import { MessagePattern } from '@app/shared/modules/kafka-client/message-pattern.decorator';
+
+type CreateUserInputDto = {
+  username: string;
+  password: string;
+};
+
+class CreateUserResultDto {
+  message: string;
+}
+
+export interface IUserServiceController {
+  createUser(
+    message: CreateUserInputDto,
+    context: KafkaContext,
+  ): CreateUserResultDto;
+}
 
 @Controller()
-export class UserServiceController {
-  @MessagePattern('medium.rocks')
-  readMessage(@Payload() message: any, @Ctx() context: KafkaContext) {
-    const originalMessage = context.getMessage();
-
-    const response =
-      `Receiving a new message from topic: medium.rocks: ` +
-      JSON.stringify(originalMessage.value);
-    console.log(response);
-
-    return 'hi from user service';
+export class UserServiceController implements IUserServiceController {
+  @MessagePattern('user-service.createUser')
+  createUser(@Payload() message: CreateUserInputDto) {
+    return { message: null };
   }
 }

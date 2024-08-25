@@ -7,12 +7,15 @@ export class AppController implements OnModuleInit {
 
   @Get('kafka-test')
   async testKafka() {
-    const result = this.kafkaClientService.send('medium.rocks', {});
+    const result = this.kafkaClientService.send('user-service.createUser', {
+      password: 'sdf',
+      username: 'sdf',
+    });
 
     return result;
   }
 
   onModuleInit() {
-    this.kafkaClientService.subscribeToResponseOf('medium.rocks');
+    this.kafkaClientService.subscribeToResponseOf('user-service.createUser');
   }
 }
