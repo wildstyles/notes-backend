@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common';
-import { KafkaContext, Payload } from '@nestjs/microservices';
+import { KafkaContext } from '@nestjs/microservices';
 import { MessagePattern } from '@app/shared/modules/kafka-client/message-pattern.decorator';
 
 type CreateUserInputDto = {
@@ -21,7 +21,7 @@ export interface IUserServiceController {
 @Controller()
 export class UserServiceController implements IUserServiceController {
   @MessagePattern('user-service.createUser')
-  createUser(@Payload() message: CreateUserInputDto) {
+  createUser() {
     return { message: null };
   }
 }
