@@ -1,7 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "apps/gateway-service/src",
+  "sourceRoot": "./",
+  "entryFile": "src/main",
   "monorepo": true,
   "root": "apps/gateway-service",
   "compilerOptions": {
@@ -12,18 +13,26 @@
     "gateway-service": {
       "type": "application",
       "root": "apps/gateway-service",
-      "entryFile": "main",
-      "sourceRoot": "apps/gateway-service/src",
+      "entryFile": "src/main",
+      "sourceRoot": "./",
       "compilerOptions": {
+        "watchAssets": true,
+        "assets": [
+          "proto/*.proto"
+        ],
         "tsConfigPath": "apps/gateway-service/tsconfig.app.json"
       }
     },
     "user-service": {
       "type": "application",
       "root": "apps/user-service",
-      "entryFile": "main",
-      "sourceRoot": "apps/user-service/src",
+      "entryFile": "src/main",
+      "sourceRoot": "./",
       "compilerOptions": {
+        "watchAssets": true,
+        "assets": [
+          "proto/*.proto"
+        ],
         "tsConfigPath": "apps/user-service/tsconfig.app.json"
       }
     },

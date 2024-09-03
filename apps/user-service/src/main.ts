@@ -1,23 +1,10 @@
-import { NestFactory } from '@nestjs/core';
-import { Transport, MicroserviceOptions } from '@nestjs/microservices';
-import { UserServiceModule } from './user-service.module';
+import { AppModule } from './app.module';
+
+import { createKafkaMicroservice } from '@app/libs/kafka-client/create-kafka-microservice';
+import { createGrpcMicroservice } from '@app/libs/grpc-client/create-grpc-microservice';
 
 async function bootstrap() {
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(
-    UserServiceModule,
-    {
-      transport: Transport.KAFKA,
-      options: {
-        client: {
-          clientId: 'user',
-          brokers: ['kafka:9092'],
-        },
-        consumer: {
-          groupId: 'user',
-        },
-      },
-    },
-  );
-  await app.listen();
+  await createKafkaMicroservice(AppModule, 'user');
+  await createGrpcMicroservice(AppModule, 'UserService');
 }
 bootstrap();

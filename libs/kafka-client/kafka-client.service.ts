@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnModuleInit } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 
-import { IUserServiceController } from '@app/user-service/user-service.controller';
+import { IUserServiceController } from '@app/user-service/user-service.kafka.controller';
+import { KafkaClientName } from './kafka-client.module';
 
 type ServiceByName = {
   'user-service': IUserServiceController;
@@ -30,8 +31,11 @@ export interface IKafkaClientService {
 }
 
 @Injectable()
-export class KafkaClientService implements IKafkaClientService {
-  constructor(private readonly client: ClientKafka) {}
+export class KafkaClientService implements IKafkaClientService, OnModuleInit {
+  constructor(
+    private readonly client: ClientKafka,
+    private readonly clientName: KafkaClientName,
+  ) {}
 
   public send<PatternKey extends KafkaSendMessagePattern>(
     pattern: PatternKey,
@@ -43,4 +47,18 @@ export class KafkaClientService implements IKafkaClientService {
   public subscribeToResponseOf(pattern: KafkaSendMessagePattern): void {
     return this.client.subscribeToResponseOf(pattern);
   }
+
+  onModuleInit() {
+    subscribeToResponseOfByClientName[this.clientName].forEach((pattern) => {
+      this.subscribeToResponseOf(pattern);
+    });
+  }
 }
+
+const subscribeToResponseOfByClientName: Record<
+  KafkaClientName,
+  KafkaSendMessagePattern[]
+> = {
+  gateway: ['user-service.createUser'],
+  user: [],
+};

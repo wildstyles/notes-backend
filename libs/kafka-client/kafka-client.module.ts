@@ -4,14 +4,11 @@ import { ClientsModule, Transport, ClientKafka } from '@nestjs/microservices';
 
 import { KafkaClientService } from './kafka-client.service';
 
-export enum KAFKA_CLIENT_NAME {
-  GATEWAY = 'gateway',
-  USER = 'user',
-}
+export type KafkaClientName = 'gateway' | 'user';
 
 @Module({})
 export class KafkaClientModule {
-  public static forRoot(name: KAFKA_CLIENT_NAME): DynamicModule {
+  public static forRoot(name: KafkaClientName): DynamicModule {
     return {
       imports: [
         ClientsModule.register([
@@ -35,7 +32,8 @@ export class KafkaClientModule {
       providers: [
         {
           provide: KafkaClientService,
-          useFactory: (client: ClientKafka) => new KafkaClientService(client),
+          useFactory: (kafkaClient: ClientKafka) =>
+            new KafkaClientService(kafkaClient, name),
           inject: [name],
         },
       ],

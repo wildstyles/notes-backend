@@ -18,9 +18,12 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./apps/notes-backend/test/jest-e2e.json"
+    "test:e2e": "jest --config ./apps/notes-backend/test/jest-e2e.json",
+    "proto:generate": "protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --proto_path=proto --ts_proto_out=./libs/grpc-client/interfaces --ts_proto_opt=nestJs=true ./proto/*.proto"
   },
   "dependencies": {
+    "@grpc/grpc-js": "^1.11.1",
+    "@grpc/proto-loader": "^0.7.13",
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/microservices": "^10.3.9",
@@ -28,7 +31,8 @@
     "kafkajs": "^2.2.4",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "ts-proto": "^2.0.3"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",

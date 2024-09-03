@@ -22,7 +22,9 @@
     "paths": {
       "@app/user-service/*": ["apps/user-service/src/*"],
       "@app/shared": ["libs/shared/src"],
-      "@app/shared/*": ["libs/shared/src/*"]
+      "@app/shared/*": ["libs/shared/src/*"],
+      "@app/libs": ["libs"],
+      "@app/libs/*": ["libs/*"]
     }
   }
 }
