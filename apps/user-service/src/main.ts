@@ -1,10 +1,10 @@
 import { AppModule } from './app.module';
 
 import { createKafkaMicroservice } from '@app/libs/kafka-client/create-kafka-microservice';
-import { createGrpcMicroservice } from '@app/libs/grpc-client/create-grpc-microservice';
+import { setupGrpcMicroservice } from '@app/libs/grpc-client/setup-grpc-microservice';
 
 async function bootstrap() {
-  await createKafkaMicroservice(AppModule, 'user');
-  await createGrpcMicroservice(AppModule, 'UserService');
+  // await createKafkaMicroservice(AppModule, 'user');
+  await setupGrpcMicroservice(AppModule, 'UserService');
 }
 bootstrap();

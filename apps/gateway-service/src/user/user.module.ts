@@ -7,7 +7,7 @@ import { KafkaClientModule } from '@app/libs';
 @Module({
   imports: [
     GrpcClientModule.forRoot('UserService'),
-    KafkaClientModule.forRoot('gateway'),
+    // KafkaClientModule.forRoot('gateway'),
   ],
   controllers: [UserHttpController],
   providers: [],

@@ -5,20 +5,20 @@ import { KafkaClientService } from '@app/libs';
 @Controller('user')
 export class UserHttpController {
   constructor(
-    private readonly grpcClient: GrpcClientService<'UserService'>,
-    private readonly kafkaClient: KafkaClientService,
+    private readonly grpcClient: GrpcClientService<'UserService'>, // private readonly kafkaClient: KafkaClientService,
   ) {}
 
-  @Post()
-  async createUser() {
-    return this.kafkaClient.send('user-service.createUser', {
-      password: 'sdf',
-      username: 'sdf',
-    });
-  }
+  // @Post()
+  // async createUser() {
+  //   return this.kafkaClient.send('user-service.createUser', {
+  //     password: 'sdf',
+  //     username: 'sdf',
+  //   });
+  // }
 
   @Get()
   async getUser() {
+    // throw new Error('Not implemented');
     return this.grpcClient.methods.getUser({ id: '1' });
   }
 }

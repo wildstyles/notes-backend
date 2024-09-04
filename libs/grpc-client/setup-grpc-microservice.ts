@@ -5,21 +5,25 @@ import {
 } from '@nestjs/microservices';
 import { NestFactory } from '@nestjs/core';
 import { join } from 'path';
+import { Logger } from 'nestjs-pino';
 
 import { ServiceName } from './grpc-client.service';
 import { USER_SERVICE_PACKAGE_NAME } from './interfaces/user-service';
 
-export const createGrpcMicroservice = async (
+export const setupGrpcMicroservice = async (
   appModule: Function,
   serverName: ServiceName,
 ) => {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     appModule,
     {
+      bufferLogs: true,
       transport: Transport.GRPC,
       options: configByServiceName[serverName],
     },
   );
+
+  app.useLogger(app.get(Logger));
 
   await app.listen();
 };

@@ -4,6 +4,7 @@ import {
   KafkaOptions,
 } from '@nestjs/microservices';
 import { NestFactory } from '@nestjs/core';
+import { Logger } from 'nestjs-pino';
 
 import { KafkaClientName } from './kafka-client.module';
 
@@ -16,10 +17,13 @@ export const createKafkaMicroservice = async (
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     appModule,
     {
+      bufferLogs: true,
       transport: Transport.KAFKA,
       options: configByServiceName[serverName],
     },
   );
+
+  app.useLogger(app.get(Logger));
 
   await app.listen();
 };
