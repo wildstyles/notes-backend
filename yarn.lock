@@ -3806,6 +3806,11 @@ nestjs-pino@^4.1.0:
   resolved "https://registry.yarnpkg.com/nestjs-pino/-/nestjs-pino-4.1.0.tgz#dc671b8cad5fa3862b49464d0a553b23215ac16a"
   integrity sha512-I6zcddauD2TNMRbsraEIxNUvHcz0El5QRUYH5eY1+pBzj7R17U+Yoyypoc+akVdSLWJ1r0kDYAZPy2mlhXv6vw==
 
+nestjs-request-context@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/nestjs-request-context/-/nestjs-request-context-3.0.0.tgz#a6a709a2c9d2847ac3d5fd21ca00a7551a56fd69"
+  integrity sha512-S7MvH/ouOnaVEzHQxplGnPXNcOsp0FfMQSm6wFzsrMF4P5Ca3Okz0dgZpg4Gul7D4w2NhC8fFPsr/1i/3gFkfQ==
+
 node-abort-controller@^3.0.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/node-abort-controller/-/node-abort-controller-3.1.1.tgz#a94377e964a9a37ac3976d848cb5c765833b8548"

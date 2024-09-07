@@ -11,10 +11,7 @@ export class LoggerModule {
         base: null,
         useLevel: 'debug',
         genReqId: (req) => {
-          console.log('genReqId');
-          const reqId = req.headers['x-request-id'] || uuid();
-
-          return reqId;
+          return req.headers['x-request-id'] || uuid();
         },
         quietReqLogger: true,
         // customProps: (req, res) => ({

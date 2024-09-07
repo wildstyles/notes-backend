@@ -14,8 +14,6 @@ export class UserServiceGrpcController implements UserServiceController {
   private readonly logger = new Logger(UserServiceGrpcController.name);
 
   getUser(request: GetUserRequest): CreateUserResponse {
-    this.logger.debug('getUser');
-
     return {
       user: {
         id: '1',
