@@ -10,7 +10,8 @@ import { USER_SERVICE_PACKAGE_NAME } from './interfaces/user-service';
 import { GrpcClientService } from './grpc-client.service';
 import { ServiceName } from './grpc-client.service';
 import { InterceptingCall, NextCall, InterceptorOptions } from '@grpc/grpc-js';
-import { RequestContextModule, RequestContext } from 'nestjs-request-context';
+import { RequestContextModule } from '../request-context/request-context.module';
+import { RequestContext } from '../request-context/request-context.service';
 
 import { REQUEST_ID_METADATA_KEY } from './grpc-logger.interceptor';
 
