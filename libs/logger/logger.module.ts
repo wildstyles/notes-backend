@@ -14,13 +14,14 @@ export class LoggerModule {
           return req.headers['x-request-id'] || uuid();
         },
         quietReqLogger: true,
-        // customProps: (req, res) => ({
-        //   context: 'HTTP',
-        // }),
         transport: {
-          level: 'debug',
-          target: 'pino-pretty',
-          options: { singleLine: true, colorize: true },
+          targets: [
+            {
+              level: 'debug',
+              target: 'pino-pretty',
+              options: { singleLine: true, colorize: true },
+            },
+          ],
         },
       },
     });
