@@ -5,7 +5,7 @@ import {
   GetUserResponse,
   CreateUserRequest,
   CreateUserResponse,
-} from '@app/libs/grpc-client/interfaces/user-service';
+} from '@app/libs/grpc-client';
 import { Controller, Logger } from '@nestjs/common';
 
 @Controller()

@@ -63,6 +63,19 @@ services:
     volumes:
       - .:/app
 
+  supplier-service:
+    image: notes-backend/supplier-service
+    depends_on:
+      - gateway-service
+    container_name: supplier-service
+    build:
+      context: .
+    command: yarn start:dev supplier-service
+    networks:
+      - loki
+    volumes:
+      - .:/app
+
 networks:
   loki:
     external: true

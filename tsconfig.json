@@ -9,7 +9,6 @@
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
-    // https://github.com/Microsoft/TypeScript/issues/23724#issuecomment-384808199
     "keyofStringsOnly": true,
     "baseUrl": "./",
     "incremental": true,
@@ -20,11 +19,21 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@app/user-service/*": ["apps/user-service/src/*"],
-      "@app/shared": ["libs/shared/src"],
-      "@app/shared/*": ["libs/shared/src/*"],
-      "@app/libs": ["libs"],
-      "@app/libs/*": ["libs/*"]
+      "@app/user-service/*": [
+        "apps/user-service/src/*"
+      ],
+      "@app/shared": [
+        "libs/shared/src"
+      ],
+      "@app/shared/*": [
+        "libs/shared/src/*"
+      ],
+      "@app/libs": [
+        "libs"
+      ],
+      "@app/libs/*": [
+        "libs/*"
+      ]
     }
   }
 }

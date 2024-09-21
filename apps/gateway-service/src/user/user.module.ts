@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 
-import { UserHttpController } from './user.http.controller';
-import { GrpcClientModule } from '@app/libs/grpc-client/grpc-client.module';
+import { UserHttpController } from './user.http-controller';
+import { GrpcClientModule } from '@app/libs/grpc-client';
 import { KafkaClientModule } from '@app/libs';
 
 @Module({

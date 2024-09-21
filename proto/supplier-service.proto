@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+package supplier_service;
+
+
+service SupplierService {
+  rpc CreateSupplier(CreateSupplierRequest) returns (CreateSupplierResponse);
+  rpc UpdateSupplier(UpdateSupplierRequest) returns (UpdateSupplierResponse);
+  rpc CreateSupply(CreateSupplyRequest) returns (CreateSupplyResponse);
+}
+
+enum SupplierCategory {
+  PIZZA = 0;
+  ITALIAN = 1;
+  UKRAINIAN = 2;
+  BURGER = 3;
+}
+
+message Supplier {
+  string id = 1;
+  string name = 2;
+  SupplierAddress address = 3;
+  string startWorkingTime = 4;
+  string endWorkingTime = 5;
+  repeated SupplierCategory categories = 6;
+}
+
+message Supply {
+  string id = 1;
+  string supplierId = 2;
+  string name = 3;
+  string description = 4;
+  double price = 5;
+}
+
+message CreateSupplierRequest {
+  string name = 1;
+  SupplierAddress address = 2;
+  string startWorkingTime = 3;
+  string endWorkingTime = 4;
+  repeated SupplierCategory categories = 5;
+}
+
+message UpdateSupplierRequest {
+  string id = 1;
+  string name = 2;
+  SupplierAddress address = 3;
+  string startWorkingTime = 4;
+  string endWorkingTime = 5;
+  repeated SupplierCategory categories = 6;
+}
+
+message CreateSupplierResponse {
+  Supplier supplier = 1;
+} 
+
+message UpdateSupplierResponse {
+  Supplier supplier = 1;
+} 
+
+message CreateSupplyRequest {
+  string supplierId = 1;
+  string name = 2;
+  string description = 3;
+  double price = 4;
+}
+
+message CreateSupplyResponse {
+  Supply supply = 1;
+}
+
+message SupplierAddress {
+  string street = 1;
+  int32 floor = 2;
+}

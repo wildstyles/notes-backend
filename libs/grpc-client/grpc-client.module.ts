@@ -6,7 +6,7 @@ import {
   ClientGrpc,
 } from '@nestjs/microservices';
 import { join } from 'path';
-import { USER_SERVICE_PACKAGE_NAME } from './interfaces/user-service';
+import { USER_SERVICE_NAME, SUPPLIER_SERVICE_NAME } from './interfaces';
 import { GrpcClientService } from './grpc-client.service';
 import { ServiceName } from './grpc-client.service';
 import { InterceptingCall, NextCall, InterceptorOptions } from '@grpc/grpc-js';
@@ -70,7 +70,12 @@ const serviceConfigByName: Record<
 > = {
   UserService: {
     url: 'user-service:5001',
-    package: USER_SERVICE_PACKAGE_NAME,
+    package: 'user_service',
     protoPath: join(__dirname, '../user-service.proto'),
+  },
+  SupplierService: {
+    url: 'supplier-service:5002',
+    package: 'supplier_service',
+    protoPath: join(__dirname, '../supplier-service.proto'),
   },
 };

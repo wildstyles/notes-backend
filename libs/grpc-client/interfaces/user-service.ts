@@ -8,8 +8,6 @@
 import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
 import { Observable } from "rxjs";
 
-export const protobufPackage = "user_service";
-
 export interface GetUserRequest {
   id: string;
 }
@@ -42,8 +40,6 @@ export interface Address {
   street: string;
   city: string;
 }
-
-export const USER_SERVICE_PACKAGE_NAME = "user_service";
 
 export interface UserServiceClient {
   getUser(request: GetUserRequest): Observable<GetUserResponse>;
