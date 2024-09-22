@@ -1,15 +1,17 @@
 import { Module } from '@nestjs/common';
+import { CqrsModule } from '@nestjs/cqrs';
 
-import { UserHttpController } from './user.http-controller';
 import { GrpcClientModule } from '@app/libs/grpc-client';
-import { KafkaClientModule } from '@app/libs';
+
+import { GetUserHandler, GetUserHttpController } from './queries';
+
+const httpControllers = [GetUserHttpController];
+
+const queryHandlers = [GetUserHandler];
 
 @Module({
-  imports: [
-    GrpcClientModule.forRoot('UserService'),
-    // KafkaClientModule.forRoot('gateway'),
-  ],
-  controllers: [UserHttpController],
-  providers: [],
+  imports: [CqrsModule, GrpcClientModule.forRoot('UserService')],
+  controllers: [...httpControllers],
+  providers: [...queryHandlers],
 })
 export class UserModule {}

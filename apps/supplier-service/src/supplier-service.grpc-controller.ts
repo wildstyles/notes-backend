@@ -22,10 +22,7 @@ export class SupplierServiceGrpcController
     console.log(request, 'REQUEST');
 
     return {
-      supplier: {
-        ...request,
-        id: '1',
-      },
+      id: '',
     };
   }
 

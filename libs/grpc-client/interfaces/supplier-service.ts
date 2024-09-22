@@ -51,7 +51,7 @@ export interface UpdateSupplierRequest {
 }
 
 export interface CreateSupplierResponse {
-  supplier: Supplier | undefined;
+  id: string;
 }
 
 export interface UpdateSupplierResponse {
