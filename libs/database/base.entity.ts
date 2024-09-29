@@ -1,16 +1,12 @@
-import { PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Opt, PrimaryKey, Property } from '@mikro-orm/core';
 
 export abstract class BaseEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryKey()
+  id!: number;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  created: Date;
+  @Property()
+  createdAt: Date & Opt = new Date();
 
-  @Column({
-    type: 'timestamp',
-    default: () => 'CURRENT_TIMESTAMP',
-    onUpdate: 'CURRENT_TIMESTAMP',
-  })
-  updated: Date;
+  @Property({ onUpdate: () => new Date() })
+  updatedAt: Date & Opt = new Date();
 }

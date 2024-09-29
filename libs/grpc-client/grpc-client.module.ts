@@ -6,7 +6,6 @@ import {
   ClientGrpc,
 } from '@nestjs/microservices';
 import { join } from 'path';
-import { USER_SERVICE_NAME, SUPPLIER_SERVICE_NAME } from './interfaces';
 import { GrpcClientService } from './grpc-client.service';
 import { ServiceName } from './grpc-client.service';
 import { InterceptingCall, NextCall, InterceptorOptions } from '@grpc/grpc-js';

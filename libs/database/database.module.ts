@@ -1,18 +1,20 @@
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { Module, Scope } from '@nestjs/common';
+import { MikroOrmModule } from '@mikro-orm/nestjs';
+import { PostgreSqlDriver } from '@mikro-orm/postgresql';
+
 import { ConfigModule, ConfigService } from '../config';
-
-import { dataSourceConfig } from './database.config';
-
+import mikroOrmConfig from './mikro-orm.config';
+// https://medium.com/brain-station-23/repository-pattern-for-data-access-in-nestjs-using-typeorm-bbf0a92d6d7c
 @Module({
   imports: [
-    TypeOrmModule.forRootAsync({
+    MikroOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => {
         const { host } = configService.get('db');
 
         return {
-          ...dataSourceConfig,
+          ...mikroOrmConfig,
+          driver: PostgreSqlDriver,
           host,
         };
       },
@@ -20,4 +22,4 @@ import { dataSourceConfig } from './database.config';
     }),
   ],
 })
-export class DatabaseModule {}
+export class PgDatabaseModule {}

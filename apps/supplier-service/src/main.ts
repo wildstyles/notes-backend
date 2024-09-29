@@ -1,9 +1,9 @@
 import { setupGrpcMicroservice } from '@app/libs';
 
-import { SupplierServiceModule } from './supplier-service.module';
+import { AppModule } from './app.module';
 
 async function bootstrap() {
-  await setupGrpcMicroservice(SupplierServiceModule, 'SupplierService');
+  await setupGrpcMicroservice(AppModule, 'SupplierService');
 }
 
 bootstrap();
