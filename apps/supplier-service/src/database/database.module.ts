@@ -1,14 +1,16 @@
 import { Module } from '@nestjs/common';
-import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { PgDatabaseModule } from '@app/libs';
-import { EntityManager } from '@mikro-orm/postgresql';
 
-import { SupplierRepository, IDataService, DataService } from './repositories';
+import { IPersistenceService, PersistenceService } from './persistence.service';
 import { SupplierEntity, SupplyEntity } from './entities';
+import { MikroOrmModule } from '@mikro-orm/nestjs';
 
 @Module({
-  imports: [PgDatabaseModule],
-  // providers: [SupplierRepository],
-  // exports: [SupplierRepository],
+  imports: [
+    PgDatabaseModule,
+    MikroOrmModule.forFeature([SupplierEntity, SupplyEntity]),
+  ],
+  providers: [{ provide: IPersistenceService, useClass: PersistenceService }],
+  exports: [IPersistenceService],
 })
 export class DatabaseModule {}

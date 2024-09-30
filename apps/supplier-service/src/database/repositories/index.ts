@@ -1,2 +1,2 @@
-export * from './data.service';
 export * from './supplier.repository';
+export * from './supply.repository';

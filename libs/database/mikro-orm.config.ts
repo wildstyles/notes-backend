@@ -5,6 +5,8 @@ import { EnvironmentVariables } from '../config/env.validation';
 import { defineConfig } from '@mikro-orm/postgresql';
 
 import { SupplierEntity } from '../../apps/supplier-service/src/database/entities/supplier.entity';
+import { SupplyEntity } from '../../apps/supplier-service/src/database/entities/supply.entity';
+import { BaseEntity } from './base.entity';
 
 // despite that we use ConfigService from @nestjs/config, which is a wrapper around dotenv,
 // we still need to call config() to load the .env file. It allows us to run migrations from the host machine
@@ -18,6 +20,6 @@ export default defineConfig({
   password: configService.getOrThrow('DB_PASSWORD'),
   dbName: configService.getOrThrow('DB_NAME'),
   host: 'localhost',
-  entities: [SupplierEntity],
-  entitiesTs: [SupplierEntity],
+  entities: [SupplierEntity, BaseEntity, SupplyEntity],
+  entitiesTs: [SupplierEntity, BaseEntity, SupplyEntity],
 });

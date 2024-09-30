@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { LoggerModule } from '@app/libs';
 
-import { DatabaseModule } from './database';
+import { DatabaseModule } from './database/database.module';
 
 import {
   CreateSupplierGrpcController,

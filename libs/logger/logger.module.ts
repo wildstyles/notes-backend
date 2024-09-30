@@ -7,7 +7,7 @@ export class LoggerModule {
   static forRoot() {
     return PinoLoggerModule.forRoot({
       pinoHttp: {
-        level: 'debug',
+        level: 'error',
         base: null,
         useLevel: 'debug',
         genReqId: (req) => {

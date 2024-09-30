@@ -1,17 +1,30 @@
-import { Entity, Property, ManyToOne, Cascade } from '@mikro-orm/core';
+import {
+  Entity,
+  Property,
+  ManyToOne,
+  Cascade,
+  EntityRepositoryType,
+} from '@mikro-orm/core';
 
-import { BaseEntity } from '@app/libs';
+import { BaseEntity } from '../../../../../libs/database/base.entity';
 
 import { SupplierEntity } from './supplier.entity';
 
-@Entity({ tableName: 'supplies' })
+import { SupplyRepository } from '../repositories/supply.repository';
+
+@Entity({ tableName: 'supplies', repository: () => SupplyRepository })
 export class SupplyEntity extends BaseEntity {
-  // @Property({ length: 255, type: 'varchar' })
-  // name: string;
-  // @Property({ length: 255, type: 'varchar' })
-  // description: string;
-  // @Property('numeric')
-  // price: number;
+  @Property({ type: 'string' })
+  name: string;
+
+  @Property({ type: 'string' })
+  description: string;
+
+  @Property({ type: 'numeric' })
+  price: number;
+
+  [EntityRepositoryType]?: SupplyRepository;
+
   // @Property({ type: 'uuid' })
   // supplierId: string;
   // @ManyToOne(() => SupplierEntity, {
