@@ -19,12 +19,12 @@ export class CreateSupplyHttpController {
   })
   async createSupply(
     @Body() body: CreateSupplyRequestDto,
-    @Param(routes.createSupply.params.supplierId) supplierId: string,
+    @Param(routes.createSupply.params.supplierId!) supplierId: string,
   ): Promise<CreateSupplyResponseDto> {
     const command = new CreateSupplyCommand(body, supplierId);
 
     const result: CreateSupplyResponse = await this.commandBus.execute(command);
 
-    return new CreateSupplyResponseDto(result.supply.id);
+    return new CreateSupplyResponseDto(result.supply!.id);
   }
 }

@@ -23,7 +23,7 @@ export interface IUserServiceController {
 export class UserServiceKafkaController implements IUserServiceController {
   // @MessagePattern('user-service.createUser')
   createUser() {
-    return { message: null };
+    return { message: '' };
   }
 
   deleteUser(): void {}

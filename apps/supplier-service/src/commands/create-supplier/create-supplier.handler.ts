@@ -14,11 +14,14 @@ export class CreateSupplierHandler
   async execute(
     command: CreateSupplierCommand,
   ): Promise<CreateSupplierResponse> {
-    const god = this.persistenceService.suppliers.create({});
+    const supplier = this.persistenceService.suppliers.create({
+      name: 'Winetime',
+      startWorkingTime: '08:00',
+      endWorkingTime: '17:00',
+      supplies: [{ name: 'Wine', price: 100, description: 'Red wine' }],
+    });
 
-    console.log(god);
-
-    // console.log(this.persistenceService.suppliers.create);
+    await this.persistenceService.em.flush();
 
     return {
       id: '123',

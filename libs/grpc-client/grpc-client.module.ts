@@ -46,7 +46,7 @@ export class GrpcClientModule {
                       start: (metadata, listener, next) => {
                         metadata.set(
                           REQUEST_ID_METADATA_KEY,
-                          RequestContext.currentContext.req.id,
+                          RequestContext.currentContext!.req.id,
                         );
 
                         next(metadata, listener);

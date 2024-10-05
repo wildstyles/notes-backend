@@ -2,6 +2,7 @@ import {
   Entity,
   Property,
   ManyToOne,
+  Ref,
   Cascade,
   EntityRepositoryType,
 } from '@mikro-orm/core';
@@ -14,21 +15,21 @@ import { SupplyRepository } from '../repositories/supply.repository';
 
 @Entity({ tableName: 'supplies', repository: () => SupplyRepository })
 export class SupplyEntity extends BaseEntity {
-  @Property({ type: 'string' })
+  @Property({ length: 255, type: 'varchar' })
   name: string;
 
-  @Property({ type: 'string' })
+  @Property({ length: 255, type: 'varchar' })
   description: string;
 
   @Property({ type: 'numeric' })
   price: number;
 
-  [EntityRepositoryType]?: SupplyRepository;
+  @ManyToOne({
+    cascade: [Cascade.ALL],
+    ref: true,
+    entity: () => SupplierEntity,
+  })
+  supplier: Ref<SupplierEntity>;
 
-  // @Property({ type: 'uuid' })
-  // supplierId: string;
-  // @ManyToOne(() => SupplierEntity, {
-  //   cascade: [Cascade.REMOVE],
-  // })
-  // supplier: SupplierEntity;
+  [EntityRepositoryType]?: SupplyRepository;
 }

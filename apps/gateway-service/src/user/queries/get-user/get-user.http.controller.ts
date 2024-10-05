@@ -17,12 +17,12 @@ export class GetUserHttpController {
   @Get(routes.getUser.path())
   @ApiOkResponse({ type: GetUserResponseDto })
   async getUser(
-    @Param(routes.getUser.params.id) id: string,
+    @Param(routes.getUser.params.id!) id: string,
   ): Promise<GetUserResponseDto> {
     const query = new GetUserQuery(id);
 
     const result: GetUserResponse = await this.queryBus.execute(query);
 
-    return new GetUserResponseDto(result.user.id);
+    return new GetUserResponseDto(result.user!.id);
   }
 }

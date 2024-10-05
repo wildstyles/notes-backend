@@ -20,7 +20,7 @@ type ServiceClientByName = {
 @Injectable()
 export class GrpcClientService<
   T extends ServiceName,
-  S = ServiceClientByName[T],
+  S extends {} = ServiceClientByName[T],
 > implements OnModuleInit
 {
   public methods: S;

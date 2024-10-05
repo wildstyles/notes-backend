@@ -3,7 +3,7 @@ import { SupplierCategory, CreateSupplierRequest } from '@app/libs';
 export class CreateSupplierCommand {
   readonly name: string;
 
-  readonly address: {
+  readonly address?: {
     floor: number;
     street: string;
   };

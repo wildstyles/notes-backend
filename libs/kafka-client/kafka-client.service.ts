@@ -10,6 +10,7 @@ type ServiceByName = {
 };
 
 type TransformService<N extends keyof ServiceByName> = {
+  // @ts-ignore
   [K in keyof ServiceByName[N] as `${N}.${K}`]: ServiceByName[N][K] extends (
     ...args: infer P
   ) => infer R
