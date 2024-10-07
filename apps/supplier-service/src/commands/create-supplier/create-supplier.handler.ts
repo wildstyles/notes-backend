@@ -5,6 +5,8 @@ import { IPersistenceService } from '../../database/persistence.service';
 
 import { CreateSupplierCommand } from '.';
 
+import { SupplierModel } from '../../domain/supplier.model';
+
 @CommandHandler(CreateSupplierCommand)
 export class CreateSupplierHandler
   implements ICommandHandler<CreateSupplierCommand, CreateSupplierResponse>
@@ -14,17 +16,18 @@ export class CreateSupplierHandler
   async execute(
     command: CreateSupplierCommand,
   ): Promise<CreateSupplierResponse> {
-    const supplier = this.persistenceService.suppliers.create({
+    const supplier = SupplierModel.create({
       name: 'Winetime',
       startWorkingTime: '08:00',
       endWorkingTime: '17:00',
-      supplies: [{ name: 'Wine', price: 100, description: 'Red wine' }],
     });
+
+    this.persistenceService.suppliers.create(supplier);
 
     await this.persistenceService.em.flush();
 
     return {
-      id: '123',
+      id: supplier.getProps().id,
     };
   }
 }

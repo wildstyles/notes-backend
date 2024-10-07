@@ -1,13 +1,12 @@
-import { PrimaryKey, Property, Opt } from '@mikro-orm/core';
-import { v4 as uuid } from 'uuid';
+import { PrimaryKey, Property } from '@mikro-orm/core';
 
 export abstract class BaseEntity {
   @PrimaryKey({ type: 'uuid' })
-  id = uuid();
+  id: string;
 
   @Property()
-  createdAt: Date & Opt = new Date();
+  createdAt: Date;
 
   @Property({ onUpdate: () => new Date() })
-  updatedAt: Date & Opt = new Date();
+  updatedAt: Date;
 }

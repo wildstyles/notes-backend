@@ -1,5 +1,21 @@
-import { EntityRepository } from '@mikro-orm/postgresql';
+import { EntityManager } from '@mikro-orm/postgresql';
+import { Injectable } from '@nestjs/common';
 
-import { SupplierEntity } from '../entities';
+import { Repository } from '@app/libs/database/base.repository';
 
-export class SupplierRepository extends EntityRepository<SupplierEntity> {}
+import { SupplierModel } from '../../domain/supplier.model';
+import { SupplierEntity } from '../entities/supplier.entity';
+import { SupplierMapper } from '../mappers/supplier.mapper';
+
+@Injectable()
+export class SupplierRepository extends Repository<
+  SupplierModel,
+  SupplierEntity
+> {
+  constructor(
+    protected readonly mapper: SupplierMapper,
+    protected readonly em: EntityManager,
+  ) {
+    super(em.getRepository(SupplierEntity), mapper);
+  }
+}
