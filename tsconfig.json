@@ -12,6 +12,8 @@
     "baseUrl": "./",
     "incremental": true,
     "strict": true,
+
+    "allowJs": false,
     "strictPropertyInitialization": false,
     "esModuleInterop": true,
     "skipLibCheck": true,

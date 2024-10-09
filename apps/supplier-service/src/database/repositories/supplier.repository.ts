@@ -18,4 +18,8 @@ export class SupplierRepository extends Repository<
   ) {
     super(em.getRepository(SupplierEntity), mapper);
   }
+
+  async findOneOrFail(id: string): Promise<SupplierModel> {
+    return super.findOneOrFail(id, { populate: ['supplies'] });
+  }
 }

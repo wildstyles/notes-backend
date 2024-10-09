@@ -1,11 +1,20 @@
-import { SupplierModel } from './supplier.model';
+import { SupplierId } from './supplier.model';
 
-export class SupplyModel {
-  private readonly _name: string;
+import { BaseModel, Id } from '../../../../libs/ddd/base.model';
 
-  private readonly _description: string;
+interface SupplyProps {
+  name: string;
+  description: string;
+  price: number;
+  supplierId: SupplierId;
+}
 
-  private readonly _price: number;
+type SupplyId = Id<'Supply'>;
 
-  private readonly _supplier: SupplierModel;
+export interface CreateSupplyProps extends SupplyProps {}
+
+export class SupplyModel extends BaseModel<SupplyProps, SupplyId> {
+  static create(props: CreateSupplyProps): SupplyModel {
+    return new SupplyModel({ props });
+  }
 }

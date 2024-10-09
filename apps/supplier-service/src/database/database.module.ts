@@ -6,9 +6,9 @@ import { SupplierEntity, SupplyEntity } from './entities';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 
 import { SupplierRepository } from './repositories';
-import { SupplierMapper } from './mappers';
+import { SupplierMapper, SupplyMapper } from './mappers';
 
-const mappers = [SupplierMapper];
+const mappers = [SupplierMapper, SupplyMapper];
 
 const repositories = [SupplierRepository];
 

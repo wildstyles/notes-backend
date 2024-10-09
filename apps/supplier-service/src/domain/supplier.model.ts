@@ -1,6 +1,6 @@
-import { SupplyModel } from './supply.model';
+import { SupplyModel, CreateSupplyProps } from './supply.model';
 
-import { BaseModel, Id } from './base.model';
+import { BaseModel, Id } from '../../../../libs/ddd/base.model';
 
 interface SupplierProps {
   name: string;
@@ -9,16 +9,15 @@ interface SupplierProps {
   supplies: SupplyModel[];
 }
 
-interface CreateSupplierProps {
-  name: string;
-  startWorkingTime: string;
-  endWorkingTime: string;
-}
+interface CreateSupplierProps extends Omit<SupplierProps, 'supplies'> {}
+interface AddSupplyProps extends Omit<CreateSupplyProps, 'supplierId'> {}
 
-type SupplierId = Id<'Supplier'>;
+export type SupplierId = Id<'Supplier'>;
 
 export class SupplierModel extends BaseModel<SupplierProps, SupplierId> {
-  public addSupply(supply: SupplyModel): void {
+  public addSupply(props: AddSupplyProps): void {
+    const supply = SupplyModel.create({ ...props, supplierId: this.id });
+
     this.props.supplies.push(supply);
   }
 

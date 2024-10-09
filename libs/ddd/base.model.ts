@@ -13,7 +13,10 @@ export interface CreateModelProps<T, Id> extends Partial<BaseModelProps<Id>> {
   props: T;
 }
 
-export abstract class BaseModel<ModelProps, ModelId extends Id<string>> {
+export abstract class BaseModel<
+  ModelProps extends {} = {},
+  ModelId extends Id<string> = string,
+> {
   protected readonly id: ModelId;
   protected readonly createdAt: Date;
   protected readonly updatedAt: Date;
