@@ -9,7 +9,7 @@ interface SupplyProps {
   supplierId: SupplierId;
 }
 
-type SupplyId = Id<'Supply'>;
+export type SupplyId = Id<'Supply'>;
 
 export interface CreateSupplyProps extends SupplyProps {}
 

@@ -3,14 +3,14 @@ import { EntityManager } from '@mikro-orm/postgresql';
 
 import { SupplierRepository, SupplyRepository } from './repositories';
 
-export abstract class IPersistenceService {
+export abstract class IDbContext {
   suppliers: SupplierRepository;
   supplies: SupplyRepository;
   em: EntityManager;
 }
 
 @Injectable()
-export class PersistenceService implements IPersistenceService {
+export class DbContext implements IDbContext {
   suppliers: SupplierRepository;
   supplies: SupplyRepository;
   em: EntityManager;

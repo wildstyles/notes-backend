@@ -1,7 +1,7 @@
 import { ICommandHandler, CommandHandler } from '@nestjs/cqrs';
 
 import { CreateSupplierResponse } from '@app/libs';
-import { IPersistenceService } from '../../database/persistence.service';
+import { IDbContext } from '../../database/db-context.service';
 
 import { CreateSupplierCommand } from '.';
 
@@ -11,7 +11,7 @@ import { SupplierModel } from '../../domain/supplier.model';
 export class CreateSupplierHandler
   implements ICommandHandler<CreateSupplierCommand, CreateSupplierResponse>
 {
-  constructor(private readonly persistenceService: IPersistenceService) {}
+  constructor(private readonly dbContext: IDbContext) {}
 
   async execute(
     command: CreateSupplierCommand,
@@ -22,9 +22,9 @@ export class CreateSupplierHandler
       endWorkingTime: '17:00',
     });
 
-    this.persistenceService.suppliers.create(supplier);
+    this.dbContext.suppliers.create(supplier);
 
-    await this.persistenceService.em.flush();
+    await this.dbContext.em.flush();
 
     return {
       id: supplier.getProps().id,

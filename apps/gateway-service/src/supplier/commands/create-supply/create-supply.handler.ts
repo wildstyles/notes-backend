@@ -14,10 +14,10 @@ export class CreateSupplyHandler
 
   async execute(command: CreateSupplyCommand): Promise<CreateSupplyResponse> {
     const result$ = this.grpcClient.methods.createSupply({
-      name: 'Supplier 1',
+      name: 'Supply 1',
       price: 0,
       description: 'Description',
-      supplierId: 'supplierId',
+      supplierId: command.supplierId,
     });
 
     return lastValueFrom(result$);

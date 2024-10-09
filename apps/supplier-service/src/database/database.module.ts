@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { PgDatabaseModule } from '@app/libs';
 
-import { IPersistenceService, PersistenceService } from './persistence.service';
+import { IDbContext, DbContext } from './db-context.service';
 import { SupplierEntity, SupplyEntity } from './entities';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 
@@ -20,8 +20,8 @@ const repositories = [SupplierRepository];
   providers: [
     ...repositories,
     ...mappers,
-    { provide: IPersistenceService, useClass: PersistenceService },
+    { provide: IDbContext, useClass: DbContext },
   ],
-  exports: [IPersistenceService],
+  exports: [IDbContext],
 })
 export class DatabaseModule {}

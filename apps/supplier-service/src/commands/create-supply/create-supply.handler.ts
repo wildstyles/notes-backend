@@ -1,22 +1,41 @@
 import { ICommandHandler, CommandHandler } from '@nestjs/cqrs';
 
-import { CreateSupplyResponse } from '@app/libs';
+import { CreateSupplyResponse as Response } from '@app/libs';
 
 import { CreateSupplyCommand } from '.';
-import { CreateRequestContext } from '@mikro-orm/core';
+
+import { IDbContext } from '../../database/db-context.service';
+import { Result, Ok } from 'oxide.ts';
+
+import { MaxSuppliesReachedError } from '../../domain/supplier.errors';
+
+export type CreateSupplyResponse = Result<Response, MaxSuppliesReachedError>;
 
 @CommandHandler(CreateSupplyCommand)
 export class CreateSupplyHandler
   implements ICommandHandler<CreateSupplyCommand, CreateSupplyResponse>
 {
-  constructor() {}
+  constructor(private readonly dbContext: IDbContext) {}
 
-  @CreateRequestContext()
   async execute(command: CreateSupplyCommand): Promise<CreateSupplyResponse> {
-    console.log(command);
+    const supplier = await this.dbContext.suppliers.findOneOrFail(
+      command.supplierId,
+    );
 
-    return {
-      supply: { id: '1' } as any,
-    };
+    const result = supplier.addSupply({
+      name: command.name,
+      price: command.price,
+      description: command.description,
+    });
+
+    if (result.isErr()) {
+      return result;
+    }
+
+    this.dbContext.suppliers.update(supplier);
+
+    await this.dbContext.em.flush();
+
+    return Ok({ supply: { id: result.unwrap() } as any });
   }
 }
