@@ -32,6 +32,15 @@ export abstract class Repository<
     protected readonly mapper: IMapper<Model, Entity>,
   ) {}
 
+  async findOneOrFail<Hint extends string = never>(
+    where: FilterQuery<Entity>,
+    options?: FindOneOrFailOptions<Entity, Hint>,
+  ): Promise<Model> {
+    const entity = await this.repository.findOneOrFail(where, options);
+
+    return this.mapper.toDomain(entity);
+  }
+
   update(model: Model): void {
     const entityData = this.mapper.toEntityData(model);
     const ref = this.repository.getReference(entityData.id);
@@ -42,18 +51,18 @@ export abstract class Repository<
     );
   }
 
-  async findOneOrFail<Hint extends string = never>(
-    where: FilterQuery<Entity>,
-    options?: FindOneOrFailOptions<Entity, Hint>,
-  ): Promise<Model> {
-    const entity = await this.repository.findOneOrFail(where, options);
-
-    return this.mapper.toDomain(entity);
-  }
-
-  create(model: Model): Entity {
+  create(model: Model): void {
     const entityData = this.mapper.toEntityData(model);
 
-    return this.repository.create(entityData);
+    this.repository.create(entityData);
+  }
+
+  delete(model: Model): void {
+    const { id } = model.getProps();
+
+    const em = this.repository.getEntityManager();
+    const ref = this.repository.getReference(id as Primary<Entity>);
+
+    em.remove(ref);
   }
 }

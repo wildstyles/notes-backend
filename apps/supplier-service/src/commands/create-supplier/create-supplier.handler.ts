@@ -16,19 +16,13 @@ export class CreateSupplierHandler
   async execute(
     command: CreateSupplierCommand,
   ): Promise<CreateSupplierResponse> {
-    // const supplier = SupplierModel.create({
-    //   name: 'Winetime',
-    //   startWorkingTime: '08:00',
-    //   endWorkingTime: '17:00',
-    // });
+    const supplier = SupplierModel.create({
+      name: 'Winetime',
+      startWorkingTime: '08:00',
+      endWorkingTime: '17:00',
+    });
 
-    const supplier = await this.persistenceService.suppliers.findOneOrFail(
-      '905d41d9-278b-4d9e-b796-ec08819bd6df',
-    );
-
-    supplier.addSupply({ name: 'Wine', price: 100, description: 'Red Wine' });
-
-    this.persistenceService.suppliers.update(supplier);
+    this.persistenceService.suppliers.create(supplier);
 
     await this.persistenceService.em.flush();
 

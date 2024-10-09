@@ -17,6 +17,7 @@ export class SupplierEntity extends BaseEntity {
 
   @OneToMany({
     entity: () => SupplyEntity,
+    orphanRemoval: true,
     mappedBy: (supply) => supply.supplier,
   })
   supplies = new Collection<SupplyEntity>(this);
