@@ -1,37 +1,29 @@
 import { Controller } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
-import { CommandBus } from '@nestjs/cqrs';
 
 import {
-  SupplierServiceController,
   CreateSupplierRequest,
   CreateSupplierResponse,
   SUPPLIER_SERVICE_NAME,
 } from '@app/libs/grpc-client';
 
-import { CreateSupplierCommand } from '.';
+import { CreateSupplierCommand, CreateSupplierHandler } from '.';
 import { CreateRequestContext } from '@mikro-orm/core';
-import { EntityManager } from '@mikro-orm/postgresql';
+import { GrpcController } from '../common/grpc.controller';
 
 @Controller()
-export class CreateSupplierGrpcController
-  implements Pick<SupplierServiceController, 'createSupplier'>
-{
-  constructor(
-    private readonly commandBus: CommandBus,
-    private readonly em: EntityManager,
-  ) {}
+export class CreateSupplierGrpcController extends GrpcController<'createSupplier'> {
+  constructor(private readonly handler: CreateSupplierHandler) {
+    super();
+  }
 
   @GrpcMethod(SUPPLIER_SERVICE_NAME, 'createSupplier')
   @CreateRequestContext()
-  async createSupplier(
+  async handle(
     request: CreateSupplierRequest,
   ): Promise<CreateSupplierResponse> {
     const command = new CreateSupplierCommand(request);
 
-    return this.commandBus.execute<
-      CreateSupplierCommand,
-      CreateSupplierResponse
-    >(command);
+    return this.handler.execute(command);
   }
 }

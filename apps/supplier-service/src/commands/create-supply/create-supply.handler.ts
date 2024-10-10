@@ -1,23 +1,16 @@
-import { ICommandHandler, CommandHandler } from '@nestjs/cqrs';
+import { Injectable } from '@nestjs/common';
+import { Ok } from 'oxide.ts';
 
-import { CreateSupplyResponse as Response } from '@app/libs';
+import { CommandHandler } from '../common/command.handler';
 
-import { CreateSupplyCommand } from '.';
+import {
+  CreateSupplyCommand as Command,
+  CreateSupplyCommandResponse as Response,
+} from '.';
 
-import { IDbContext } from '../../database/db-context.service';
-import { Result, Ok } from 'oxide.ts';
-
-import { MaxSuppliesReachedError } from '../../domain/supplier.errors';
-
-export type CreateSupplyResponse = Result<Response, MaxSuppliesReachedError>;
-
-@CommandHandler(CreateSupplyCommand)
-export class CreateSupplyHandler
-  implements ICommandHandler<CreateSupplyCommand, CreateSupplyResponse>
-{
-  constructor(private readonly dbContext: IDbContext) {}
-
-  async execute(command: CreateSupplyCommand): Promise<CreateSupplyResponse> {
+@Injectable()
+export class CreateSupplyHandler extends CommandHandler<Command, Response> {
+  async implementation(command: Command): Promise<Response> {
     const supplier = await this.dbContext.suppliers.findOneOrFail(
       command.supplierId,
     );
@@ -33,8 +26,6 @@ export class CreateSupplyHandler
     }
 
     this.dbContext.suppliers.update(supplier);
-
-    await this.dbContext.em.flush();
 
     return Ok({ supply: { id: result.unwrap() } as any });
   }

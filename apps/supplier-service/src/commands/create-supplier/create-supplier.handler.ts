@@ -1,21 +1,17 @@
-import { ICommandHandler, CommandHandler } from '@nestjs/cqrs';
+import { Injectable } from '@nestjs/common';
 
-import { CreateSupplierResponse } from '@app/libs';
-import { IDbContext } from '../../database/db-context.service';
+import { CommandHandler } from '../common/command.handler';
 
-import { CreateSupplierCommand } from '.';
+import {
+  CreateSupplierCommand as Command,
+  CreateSupplierCommandResponse as Response,
+} from '.';
 
 import { SupplierModel } from '../../domain/supplier.model';
 
-@CommandHandler(CreateSupplierCommand)
-export class CreateSupplierHandler
-  implements ICommandHandler<CreateSupplierCommand, CreateSupplierResponse>
-{
-  constructor(private readonly dbContext: IDbContext) {}
-
-  async execute(
-    command: CreateSupplierCommand,
-  ): Promise<CreateSupplierResponse> {
+@Injectable()
+export class CreateSupplierHandler extends CommandHandler<Command, Response> {
+  async implementation(command: Command): Promise<Response> {
     const supplier = SupplierModel.create({
       name: 'Winetime',
       startWorkingTime: '08:00',
@@ -23,8 +19,6 @@ export class CreateSupplierHandler
     });
 
     this.dbContext.suppliers.create(supplier);
-
-    await this.dbContext.em.flush();
 
     return {
       id: supplier.getProps().id,

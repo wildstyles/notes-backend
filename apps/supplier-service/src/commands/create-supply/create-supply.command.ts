@@ -1,4 +1,7 @@
-import { CreateSupplyRequest } from '@app/libs';
+import { CreateSupplyRequest, CreateSupplyResponse } from '@app/libs';
+import { Result } from 'oxide.ts';
+
+import { MaxSuppliesReachedError } from '../../domain/supplier.errors';
 
 export class CreateSupplyCommand {
   readonly name: string;
@@ -16,3 +19,8 @@ export class CreateSupplyCommand {
     this.supplierId = request.supplierId;
   }
 }
+
+export type CreateSupplyCommandResponse = Result<
+  CreateSupplyResponse,
+  MaxSuppliesReachedError
+>;

@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
 import { PgDatabaseModule } from '@app/libs';
 
-import { IDbContext, DbContext } from './db-context.service';
+import { DbContext } from './db-context.service';
+import { DB_CONTEXT_TOKEN } from '@app/libs';
 import { SupplierEntity, SupplyEntity } from './entities';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 
@@ -20,8 +21,8 @@ const repositories = [SupplierRepository];
   providers: [
     ...repositories,
     ...mappers,
-    { provide: IDbContext, useClass: DbContext },
+    { provide: DB_CONTEXT_TOKEN, useClass: DbContext },
   ],
-  exports: [IDbContext],
+  exports: [{ provide: DB_CONTEXT_TOKEN, useClass: DbContext }],
 })
 export class DatabaseModule {}

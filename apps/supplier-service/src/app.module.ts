@@ -1,5 +1,4 @@
-import { Module } from '@nestjs/common';
-import { CqrsModule } from '@nestjs/cqrs';
+import { Module, Provider } from '@nestjs/common';
 import { LoggerModule } from '@app/libs';
 
 import { DatabaseModule } from './database/database.module';
@@ -16,10 +15,13 @@ const grpcControllers = [
   CreateSupplyGrpcController,
 ];
 
-const commandHandlers = [CreateSupplierHandler, CreateSupplyHandler];
+const commandHandlers: Provider[] = [
+  CreateSupplierHandler,
+  CreateSupplyHandler,
+];
 
 @Module({
-  imports: [CqrsModule, LoggerModule.forRoot(), DatabaseModule],
+  imports: [LoggerModule.forRoot(), DatabaseModule],
   providers: [...commandHandlers],
   controllers: [...grpcControllers],
 })

@@ -6,12 +6,19 @@ import {
   FromEntityType,
   Primary,
   EntityData,
+  EntityManager,
 } from '@mikro-orm/postgresql';
 import { BaseEntity } from './base.entity';
 import { BaseModel } from '../ddd/base.model';
 
 // https://medium.com/brain-station-23/repository-pattern-for-data-access-in-nestjs-using-typeorm-bbf0a92d6d7c
 // https://dou.ua/forums/topic/47721/
+
+export const DB_CONTEXT_TOKEN = 'DB_CONTEXT';
+
+export interface IDbContextBase {
+  em: EntityManager;
+}
 
 export interface IMapper<
   DomainModel extends BaseModel,

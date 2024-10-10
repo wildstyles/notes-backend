@@ -1,4 +1,8 @@
-import { SupplierCategory, CreateSupplierRequest } from '@app/libs';
+import {
+  SupplierCategory,
+  CreateSupplierRequest,
+  CreateSupplierResponse,
+} from '@app/libs';
 
 export class CreateSupplierCommand {
   readonly name: string;
@@ -22,3 +26,5 @@ export class CreateSupplierCommand {
     this.categories = request.categories;
   }
 }
+
+export type CreateSupplierCommandResponse = CreateSupplierResponse;
