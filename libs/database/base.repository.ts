@@ -8,7 +8,10 @@ import {
   EntityData,
   EntityManager,
 } from '@mikro-orm/postgresql';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 import { BaseEntity } from './base.entity';
+import { AggregateRoot } from '../ddd/base.aggregate-root';
+import { Inject } from '@nestjs/common';
 import { BaseModel } from '../ddd/base.model';
 
 // https://medium.com/brain-station-23/repository-pattern-for-data-access-in-nestjs-using-typeorm-bbf0a92d6d7c
@@ -31,9 +34,12 @@ export interface IMapper<
 }
 
 export abstract class Repository<
-  Model extends BaseModel,
+  Model extends AggregateRoot,
   Entity extends BaseEntity,
 > {
+  @Inject(EventEmitter2)
+  private readonly eventEmitter: EventEmitter2;
+
   constructor(
     protected readonly repository: EntityRepository<Entity>,
     protected readonly mapper: IMapper<Model, Entity>,
@@ -48,7 +54,7 @@ export abstract class Repository<
     return this.mapper.toDomain(entity);
   }
 
-  update(model: Model): void {
+  async update(model: Model): Promise<void> {
     const entityData = this.mapper.toEntityData(model);
     const ref = this.repository.getReference(entityData.id);
 
@@ -56,20 +62,30 @@ export abstract class Repository<
       ref,
       entityData as EntityData<FromEntityType<Entity>>,
     );
+
+    await this.publishDomainEvents(model);
   }
 
-  create(model: Model): void {
+  async create(model: Model): Promise<void> {
     const entityData = this.mapper.toEntityData(model);
 
     this.repository.create(entityData);
+
+    await this.publishDomainEvents(model);
   }
 
-  delete(model: Model): void {
+  async delete(model: Model): Promise<void> {
     const { id } = model.getProps();
 
     const em = this.repository.getEntityManager();
     const ref = this.repository.getReference(id as Primary<Entity>);
 
     em.remove(ref);
+
+    await this.publishDomainEvents(model);
+  }
+
+  protected async publishDomainEvents(model: Model): Promise<void> {
+    await model.publishEvents(this.eventEmitter);
   }
 }

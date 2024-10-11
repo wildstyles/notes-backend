@@ -2,8 +2,12 @@ import { Result, Ok, Err } from 'oxide.ts';
 
 import { SupplyModel, CreateSupplyProps, SupplyId } from './supply.model';
 
-import { BaseModel, Id } from '../../../../libs/ddd/base.model';
+import { Id } from '../../../../libs/ddd/base.model';
+
+import { AggregateRoot } from '@app/libs/ddd/base.aggregate-root';
+
 import { MaxSuppliesReachedError } from './supplier.errors';
+import { SupplierCreatedDomainEvent } from './events/supplier-created.domain-event';
 
 interface SupplierProps {
   name: string;
@@ -17,7 +21,7 @@ interface AddSupplyProps extends Omit<CreateSupplyProps, 'supplierId'> {}
 
 export type SupplierId = Id<'Supplier'>;
 
-export class SupplierModel extends BaseModel<SupplierProps, SupplierId> {
+export class SupplierModel extends AggregateRoot<SupplierProps, SupplierId> {
   private static readonly MAX_SUPPLIES_COUNT = 2;
 
   public addSupply(
@@ -34,6 +38,15 @@ export class SupplierModel extends BaseModel<SupplierProps, SupplierId> {
   }
 
   static create(props: CreateSupplierProps): SupplierModel {
-    return new SupplierModel({ props: { ...props, supplies: [] } });
+    const supplier = new SupplierModel({ props: { ...props, supplies: [] } });
+
+    supplier.addEvent(
+      new SupplierCreatedDomainEvent({
+        aggregateId: supplier.id,
+        supplierName: supplier.props.name,
+      }),
+    );
+
+    return supplier;
   }
 }

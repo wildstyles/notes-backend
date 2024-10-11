@@ -18,7 +18,7 @@ export class CreateSupplierHandler extends CommandHandler<Command, Response> {
       endWorkingTime: '17:00',
     });
 
-    this.dbContext.suppliers.create(supplier);
+    await this.dbContext.suppliers.create(supplier);
 
     return {
       id: supplier.getProps().id,

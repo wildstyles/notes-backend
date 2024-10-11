@@ -15,10 +15,12 @@ export const setupGrpcMicroservice = async (
   appModule: Function,
   serverName: ServiceName,
 ) => {
-  const appContext = await NestFactory.createApplicationContext(appModule);
   // check that logger module imported in appModule
-  // it's important, since in case it's not exists useLogger below won't work and service itself won't start
-  appContext.get(Logger);
+  // it's important, since in case it's not exists useLogger below won't work and service itself won't start and won't log anything
+  // commented since with "createApplicationContext" event emitter fires events twice
+
+  // const appContext = await NestFactory.createApplicationContext(appModule);
+  // appContext.get(Logger);
 
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     appModule,

@@ -21,8 +21,6 @@ export abstract class CommandHandler<
   @Inject(DB_CONTEXT_TOKEN)
   protected readonly dbContext: DbContext;
 
-  constructor() {}
-
   async execute(command: Command): Promise<Response> {
     const result = await this.implementation(command);
 

@@ -25,7 +25,7 @@ export class CreateSupplyHandler extends CommandHandler<Command, Response> {
       return result;
     }
 
-    this.dbContext.suppliers.update(supplier);
+    await this.dbContext.suppliers.update(supplier);
 
     return Ok({ supply: { id: result.unwrap() } as any });
   }
