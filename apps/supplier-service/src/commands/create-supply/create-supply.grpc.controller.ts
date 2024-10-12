@@ -1,17 +1,24 @@
-import { Controller, BadRequestException } from '@nestjs/common';
+import {
+  Controller,
+  ConflictException,
+  InternalServerErrorException,
+} from '@nestjs/common';
+import { CreateRequestContext } from '@mikro-orm/core';
 import { GrpcMethod } from '@nestjs/microservices';
+import { match } from 'oxide.ts';
 
 import {
   CreateSupplyRequest,
   CreateSupplyResponse,
   SUPPLIER_SERVICE_NAME,
 } from '@app/libs/grpc-client';
-import { CreateRequestContext } from '@mikro-orm/core';
+
 import { CreateSupplyHandler } from './create-supply.handler';
 
 import { CreateSupplyCommand } from '.';
-import { match } from 'oxide.ts';
+
 import { GrpcController } from '../common/grpc.controller';
+import { MaxSuppliesReachedError } from '../../domain/supplier.errors';
 
 @Controller()
 export class CreateSupplyGrpcController extends GrpcController<'createSupply'> {
@@ -29,7 +36,11 @@ export class CreateSupplyGrpcController extends GrpcController<'createSupply'> {
     return match(result, {
       Ok: (r) => r,
       Err: (e) => {
-        throw new BadRequestException(e.message);
+        if (e instanceof MaxSuppliesReachedError) {
+          throw new ConflictException(e.message);
+        }
+
+        throw new InternalServerErrorException('An unknown error occurred');
       },
     });
   }

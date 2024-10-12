@@ -7,11 +7,16 @@ import {
   Primary,
   EntityData,
   EntityManager,
+  NotFoundError,
 } from '@mikro-orm/postgresql';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { BaseEntity } from './base.entity';
 import { AggregateRoot } from '../ddd/base.aggregate-root';
-import { Inject } from '@nestjs/common';
+import {
+  Inject,
+  NotFoundException,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { BaseModel } from '../ddd/base.model';
 
 // https://medium.com/brain-station-23/repository-pattern-for-data-access-in-nestjs-using-typeorm-bbf0a92d6d7c
@@ -49,9 +54,19 @@ export abstract class Repository<
     where: FilterQuery<Entity>,
     options?: FindOneOrFailOptions<Entity, Hint>,
   ): Promise<Model> {
-    const entity = await this.repository.findOneOrFail(where, options);
+    try {
+      const entity = await this.repository.findOneOrFail(where, options);
 
-    return this.mapper.toDomain(entity);
+      return this.mapper.toDomain(entity);
+    } catch (error) {
+      if (error instanceof NotFoundError) {
+        throw new NotFoundException(error.message);
+      }
+
+      throw new InternalServerErrorException(
+        (error as Error)?.message || 'Error on finding entity',
+      );
+    }
   }
 
   async update(model: Model): Promise<void> {

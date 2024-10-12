@@ -14,9 +14,7 @@ export class CreateSupplierHandler
     private readonly grpcClient: GrpcClientService<'SupplierService'>,
   ) {}
 
-  async execute(
-    command: CreateSupplierCommand,
-  ): Promise<CreateSupplierResponse> {
+  async execute(command: CreateSupplierCommand): Promise<any> {
     const result$ = this.grpcClient.methods.createSupplier({
       name: 'Supplier 1',
       categories: [2],

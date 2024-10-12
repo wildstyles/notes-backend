@@ -10,6 +10,7 @@ import { Logger } from 'nestjs-pino';
 import { ServiceName } from './grpc-client.service';
 
 import { GrpcLoggerInterceptor } from './grpc-logger.interceptor';
+import { HttpToGrpcExceptionFilter } from './grpc-exception.filter';
 
 export const setupGrpcMicroservice = async (
   appModule: Function,
@@ -31,6 +32,7 @@ export const setupGrpcMicroservice = async (
     },
   );
 
+  app.useGlobalFilters(new HttpToGrpcExceptionFilter());
   app.useGlobalInterceptors(new GrpcLoggerInterceptor(serverName));
   app.useLogger(app.get(Logger));
 
