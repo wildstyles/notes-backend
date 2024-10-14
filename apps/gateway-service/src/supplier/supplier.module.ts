@@ -8,7 +8,10 @@ import {
   CreateSupplierHandler,
   CreateSupplyHandler,
   CreateSupplyHttpController,
+  CreateSupplierSaga,
 } from './commands';
+
+const sagas = [CreateSupplierSaga];
 
 const httpControllers = [
   CreateSupplierHttpController,
@@ -23,6 +26,6 @@ const commandHandlers: Provider[] = [
 @Module({
   imports: [CqrsModule, GrpcClientModule.forRoot('SupplierService')],
   controllers: [...httpControllers],
-  providers: [...commandHandlers],
+  providers: [...sagas, ...commandHandlers],
 })
 export class SupplierModule {}

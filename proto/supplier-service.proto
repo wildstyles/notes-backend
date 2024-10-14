@@ -7,6 +7,8 @@ service SupplierService {
   rpc CreateSupplier(CreateSupplierRequest) returns (CreateSupplierResponse);
   rpc UpdateSupplier(UpdateSupplierRequest) returns (UpdateSupplierResponse);
   rpc CreateSupply(CreateSupplyRequest) returns (CreateSupplyResponse);
+
+  rpc RollbackCreateSupplier(RollbackCreateSupplierRequest) returns (RollbackCreateSupplierResponse);
 }
 
 enum SupplierCategory {
@@ -66,10 +68,18 @@ message CreateSupplyRequest {
 }
 
 message CreateSupplyResponse {
-  Supply supply = 1;
+  string id = 1;
 }
 
 message SupplierAddress {
   string street = 1;
   int32 floor = 2;
+}
+
+message RollbackCreateSupplierRequest {
+  string id = 1;
+}
+
+message RollbackCreateSupplierResponse {
+  string id = 1;
 }

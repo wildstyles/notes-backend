@@ -1,31 +1,21 @@
 import { ICommandHandler, CommandHandler } from '@nestjs/cqrs';
-import { GrpcClientService } from '@app/libs';
-import { lastValueFrom } from 'rxjs';
-
-import { CreateSupplierResponse } from '@app/libs';
+import { CreateSupplierResponse, CreateSupplyResponse } from '@app/libs';
 
 import { CreateSupplierCommand } from '.';
+
+import { CreateSupplierSaga } from './create-supplier.saga';
 
 @CommandHandler(CreateSupplierCommand)
 export class CreateSupplierHandler
   implements ICommandHandler<CreateSupplierCommand, CreateSupplierResponse>
 {
-  constructor(
-    private readonly grpcClient: GrpcClientService<'SupplierService'>,
-  ) {}
+  constructor(private readonly saga: CreateSupplierSaga) {}
 
-  async execute(command: CreateSupplierCommand): Promise<any> {
-    const result$ = this.grpcClient.methods.createSupplier({
-      name: 'Supplier 1',
-      categories: [2],
-      startWorkingTime: '08:00',
-      endWorkingTime: '17:00',
-      address: {
-        street: '123 Street',
-        floor: 1,
-      },
-    });
+  async execute(command: CreateSupplierCommand): Promise<CreateSupplyResponse> {
+    const result = await this.saga.execute(command);
 
-    return lastValueFrom(result$);
+    return {
+      id: result.createSupplier.id,
+    };
   }
 }

@@ -25,6 +25,6 @@ export class CreateSupplyHttpController {
 
     const result: CreateSupplyResponse = await this.commandBus.execute(command);
 
-    return new CreateSupplyResponseDto(result.supply!.id);
+    return new CreateSupplyResponseDto(result.id);
   }
 }

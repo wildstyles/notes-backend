@@ -2,6 +2,8 @@ import {
   SupplierCategory,
   CreateSupplierRequest,
   CreateSupplierResponse,
+  RollbackCreateSupplierRequest,
+  RollbackCreateSupplierResponse,
 } from '@app/libs';
 
 export class CreateSupplierCommand {
@@ -28,3 +30,14 @@ export class CreateSupplierCommand {
 }
 
 export type CreateSupplierCommandResponse = CreateSupplierResponse;
+
+export class RollbackCreateSupplierCommand {
+  readonly id: string;
+
+  constructor(request: RollbackCreateSupplierRequest) {
+    this.id = request.id;
+  }
+}
+
+export type RollbackCreateSupplierCommandResponse =
+  RollbackCreateSupplierResponse;

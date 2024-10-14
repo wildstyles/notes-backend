@@ -50,6 +50,10 @@ export abstract class Repository<
     protected readonly mapper: IMapper<Model, Entity>,
   ) {}
 
+  getReference(id: Primary<Entity>): Entity {
+    return this.repository.getReference(id);
+  }
+
   async findOneOrFail<Hint extends string = never>(
     where: FilterQuery<Entity>,
     options?: FindOneOrFailOptions<Entity, Hint>,
