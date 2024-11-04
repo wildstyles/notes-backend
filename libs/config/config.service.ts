@@ -5,7 +5,7 @@ import { EnvironmentVariables } from './env.validation';
 
 interface Config {
   db: {
-    port: number;
+    port: string;
     host: string;
     username: string;
     name: string;

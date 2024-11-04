@@ -1,35 +1,24 @@
-import { plainToInstance } from 'class-transformer';
-import { IsNumber, IsString, Min, validateSync } from 'class-validator';
+import { Type, Static } from '@sinclair/typebox';
+import Ajv from 'ajv';
 
-export class EnvironmentVariables {
-  @Min(0)
-  @IsNumber()
-  DB_PORT: number;
+const schema = Type.Object({
+  DB_PORT: Type.String(),
+  DB_HOST: Type.String(),
+  DB_USER: Type.String(),
+  DB_NAME: Type.String(),
+  DB_PASSWORD: Type.String(),
+});
 
-  @IsString()
-  DB_HOST: string;
-
-  @IsString()
-  DB_USER: string;
-
-  @IsString()
-  DB_NAME: string;
-
-  @IsString()
-  DB_PASSWORD: string;
-}
+export interface EnvironmentVariables extends Static<typeof schema> {}
 
 export function validate(config: Record<string, unknown>) {
-  const validatedConfig = plainToInstance(EnvironmentVariables, config, {
-    enableImplicitConversion: true,
-  });
-  const errors = validateSync(validatedConfig, {
-    skipMissingProperties: false,
-  });
+  const ajv = new Ajv();
 
-  if (errors.length > 0) {
-    throw new Error(errors.toString());
+  const isValid = ajv.validate(schema, config);
+
+  if (!isValid) {
+    throw new Error(ajv.errorsText());
   }
 
-  return validatedConfig;
+  return config;
 }
