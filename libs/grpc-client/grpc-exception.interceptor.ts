@@ -4,10 +4,10 @@ import {
   CallHandler,
   HttpException,
   Injectable,
+  BadRequestException,
 } from '@nestjs/common';
 import { Observable, throwError, catchError } from 'rxjs';
 import { status as rpcStatusCode } from '@grpc/grpc-js';
-import { ZodValidationException } from 'nestjs-zod';
 
 import { HttpToGrpcExceptionFilter } from './grpc-exception.filter';
 
@@ -16,13 +16,15 @@ export class GrpcExceptionInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
     return next.handle().pipe(
       catchError((err) => {
-        if (err instanceof ZodValidationException) {
+        // catches ajv validation errors
+        if (err instanceof BadRequestException) {
           return throwError(() => err);
         }
 
+        // TODO: check for grpc error instance
         const code = err.code ?? rpcStatusCode.INTERNAL;
 
-        let errCode =
+        const errCode =
           Object.keys(HttpToGrpcExceptionFilter.HttpToRpcStatusCode).find(
             (k) =>
               HttpToGrpcExceptionFilter.HttpToRpcStatusCode[Number(k)] === code,

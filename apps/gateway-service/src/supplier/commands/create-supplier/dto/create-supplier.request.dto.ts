@@ -1,18 +1,18 @@
-import z from 'zod';
+import { Type } from '@sinclair/typebox';
 import { SupplierCategory } from '@app/libs';
-import { createZodDtoWithApiProperties } from '@app/libs/validation';
+import { createAjvDto } from '@app/libs/validation';
 
-export const CreateSupplierRequestSchema = z.object({
-  name: z.string().describe('Name of the supplier'),
-  startWorkingTime: z.string(),
-  endWorkingTime: z.string(),
-  categories: z.array(z.nativeEnum(SupplierCategory)), // TODO: grpc find out enums
-  address: z.object({
-    floor: z.number(),
-    street: z.string(),
+export const CreateSupplierRequestSchema = Type.Object({
+  name: Type.String({ description: 'Supplier name' }),
+  startWorkingTime: Type.String(),
+  endWorkingTime: Type.String(),
+  categories: Type.Array(Type.Enum(SupplierCategory)), // TODO: grpc find out enums
+  address: Type.Object({
+    floor: Type.Number(),
+    street: Type.String(),
   }),
 });
 
-export class CreateSupplierRequestDto extends createZodDtoWithApiProperties(
+export class CreateSupplierRequestDto extends createAjvDto(
   CreateSupplierRequestSchema,
 ) {}

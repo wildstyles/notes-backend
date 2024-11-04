@@ -1,1 +1,2 @@
-export * from './populate-api-property.decorator';
+export * from './ajv-validation.pipe';
+export * from './create-ajv-dto';
