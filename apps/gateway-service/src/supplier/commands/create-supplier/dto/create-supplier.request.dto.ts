@@ -1,12 +1,12 @@
 import { Type } from '@sinclair/typebox';
 import { SupplierCategory } from '@app/libs';
-import { createAjvDto } from '@app/libs/validation';
+import { createAjvDto, EnumByKey } from '@app/libs/validation';
 
 export const CreateSupplierRequestSchema = Type.Object({
   name: Type.String({ description: 'Supplier name' }),
   startWorkingTime: Type.String(),
   endWorkingTime: Type.String(),
-  categories: Type.Array(Type.Enum(SupplierCategory)), // TODO: grpc find out enums
+  categories: Type.Array(EnumByKey(SupplierCategory)),
   address: Type.Object({
     floor: Type.Number(),
     street: Type.String(),

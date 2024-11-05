@@ -1,5 +1,14 @@
-import { type Static, TObject, TProperties } from '@sinclair/typebox';
+import { type Static, TObject, TProperties, Type } from '@sinclair/typebox';
 import { ApiProperty } from '@nestjs/swagger';
+
+export const EnumByKey = <T extends Record<string, number>>(enumObj: T) => {
+  const values = Object.keys(enumObj) as Array<keyof T>;
+
+  return Type.Unsafe<(typeof values)[number]>({
+    type: 'string',
+    enum: values,
+  });
+};
 
 export interface AjvDto<T extends TProperties> {
   new (): Static<TObject<T>>;

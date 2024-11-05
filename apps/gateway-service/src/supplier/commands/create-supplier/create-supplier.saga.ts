@@ -26,16 +26,9 @@ class CreateSupplierSagaStep
   ) {}
 
   async execute(context: SagaContext) {
-    const result$ = this.grpcClient.methods.createSupplier({
-      name: context.initialParams.name,
-      categories: [2],
-      startWorkingTime: '08:00',
-      endWorkingTime: '17:00',
-      address: {
-        street: '123 Street',
-        floor: 1,
-      },
-    });
+    const result$ = this.grpcClient.methods.createSupplier(
+      context.initialParams,
+    );
 
     const res = await lastValueFrom(result$);
 

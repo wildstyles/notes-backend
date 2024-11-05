@@ -21,6 +21,8 @@ export class CreateSupplierCommand implements CreateSupplierRequest {
     this.address = dto.address;
     this.startWorkingTime = dto.startWorkingTime;
     this.endWorkingTime = dto.endWorkingTime;
-    this.categories = dto.categories;
+    this.categories = dto.categories.map(
+      (category) => SupplierCategory[category],
+    );
   }
 }

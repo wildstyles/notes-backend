@@ -23,11 +23,11 @@ export class CreateSupplierHttpController {
   ): Promise<CreateSupplierResponseDto> {
     const command = new CreateSupplierCommand(body);
 
-    // const result = await this.commandBus.execute<
-    //   CreateSupplierCommand,
-    //   CreateSupplierResponse
-    // >(command);
+    const result = await this.commandBus.execute<
+      CreateSupplierCommand,
+      CreateSupplierResponse
+    >(command);
 
-    return new CreateSupplierResponseDto('mocked-id');
+    return new CreateSupplierResponseDto(result.id);
   }
 }
