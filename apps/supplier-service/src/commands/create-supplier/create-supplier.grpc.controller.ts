@@ -5,18 +5,20 @@ import {
   RollbackCreateSupplierRequest,
   RollbackCreateSupplierResponse,
   CreateSupplierResponse,
-} from '@app/libs/grpc-client';
+  GrpcRollbackController,
+  SUPPLIER_SERVICE_NAME,
+} from '@app/libs';
 
 import {
   CreateSupplierCommand,
   CreateSupplierHandler,
   RollbackCreateSupplierCommand,
 } from '.';
-import { GrpcRollbackController } from '../common/grpc.controller';
 import { EntityManager } from '@mikro-orm/postgresql';
 
 @Controller()
 export class CreateSupplierGrpcController extends GrpcRollbackController(
+  SUPPLIER_SERVICE_NAME,
   'createSupplier',
   'rollbackCreateSupplier',
 ) {

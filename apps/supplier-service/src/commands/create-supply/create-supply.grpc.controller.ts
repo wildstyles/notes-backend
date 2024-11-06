@@ -8,17 +8,21 @@ import { match } from 'oxide.ts';
 import {
   CreateSupplyRequest,
   CreateSupplyResponse,
-} from '@app/libs/grpc-client';
+  GrpcController,
+  SUPPLIER_SERVICE_NAME,
+} from '@app/libs';
 
 import { CreateSupplyHandler } from './create-supply.handler';
 
 import { CreateSupplyCommand } from '.';
 
-import { GrpcController } from '../common/grpc.controller';
 import { MaxSuppliesReachedError } from '../../domain/supplier.errors';
 
 @Controller()
-export class CreateSupplyGrpcController extends GrpcController('createSupply') {
+export class CreateSupplyGrpcController extends GrpcController(
+  SUPPLIER_SERVICE_NAME,
+  'createSupply',
+) {
   constructor(private readonly handler: CreateSupplyHandler) {
     super();
   }
