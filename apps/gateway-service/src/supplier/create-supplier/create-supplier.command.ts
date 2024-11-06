@@ -1,6 +1,6 @@
 import { SupplierCategory, CreateSupplierRequest } from '@app/libs';
 
-import { CreateSupplierRequestDto } from './dto';
+import { CreateSupplierRequestDto } from './create-supplier.request.dto';
 
 export class CreateSupplierCommand implements CreateSupplierRequest {
   readonly name: string;

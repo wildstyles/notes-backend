@@ -1,4 +1,4 @@
-import { CreateSupplyRequestDto } from './dto/create-supply.request.dto';
+import { CreateSupplyRequestDto } from './create-supply.request.dto';
 import { CreateSupplyRequest } from '@app/libs';
 
 export class CreateSupplyCommand implements CreateSupplyRequest {

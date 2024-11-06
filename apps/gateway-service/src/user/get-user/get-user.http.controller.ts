@@ -6,7 +6,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { routes } from 'apps/gateway-service/src/common';
 
 import { GetUserQuery } from './get-user.query';
-import { GetUserResponseDto } from './dto';
+import { GetUserResponseDto } from './get-user.response.dto';
 import { GetUserResponse } from '@app/libs';
 
 @ApiTags(routes.getUser.apiTag)

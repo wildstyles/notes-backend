@@ -20,7 +20,6 @@ export class UserServiceGrpcController implements UserServiceController {
         name: 'John Doe',
         email: '',
         age: 0,
-        address: { street: '', city: '' },
       },
     };
   }

@@ -3,8 +3,9 @@ import { CommandBus } from '@nestjs/cqrs';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { CreateSupplierResponse } from '@app/libs';
-import { CreateSupplierRequestDto, CreateSupplierResponseDto } from './dto';
-import { CreateSupplierCommand } from '.';
+import { CreateSupplierResponseDto } from './create-supplier.response.dto';
+import { CreateSupplierRequestDto } from './create-supplier.request.dto';
+import { CreateSupplierCommand } from './create-supplier.command';
 
 import { routes } from 'apps/gateway-service/src/common/routes';
 

@@ -6,10 +6,12 @@ import { GrpcClientModule } from '@app/libs/grpc-client';
 import {
   CreateSupplierHttpController,
   CreateSupplierHandler,
+  CreateSupplierSaga,
+} from './create-supplier';
+import {
   CreateSupplyHandler,
   CreateSupplyHttpController,
-  CreateSupplierSaga,
-} from './commands';
+} from './create-supply';
 
 const sagas = [CreateSupplierSaga];
 

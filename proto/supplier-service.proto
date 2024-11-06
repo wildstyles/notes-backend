@@ -5,7 +5,6 @@ package supplier_service;
 
 service SupplierService {
   rpc CreateSupplier(CreateSupplierRequest) returns (CreateSupplierResponse);
-  rpc UpdateSupplier(UpdateSupplierRequest) returns (UpdateSupplierResponse);
   rpc CreateSupply(CreateSupplyRequest) returns (CreateSupplyResponse);
 
   rpc RollbackCreateSupplier(RollbackCreateSupplierRequest) returns (RollbackCreateSupplierResponse);
@@ -43,21 +42,8 @@ message CreateSupplierRequest {
   repeated SupplierCategory categories = 5;
 }
 
-message UpdateSupplierRequest {
-  string id = 1;
-  string name = 2;
-  SupplierAddress address = 3;
-  string startWorkingTime = 4;
-  string endWorkingTime = 5;
-  repeated SupplierCategory categories = 6;
-}
-
 message CreateSupplierResponse {
   string id = 1;
-} 
-
-message UpdateSupplierResponse {
-  Supplier supplier = 1;
 } 
 
 message CreateSupplyRequest {

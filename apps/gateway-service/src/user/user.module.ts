@@ -3,7 +3,7 @@ import { CqrsModule } from '@nestjs/cqrs';
 
 import { GrpcClientModule } from '@app/libs/grpc-client';
 
-import { GetUserHandler, GetUserHttpController } from './queries';
+import { GetUserHandler, GetUserHttpController } from './get-user';
 
 const httpControllers = [GetUserHttpController];
 
