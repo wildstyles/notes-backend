@@ -7,7 +7,7 @@ import {
   EntityRepositoryType,
 } from '@mikro-orm/core';
 
-import { BaseEntity } from '../../../../../libs/database/base.entity';
+import { BaseEntity } from '../../../../../../libs/database/base.entity';
 
 import { SupplierEntity } from './supplier.entity';
 

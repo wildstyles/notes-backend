@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 
 import { Repository } from '@app/libs/database/base.repository';
 
-import { SupplierModel } from '../../domain/supplier.model';
+import { SupplierModel } from '../../../domain/supplier.model';
 import { SupplierEntity } from '../entities/supplier.entity';
 import { SupplierMapper } from '../mappers/supplier.mapper';
 

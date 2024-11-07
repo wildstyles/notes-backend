@@ -2,16 +2,18 @@ import { Module, Provider } from '@nestjs/common';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { LoggerModule } from '@app/libs';
 
-import { DatabaseModule } from './database/database.module';
+import { DatabaseModule } from './infrastructure/database/database.module';
+
+import {
+  CreateSupplierHandler,
+  CreateSupplyHandler,
+  SupplierCreatedEventHandler,
+} from './application';
 
 import {
   CreateSupplierGrpcController,
   CreateSupplyGrpcController,
-  CreateSupplierHandler,
-  CreateSupplyHandler,
-} from './commands';
-
-import { SupplierCreatedEventHandler } from './domain-event-handlers';
+} from './infrastructure/controllers';
 
 const grpcControllers = [
   CreateSupplierGrpcController,

@@ -13,7 +13,7 @@ import {
   CreateSupplierCommand,
   CreateSupplierHandler,
   RollbackCreateSupplierCommand,
-} from '.';
+} from '../../application';
 import { EntityManager } from '@mikro-orm/postgresql';
 
 @Controller()

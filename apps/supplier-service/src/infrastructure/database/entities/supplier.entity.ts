@@ -1,6 +1,6 @@
 import { Entity, OneToMany, Property, Collection } from '@mikro-orm/core';
 
-import { BaseEntity } from '../../../../../libs/database/base.entity';
+import { BaseEntity } from '../../../../../../libs/database/base.entity';
 
 import { SupplyEntity } from './supply.entity';
 

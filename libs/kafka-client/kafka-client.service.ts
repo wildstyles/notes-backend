@@ -2,8 +2,12 @@ import { Injectable, OnModuleInit } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 
-import { IUserServiceController } from '@app/user-service/user-service.kafka.controller';
 import { KafkaClientName } from './kafka-client.module';
+
+export interface IUserServiceController {
+  deleteUser(): void;
+  createUser(message: any, context: any): any;
+}
 
 type ServiceByName = {
   'user-service': IUserServiceController;

@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
-import { SupplierCreatedDomainEvent } from '../domain/events/supplier-created.domain-event';
-import { DomainEventHandler } from './base.domain-event.handler';
-import { SupplyModel } from '../domain/supply.model';
+import { SupplierCreatedDomainEvent } from '../../domain/events/supplier-created.domain-event';
+import { DomainEventHandler } from '../common/domain-event.handler';
+import { SupplyModel } from '../../domain/supply.model';
 
 @Injectable()
 export class SupplierCreatedEventHandler extends DomainEventHandler<SupplierCreatedDomainEvent> {

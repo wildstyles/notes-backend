@@ -6,7 +6,7 @@ import { CommandHandler } from '../common/command.handler';
 import {
   CreateSupplyCommand as Command,
   CreateSupplyCommandResponse as Response,
-} from '.';
+} from './create-supply.command';
 
 @Injectable()
 export class CreateSupplyHandler extends CommandHandler<Command, Response> {

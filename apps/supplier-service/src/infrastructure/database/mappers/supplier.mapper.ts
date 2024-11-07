@@ -1,6 +1,6 @@
 import { Injectable, NotImplementedException } from '@nestjs/common';
 
-import { SupplierModel } from '../../domain/supplier.model';
+import { SupplierModel } from '../../../domain/supplier.model';
 import { SupplierEntity } from '../entities/supplier.entity';
 
 import { RequiredEntityData, Primary } from '@mikro-orm/core';

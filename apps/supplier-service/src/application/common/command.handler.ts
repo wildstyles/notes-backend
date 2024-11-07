@@ -2,7 +2,7 @@ import {
   CommandHandler as BaseCommandHandler,
   ICommand,
 } from '@app/libs/cqrs/command.handler';
-import { IDbContext } from '../../database/db-context.service';
+import { IDbContext } from '../../infrastructure/database/db-context.service';
 
 export abstract class CommandHandler<
   Command extends ICommand,

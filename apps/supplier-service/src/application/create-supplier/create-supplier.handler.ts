@@ -7,7 +7,7 @@ import {
   RollbackCreateSupplierCommandResponse as RollbackResponse,
   CreateSupplierCommand as Command,
   CreateSupplierCommandResponse as Response,
-} from '.';
+} from './create-supplier.command';
 
 import { SupplierModel } from '../../domain/supplier.model';
 

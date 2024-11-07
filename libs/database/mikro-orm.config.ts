@@ -6,8 +6,8 @@ import { EnvironmentVariables } from '../config/env.validation';
 import { defineConfig } from '@mikro-orm/postgresql';
 import * as path from 'path';
 
-import { SupplierEntity } from '../../apps/supplier-service/src/database/entities/supplier.entity';
-import { SupplyEntity } from '../../apps/supplier-service/src/database/entities/supply.entity';
+import { SupplierEntity } from '../../apps/supplier-service/src/infrastructure/database/entities/supplier.entity';
+import { SupplyEntity } from '../../apps/supplier-service/src/infrastructure/database/entities/supply.entity';
 import { UserEntity } from '../../apps/user-service/src/infrastructure/database/entities/user.entity';
 import { BaseEntity } from './base.entity';
 

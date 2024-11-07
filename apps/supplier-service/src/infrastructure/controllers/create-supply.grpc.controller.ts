@@ -12,9 +12,7 @@ import {
   SUPPLIER_SERVICE_NAME,
 } from '@app/libs';
 
-import { CreateSupplyHandler } from './create-supply.handler';
-
-import { CreateSupplyCommand } from '.';
+import { CreateSupplyCommand, CreateSupplyHandler } from '../../application';
 
 import { MaxSuppliesReachedError } from '../../domain/supplier.errors';
 
