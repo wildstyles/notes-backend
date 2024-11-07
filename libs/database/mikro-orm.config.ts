@@ -8,6 +8,7 @@ import * as path from 'path';
 
 import { SupplierEntity } from '../../apps/supplier-service/src/database/entities/supplier.entity';
 import { SupplyEntity } from '../../apps/supplier-service/src/database/entities/supply.entity';
+import { UserEntity } from '../../apps/user-service/src/infrastructure/database/entities/user.entity';
 import { BaseEntity } from './base.entity';
 
 // despite that we use ConfigService from @nestjs/config, which is a wrapper around dotenv,
@@ -39,6 +40,6 @@ export default defineConfig({
     },
   },
   extensions: [Migrator],
-  entities: [SupplierEntity, BaseEntity, SupplyEntity],
-  entitiesTs: [SupplierEntity, BaseEntity, SupplyEntity],
+  entities: [SupplierEntity, BaseEntity, SupplyEntity, UserEntity],
+  entitiesTs: [SupplierEntity, BaseEntity, SupplyEntity, UserEntity],
 });

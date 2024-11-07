@@ -18,6 +18,14 @@ export const routes: Record<Route, RouteSettings> & { version: string } = {
     },
   },
 
+  createUser: {
+    apiTag: usersApiTag,
+    params: {},
+    path: function () {
+      return usersRoot;
+    },
+  },
+
   createSupplier: {
     apiTag: suppliersApiTag,
     params: {},
@@ -35,7 +43,7 @@ export const routes: Record<Route, RouteSettings> & { version: string } = {
   },
 };
 
-type Route = 'getUser' | 'createSupplier' | 'createSupply';
+type Route = 'getUser' | 'createSupplier' | 'createSupply' | 'createUser';
 
 type RouteSettings = {
   path: () => string;

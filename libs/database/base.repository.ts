@@ -22,7 +22,8 @@ import { BaseModel } from '../ddd/base.model';
 // https://medium.com/brain-station-23/repository-pattern-for-data-access-in-nestjs-using-typeorm-bbf0a92d6d7c
 // https://dou.ua/forums/topic/47721/
 
-export const DB_CONTEXT_TOKEN = 'DB_CONTEXT';
+export const DB_COMMAND_CONTEXT_TOKEN = 'DB_COMMAND_CONTEXT';
+export const DB_QUERY_CONTEXT_TOKEN = 'DB_QUERY_CONTEXT';
 
 export interface IDbContextBase {
   em: EntityManager;

@@ -1,5 +1,5 @@
 import { Inject } from '@nestjs/common';
-import { IDbContextBase, DB_CONTEXT_TOKEN } from '../database';
+import { IDbContextBase, DB_COMMAND_CONTEXT_TOKEN } from '../database';
 
 export interface ICommand {}
 
@@ -18,7 +18,7 @@ export abstract class CommandHandler<
 {
   protected flashable: boolean = true;
 
-  @Inject(DB_CONTEXT_TOKEN)
+  @Inject(DB_COMMAND_CONTEXT_TOKEN)
   protected readonly dbContext: DbContext;
 
   async execute(command: Command): Promise<Response> {

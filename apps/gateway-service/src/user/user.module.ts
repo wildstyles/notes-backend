@@ -4,10 +4,11 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { GrpcClientModule } from '@app/libs/grpc-client';
 
 import { GetUserHandler, GetUserHttpController } from './get-user';
+import { CreateUserHandler, CreateUserHttpController } from './create-user';
 
-const httpControllers = [GetUserHttpController];
+const httpControllers = [GetUserHttpController, CreateUserHttpController];
 
-const queryHandlers = [GetUserHandler];
+const queryHandlers = [GetUserHandler, CreateUserHandler];
 
 @Module({
   imports: [CqrsModule, GrpcClientModule.forRoot('UserService')],

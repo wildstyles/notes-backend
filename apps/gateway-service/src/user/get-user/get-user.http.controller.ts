@@ -23,6 +23,6 @@ export class GetUserHttpController {
 
     const result: GetUserResponse = await this.queryBus.execute(query);
 
-    return new GetUserResponseDto(result.user!.id);
+    return new GetUserResponseDto(result);
   }
 }

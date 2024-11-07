@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { PgDatabaseModule } from '@app/libs';
 
 import { DbContext } from './db-context.service';
-import { DB_CONTEXT_TOKEN } from '@app/libs';
+import { DB_COMMAND_CONTEXT_TOKEN } from '@app/libs';
 import { SupplierEntity, SupplyEntity } from './entities';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 
@@ -21,8 +21,8 @@ const repositories = [SupplierRepository];
   providers: [
     ...repositories,
     ...mappers,
-    { provide: DB_CONTEXT_TOKEN, useClass: DbContext },
+    { provide: DB_COMMAND_CONTEXT_TOKEN, useClass: DbContext },
   ],
-  exports: [{ provide: DB_CONTEXT_TOKEN, useClass: DbContext }],
+  exports: [{ provide: DB_COMMAND_CONTEXT_TOKEN, useClass: DbContext }],
 })
 export class DatabaseModule {}

@@ -24,7 +24,7 @@ export interface CreateUserRequest {
 }
 
 export interface CreateUserResponse {
-  user: User | undefined;
+  id: string;
 }
 
 export interface User {
