@@ -4,7 +4,7 @@ import { SupplyModel, CreateSupplyProps, SupplyId } from './supply.model';
 
 import { Id } from '../../../../libs/ddd/base.model';
 
-import { AggregateRoot } from '@app/libs/ddd/base.aggregate-root';
+import { AggregateRoot } from '../../../../libs/ddd/base.aggregate-root';
 
 import { MaxSuppliesReachedError } from './supplier.errors';
 import { SupplierCreatedDomainEvent } from './events/supplier-created.domain-event';
@@ -16,13 +16,13 @@ interface SupplierProps {
   supplies: SupplyModel[];
 }
 
-interface CreateSupplierProps extends Omit<SupplierProps, 'supplies'> {}
-interface AddSupplyProps extends Omit<CreateSupplyProps, 'supplierId'> {}
+export interface CreateSupplierProps extends Omit<SupplierProps, 'supplies'> {}
+export interface AddSupplyProps extends Omit<CreateSupplyProps, 'supplierId'> {}
 
 export type SupplierId = Id<'Supplier'>;
 
 export class SupplierModel extends AggregateRoot<SupplierProps, SupplierId> {
-  private static readonly MAX_SUPPLIES_COUNT = 2;
+  public static readonly MAX_SUPPLIES_COUNT = 2;
 
   public addSupply(
     props: AddSupplyProps,

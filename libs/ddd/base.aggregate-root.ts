@@ -12,7 +12,7 @@ export abstract class AggregateRoot<
     this._domainEvents.push(event);
   }
 
-  public clearEvents(): void {
+  private clearEvents(): void {
     this._domainEvents = [];
   }
 
