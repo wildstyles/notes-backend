@@ -23,7 +23,8 @@ export default defineConfig({
   password: configService.getOrThrow('DB_PASSWORD'),
   dbName: configService.getOrThrow('DB_NAME'),
   host: 'localhost',
-  debug: true,
+  debug: process.env.NODE_ENV !== 'test',
+  allowGlobalContext: process.env.NODE_ENV === 'test',
   migrations: {
     path: path.join(__dirname, './migrations'),
     pathTs: path.join(__dirname, './migrations'),

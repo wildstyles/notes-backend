@@ -1,7 +1,8 @@
+import { Type } from '@nestjs/common';
 import { DomainEventHandler as BaseDomainEventHandler } from '@app/libs/ddd/base.domain-event-handler';
 import { DomainEvent } from '@app/libs/ddd/base.domain-event';
-import { DbContext } from '../../infrastructure/database/db-context.service';
+import { IDbCommandContext } from '../../infrastructure/database/db-command-context.service';
 
-export abstract class DomainEventHandler<
-  Event extends DomainEvent,
-> extends BaseDomainEventHandler<Event, DbContext> {}
+export function DomainEventHandler<E extends Type<DomainEvent>>(event: E) {
+  return BaseDomainEventHandler<E, IDbCommandContext>(event);
+}

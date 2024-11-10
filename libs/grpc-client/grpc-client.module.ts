@@ -44,10 +44,12 @@ export class GrpcClientModule {
                   (options: InterceptorOptions, nextCall: NextCall) => {
                     return new InterceptingCall(nextCall(options), {
                       start: (metadata, listener, next) => {
-                        metadata.set(
-                          REQUEST_ID_METADATA_KEY,
-                          RequestContext.currentContext!.req.id,
-                        );
+                        if (RequestContext.currentContext) {
+                          metadata.set(
+                            REQUEST_ID_METADATA_KEY,
+                            RequestContext.currentContext.req.id,
+                          );
+                        }
 
                         next(metadata, listener);
                       },
@@ -73,8 +75,14 @@ const serviceConfigByName: Record<
     protoPath: join(__dirname, '../user-service.proto'),
   },
   SupplierService: {
-    url: 'supplier-service:5002',
+    url:
+      process.env.NODE_ENV === 'test'
+        ? 'localhost:5002'
+        : 'supplier-service:5002',
     package: 'supplier_service',
-    protoPath: join(__dirname, '../supplier-service.proto'),
+    protoPath:
+      process.env.NODE_ENV === 'test'
+        ? join(__dirname, '../../proto/supplier-service.proto')
+        : join(__dirname, '../supplier-service.proto'),
   },
 };

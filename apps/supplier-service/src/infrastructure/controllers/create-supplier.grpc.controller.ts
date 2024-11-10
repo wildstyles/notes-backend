@@ -14,7 +14,6 @@ import {
   CreateSupplierHandler,
   RollbackCreateSupplierCommand,
 } from '../../application';
-import { EntityManager } from '@mikro-orm/postgresql';
 
 @Controller()
 export class CreateSupplierGrpcController extends GrpcRollbackController(

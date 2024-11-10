@@ -16,8 +16,8 @@ export class CreateSupplierHandler extends CommandHandler<Command, Response> {
   async implementation(command: Command): Promise<Response> {
     const supplier = SupplierModel.create({
       name: command.name,
-      startWorkingTime: '08:00',
-      endWorkingTime: '17:00',
+      startWorkingTime: command.startWorkingTime,
+      endWorkingTime: command.endWorkingTime,
     });
 
     await this.dbContext.suppliers.create(supplier);

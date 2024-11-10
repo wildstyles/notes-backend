@@ -6,6 +6,8 @@ import {
 import { NestFactory } from '@nestjs/core';
 import { join } from 'path';
 import { Logger } from 'nestjs-pino';
+import { TestingModule } from '@nestjs/testing';
+import { FastifyAdapter } from '@nestjs/platform-fastify';
 
 import { ServiceName } from './grpc-client.service';
 
@@ -39,6 +41,23 @@ export const setupGrpcMicroservice = async (
   await app.listen();
 };
 
+export const setupTestGrpcMicroservice = async (
+  module: TestingModule,
+  serverName: ServiceName,
+) => {
+  const app = module.createNestApplication(new FastifyAdapter());
+
+  app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.GRPC,
+    options: configByServiceName[serverName],
+  });
+
+  await app.startAllMicroservices();
+  await app.init();
+
+  return app;
+};
+
 const configByServiceName: Record<ServiceName, GrpcOptions['options']> = {
   UserService: {
     url: '0.0.0.0:5001',
@@ -46,8 +65,11 @@ const configByServiceName: Record<ServiceName, GrpcOptions['options']> = {
     package: 'user_service',
   },
   SupplierService: {
-    url: '0.0.0.0:5002',
-    protoPath: join(__dirname, '../supplier-service.proto'),
+    url: process.env.NODE_ENV === 'test' ? 'localhost:5002' : '0.0.0.0:5002',
+    protoPath:
+      process.env.NODE_ENV === 'test'
+        ? join(__dirname, '../../proto/supplier-service.proto')
+        : join(__dirname, '../supplier-service.proto'),
     package: 'supplier_service',
   },
 };

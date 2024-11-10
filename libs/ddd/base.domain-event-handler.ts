@@ -1,19 +1,24 @@
-import { Inject } from '@nestjs/common';
+import { Inject, Type } from '@nestjs/common';
 import { DomainEvent } from '@app/libs/ddd/base.domain-event';
+import { OnEvent } from '@nestjs/event-emitter';
 
 import { DB_COMMAND_CONTEXT_TOKEN, IDbContextBase } from '@app/libs';
 
-export abstract class DomainEventHandler<
-  Event extends DomainEvent,
+export function DomainEventHandler<
+  Event extends Type<DomainEvent>,
   DbContext extends IDbContextBase = IDbContextBase,
-> {
-  @Inject(DB_COMMAND_CONTEXT_TOKEN)
-  protected readonly dbContext: DbContext;
+>(event: Event) {
+  abstract class DomainEventHandler {
+    @Inject(DB_COMMAND_CONTEXT_TOKEN)
+    public readonly dbContext: DbContext;
 
-  // @OnEvent(Event.name)
-  async handle(event: Event) {
-    await this.implementation(event);
+    @OnEvent(event.name, { async: true, promisify: true })
+    async handle(event: InstanceType<Event>) {
+      await this.implementation(event);
+    }
+
+    abstract implementation(event: InstanceType<Event>): Promise<void>;
   }
 
-  abstract implementation(event: Event): Promise<void>;
+  return DomainEventHandler;
 }

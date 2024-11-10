@@ -4,13 +4,13 @@ import { IDbContextBase } from '@app/libs';
 
 import { SupplierRepository, SupplyRepository } from './repositories';
 
-export interface IDbContext extends IDbContextBase {
+export interface IDbCommandContext extends IDbContextBase {
   suppliers: SupplierRepository;
   supplies: SupplyRepository;
 }
 
 @Injectable()
-export class DbContext implements IDbContext {
+export class DbCommandContext implements IDbCommandContext {
   suppliers: SupplierRepository;
   supplies: SupplyRepository;
   em: EntityManager;

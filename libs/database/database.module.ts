@@ -1,4 +1,4 @@
-import { Module, Scope } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { PostgreSqlDriver } from '@mikro-orm/postgresql';
 
@@ -15,7 +15,7 @@ import mikroOrmConfig from './mikro-orm.config';
         return {
           ...mikroOrmConfig,
           driver: PostgreSqlDriver,
-          host,
+          ...(process.env.NODE_ENV !== 'test' ? { host } : {}),
         };
       },
       inject: [ConfigService],

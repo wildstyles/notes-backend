@@ -18,7 +18,7 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./apps/notes-backend/test/jest-e2e.json",
+    "test:e2e": "jest --config ./apps/supplier-service/test/jest-e2e.json",
     "mikro-orm": "npx mikro-orm --config ./libs/database/mikro-orm.config.ts",
     "migration:create": "yarn mikro-orm migration:create",
     "migration:up": "yarn mikro-orm migration:up",
@@ -98,13 +98,6 @@
       "**/*.(t|j)s"
     ],
     "coverageDirectory": "./coverage",
-    "testEnvironment": "node",
-    "roots": [
-      "<rootDir>/apps/",
-      "<rootDir>/libs/"
-    ],
-    "moduleNameMapper": {
-      "^@app/shared(|/.*)$": "<rootDir>/libs/shared/src/$1"
-    }
+    "testEnvironment": "node"
   }
 }
