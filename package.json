@@ -18,7 +18,7 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./apps/supplier-service/test/jest-e2e.json",
+    "test:e2e": "jest --config ./apps/supplier-service/test/jest-e2e.ts",
     "mikro-orm": "npx mikro-orm --config ./libs/database/mikro-orm.config.ts",
     "migration:create": "yarn mikro-orm migration:create",
     "migration:up": "yarn mikro-orm migration:up",
@@ -61,6 +61,7 @@
     "uuid": "^10.0.0"
   },
   "devDependencies": {
+    "@dotenvx/dotenvx": "^1.22.0",
     "@nestjs/cli": "^9.0.0",
     "@nestjs/schematics": "^9.0.0",
     "@nestjs/testing": "^9.0.0",

@@ -1,7 +1,7 @@
 import { ConfigService } from '@nestjs/config';
 import { config } from 'dotenv';
 import { Migrator } from '@mikro-orm/migrations';
-import { EnvironmentVariables } from '../config/env.validation';
+import { EnvironmentVariables, nodeEnv } from '../config/env.validation';
 
 import { defineConfig } from '@mikro-orm/postgresql';
 import * as path from 'path';
@@ -22,9 +22,12 @@ export default defineConfig({
   user: configService.getOrThrow('DB_USER'),
   password: configService.getOrThrow('DB_PASSWORD'),
   dbName: configService.getOrThrow('DB_NAME'),
-  host: 'localhost',
-  debug: process.env.NODE_ENV !== 'test',
-  allowGlobalContext: process.env.NODE_ENV === 'test',
+  host:
+    configService.getOrThrow('NODE_ENV') === nodeEnv.development
+      ? configService.getOrThrow('DB_HOST')
+      : 'localhost',
+  debug: configService.getOrThrow('NODE_ENV') !== nodeEnv.test,
+  allowGlobalContext: configService.getOrThrow('NODE_ENV') === nodeEnv.test,
   migrations: {
     path: path.join(__dirname, './migrations'),
     pathTs: path.join(__dirname, './migrations'),

@@ -1,6 +1,12 @@
 import { type Static, TObject, TProperties, Type } from '@sinclair/typebox';
 import { ApiProperty } from '@nestjs/swagger';
 
+export const StringEnum = <T extends string[]>(values: [...T]) =>
+  Type.Unsafe<T[number]>({
+    type: 'string',
+    enum: values,
+  });
+
 export const EnumByKey = <T extends Record<string, number>>(enumObj: T) => {
   const values = Object.keys(enumObj) as Array<keyof T>;
 

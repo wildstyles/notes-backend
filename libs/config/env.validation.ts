@@ -1,7 +1,15 @@
 import { Type, Static } from '@sinclair/typebox';
 import Ajv from 'ajv';
+import { StringEnum } from '../validation';
+
+export const nodeEnv = {
+  development: 'development',
+  production: 'production',
+  test: 'test',
+} as const;
 
 const schema = Type.Object({
+  NODE_ENV: StringEnum(Object.values(nodeEnv)),
   DB_PORT: Type.String(),
   DB_HOST: Type.String(),
   DB_USER: Type.String(),
