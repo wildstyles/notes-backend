@@ -17,7 +17,7 @@ const schema = Type.Object({
   DB_PASSWORD: Type.String(),
 });
 
-export interface EnvironmentVariables extends Static<typeof schema> {}
+export type EnvironmentVariables = Static<typeof schema>;
 
 export function validate(config: Record<string, unknown>) {
   const ajv = new Ajv();

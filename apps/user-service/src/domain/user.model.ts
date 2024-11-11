@@ -9,7 +9,7 @@ interface UserProps {
   password: string;
 }
 
-interface CreateUserProps extends UserProps {}
+type CreateUserProps = UserProps;
 
 export type UserId = Id<'User'>;
 

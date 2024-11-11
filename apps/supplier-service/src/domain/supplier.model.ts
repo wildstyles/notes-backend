@@ -16,8 +16,8 @@ interface SupplierProps {
   supplies: SupplyModel[];
 }
 
-export interface CreateSupplierProps extends Omit<SupplierProps, 'supplies'> {}
-export interface AddSupplyProps extends Omit<CreateSupplyProps, 'supplierId'> {}
+export type CreateSupplierProps = Omit<SupplierProps, 'supplies'>;
+export type AddSupplyProps = Omit<CreateSupplyProps, 'supplierId'>;
 
 export type SupplierId = Id<'Supplier'>;
 

@@ -11,7 +11,7 @@ interface SupplyProps {
 
 export type SupplyId = Id<'Supply'>;
 
-export interface CreateSupplyProps extends SupplyProps {}
+export type CreateSupplyProps = SupplyProps;
 
 export class SupplyModel extends BaseModel<SupplyProps, SupplyId> {
   static create(props: CreateSupplyProps): SupplyModel {

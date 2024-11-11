@@ -16,7 +16,7 @@ export abstract class CommandHandler<
   DbContext extends IDbContextBase = IDbContextBase,
 > implements ICommandHandler<Command, Response>
 {
-  protected flashable: boolean = true;
+  protected flashable = true;
 
   @Inject(DB_COMMAND_CONTEXT_TOKEN)
   protected readonly dbContext: DbContext;

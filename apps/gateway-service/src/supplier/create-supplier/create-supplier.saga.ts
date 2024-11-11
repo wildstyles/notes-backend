@@ -10,7 +10,7 @@ import { lastValueFrom } from 'rxjs';
 
 import { CreateSupplierCommand } from './create-supplier.command';
 
-interface InitialSagaContext extends ISagaContext<CreateSupplierCommand> {}
+type InitialSagaContext = ISagaContext<CreateSupplierCommand>;
 
 interface CreateSupplierStepContext {
   createSupplier?: CreateSupplierResponse;
