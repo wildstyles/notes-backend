@@ -1,4 +1,4 @@
-import { GetUserResponse } from '@app/libs';
+import { GetUserResponse } from '@repo/common';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class GetUserResponseDto {

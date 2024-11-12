@@ -8,8 +8,8 @@ import { Logger } from 'nestjs-pino';
 import { AppModule } from './app.module';
 import { setupSwagger } from './common';
 
-import { GrpcExceptionInterceptor } from '@app/libs/grpc-client/grpc-exception.interceptor';
-import { AjvValidationPipe } from '@app/libs/validation';
+import { GrpcExceptionInterceptor } from '@repo/common/grpc-client/grpc-exception.interceptor';
+import { AjvValidationPipe } from '@repo/common';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(

@@ -70,19 +70,16 @@ const serviceConfigByName: Record<
   Required<Pick<GrpcOptions['options'], 'url' | 'package' | 'protoPath'>>
 > = {
   UserService: {
-    url: 'user-service:5001',
+    url: 'localhost:5001',
     package: 'user_service',
-    protoPath: join(__dirname, '../user-service.proto'),
+    protoPath: join(__dirname, '../../../../proto/user-service.proto'),
   },
   SupplierService: {
-    url:
-      process.env.NODE_ENV === 'test'
-        ? 'localhost:5002'
-        : 'supplier-service:5002',
+    url: process.env.NODE_ENV === 'test' ? 'localhost:5002' : 'localhost:5002',
     package: 'supplier_service',
     protoPath:
       process.env.NODE_ENV === 'test'
-        ? join(__dirname, '../../proto/supplier-service.proto')
-        : join(__dirname, '../supplier-service.proto'),
+        ? join(__dirname, '../../../../proto/supplier-service.proto')
+        : join(__dirname, '../../../../proto/supplier-service.proto'),
   },
 };

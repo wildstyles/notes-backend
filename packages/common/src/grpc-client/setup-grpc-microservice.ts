@@ -46,30 +46,27 @@ export const setupTestGrpcMicroservice = async (
   serverName: ServiceName,
 ) => {
   const app = module.createNestApplication(new FastifyAdapter());
-
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.GRPC,
     options: configByServiceName[serverName],
   });
-
   await app.startAllMicroservices();
   await app.init();
-
   return app;
 };
 
 const configByServiceName: Record<ServiceName, GrpcOptions['options']> = {
   UserService: {
-    url: '0.0.0.0:5001',
-    protoPath: join(__dirname, '../user-service.proto'),
+    url: 'localhost:5001',
+    protoPath: join(__dirname, '../../../../proto/user-service.proto'),
     package: 'user_service',
   },
   SupplierService: {
-    url: process.env.NODE_ENV === 'test' ? 'localhost:5002' : '0.0.0.0:5002',
+    url: process.env.NODE_ENV === 'test' ? 'localhost:5002' : 'localhost:5002',
     protoPath:
       process.env.NODE_ENV === 'test'
-        ? join(__dirname, '../../proto/supplier-service.proto')
-        : join(__dirname, '../supplier-service.proto'),
+        ? join(__dirname, '../../../../proto/supplier-service.proto')
+        : join(__dirname, '../../../../proto/supplier-service.proto'),
     package: 'supplier_service',
   },
 };

@@ -1,4 +1,4 @@
-import { CreateUserRequest } from '@app/libs';
+import { CreateUserRequest } from '@repo/common';
 
 import { CreateUserRequestDto } from './create-user.request.dto';
 

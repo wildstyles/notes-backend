@@ -1,35 +1,10 @@
-import {
-  Entity,
-  Property,
-  ManyToOne,
-  Ref,
-  Cascade,
-  EntityRepositoryType,
-} from '@mikro-orm/core';
-
-import { BaseEntity } from '../../../../../../libs/database/base.entity';
-
-import { SupplierEntity } from './supplier.entity';
+import { SupplyEntity as BaseSupplyEntity } from '@repo/common/database/entities/supply.entity';
+import { Entity, EntityRepositoryType } from '@mikro-orm/core';
 
 import { SupplyRepository } from '../repositories/supply.repository';
 
+// to write custom repository, but without ddd mappings we must provide repository param in @Entity
 @Entity({ tableName: 'supplies', repository: () => SupplyRepository })
-export class SupplyEntity extends BaseEntity {
-  @Property({ length: 255, type: 'varchar' })
-  name: string;
-
-  @Property({ length: 255, type: 'varchar' })
-  description: string;
-
-  @Property({ type: 'numeric' })
-  price: number;
-
-  @ManyToOne({
-    cascade: [Cascade.ALL],
-    ref: true,
-    entity: () => SupplierEntity,
-  })
-  supplier: Ref<SupplierEntity>;
-
+export class SupplyEntity extends BaseSupplyEntity {
   [EntityRepositoryType]?: SupplyRepository;
 }

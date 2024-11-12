@@ -1,4 +1,4 @@
-import { CreateUserRequest, CreateUserResponse } from '@app/libs';
+import { CreateUserRequest, CreateUserResponse } from '@repo/common';
 
 export class CreateUserCommand {
   readonly name: string;

@@ -4,7 +4,7 @@ import {
   CreateSupplierResponse,
   RollbackCreateSupplierRequest,
   RollbackCreateSupplierResponse,
-} from '@app/libs';
+} from '@repo/common';
 
 export class CreateSupplierCommand {
   readonly name: string;

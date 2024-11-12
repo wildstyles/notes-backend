@@ -4,7 +4,7 @@ import {
   USER_SERVICE_NAME,
   GetUserRequest,
   GetUserResponse,
-} from '@app/libs';
+} from '@repo/common';
 
 import { GetUserHandler, GetUserQuery } from '../../application';
 

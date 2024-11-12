@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
-import { LoggerModule } from '@app/libs/logger/logger.module';
+
+import { LoggerModule } from '@repo/common';
 
 import { UserModule } from './user/user.module';
 import { SupplierModule } from './supplier/supplier.module';
@@ -8,3 +9,6 @@ import { SupplierModule } from './supplier/supplier.module';
   imports: [LoggerModule.forRoot(), UserModule, SupplierModule],
 })
 export class AppModule {}
+
+
+

@@ -5,7 +5,7 @@ import {
   SUPPLIER_SERVICE_NAME,
   USER_SERVICE_NAME,
   UserServiceController,
-} from '@app/libs';
+} from './interfaces';
 import { GrpcMethod } from '@nestjs/microservices';
 
 type PickFn<T> = {

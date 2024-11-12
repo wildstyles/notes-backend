@@ -10,7 +10,7 @@ import {
   CreateSupplyResponse,
   GrpcController,
   SUPPLIER_SERVICE_NAME,
-} from '@app/libs';
+} from '@repo/common';
 
 import { CreateSupplyCommand, CreateSupplyHandler } from '../../application';
 

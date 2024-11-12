@@ -1,4 +1,4 @@
-import { GetUserRequest, GetUserResponse } from '@app/libs';
+import { GetUserRequest, GetUserResponse } from '@repo/common';
 
 export class GetUserQuery {
   readonly id: string;

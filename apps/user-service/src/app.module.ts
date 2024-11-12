@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 
 import { EventEmitterModule } from '@nestjs/event-emitter';
-import { LoggerModule } from '@app/libs/logger/logger.module';
+import { LoggerModule } from '@repo/common';
 
 import { DatabaseModule } from './infrastructure/database/database.module';
 

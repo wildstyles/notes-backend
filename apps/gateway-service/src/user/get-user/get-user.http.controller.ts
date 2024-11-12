@@ -3,11 +3,11 @@ import { ApiOkResponse } from '@nestjs/swagger';
 import { QueryBus } from '@nestjs/cqrs';
 import { ApiTags } from '@nestjs/swagger';
 
-import { routes } from 'apps/gateway-service/src/common';
+import { routes } from '../../common';
 
 import { GetUserQuery } from './get-user.query';
 import { GetUserResponseDto } from './get-user.response.dto';
-import { GetUserResponse } from '@app/libs';
+import { GetUserResponse } from '@repo/common';
 
 @ApiTags(routes.getUser.apiTag)
 @Controller()

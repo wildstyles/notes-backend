@@ -1,7 +1,7 @@
 import {
   DomainEvent,
   IDomainEventProps,
-} from '../../../../../libs/ddd/base.domain-event';
+} from '@repo/common/ddd/base.domain-event';
 
 export class SupplierCreatedDomainEvent extends DomainEvent {
   public readonly supplierName: string;

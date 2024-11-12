@@ -1,5 +1,5 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { GrpcClientService, GetUserResponse } from '@app/libs';
+import { GrpcClientService, GetUserResponse } from '@repo/common';
 import { lastValueFrom } from 'rxjs';
 
 import { GetUserQuery } from './get-user.query';

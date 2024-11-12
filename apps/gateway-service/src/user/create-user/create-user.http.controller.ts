@@ -3,12 +3,12 @@ import { ApiOkResponse } from '@nestjs/swagger';
 import { CommandBus } from '@nestjs/cqrs';
 import { ApiTags } from '@nestjs/swagger';
 
-import { routes } from 'apps/gateway-service/src/common';
+import { routes } from '../../common';
 
 import { CreateUserRequestDto } from './create-user.request.dto';
 import { CreateUserResponseDto } from './create-user.response.dto';
 import { CreateUserCommand } from './create-user.command';
-import { CreateUserResponse } from '@app/libs';
+import { CreateUserResponse } from '@repo/common';
 
 @ApiTags(routes.createUser.apiTag)
 @Controller()

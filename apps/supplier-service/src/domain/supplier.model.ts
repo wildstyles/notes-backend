@@ -2,9 +2,9 @@ import { Result, Ok, Err } from 'oxide.ts';
 
 import { SupplyModel, CreateSupplyProps, SupplyId } from './supply.model';
 
-import { Id } from '../../../../libs/ddd/base.model';
+import { Id } from '@repo/common/ddd/base.model';
 
-import { AggregateRoot } from '../../../../libs/ddd/base.aggregate-root';
+import { AggregateRoot } from '@repo/common/ddd/base.aggregate-root';
 
 import { MaxSuppliesReachedError } from './supplier.errors';
 import { SupplierCreatedDomainEvent } from './events/supplier-created.domain-event';

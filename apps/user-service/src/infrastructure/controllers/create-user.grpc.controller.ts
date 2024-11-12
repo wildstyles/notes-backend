@@ -5,7 +5,7 @@ import {
   CreateUserResponse,
   GrpcController,
   USER_SERVICE_NAME,
-} from '@app/libs';
+} from '@repo/common';
 
 import { CreateUserHandler, CreateUserCommand } from '../../application';
 

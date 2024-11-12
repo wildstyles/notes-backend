@@ -1,6 +1,6 @@
 import { SupplierId } from './supplier.model';
 
-import { BaseModel, Id } from '../../../../libs/ddd/base.model';
+import { BaseModel, Id } from '@repo/common/ddd/base.model';
 
 interface SupplyProps {
   name: string;

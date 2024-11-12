@@ -7,7 +7,7 @@ import {
   CreateSupplierResponse,
   GrpcRollbackController,
   SUPPLIER_SERVICE_NAME,
-} from '@app/libs';
+} from '@repo/common';
 
 import {
   CreateSupplierCommand,

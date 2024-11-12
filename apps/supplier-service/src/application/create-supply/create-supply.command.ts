@@ -1,4 +1,4 @@
-import { CreateSupplyRequest, CreateSupplyResponse } from '@app/libs';
+import { CreateSupplyRequest, CreateSupplyResponse } from '@repo/common';
 import { Result } from 'oxide.ts';
 
 import { MaxSuppliesReachedError } from '../../domain/supplier.errors';

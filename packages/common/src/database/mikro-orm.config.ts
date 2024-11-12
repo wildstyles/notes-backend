@@ -6,9 +6,7 @@ import { EnvironmentVariables, nodeEnv } from '../config/env.validation';
 import { defineConfig } from '@mikro-orm/postgresql';
 import * as path from 'path';
 
-import { SupplierEntity } from '../../apps/supplier-service/src/infrastructure/database/entities/supplier.entity';
-import { SupplyEntity } from '../../apps/supplier-service/src/infrastructure/database/entities/supply.entity';
-import { UserEntity } from '../../apps/user-service/src/infrastructure/database/entities/user.entity';
+import { SupplyEntity, SupplierEntity, UserEntity } from './entities';
 import { BaseEntity } from './base.entity';
 
 // despite that we use ConfigService from @nestjs/config, which is a wrapper around dotenv,
@@ -44,6 +42,6 @@ export default defineConfig({
     },
   },
   extensions: [Migrator],
-  entities: [SupplierEntity, BaseEntity, SupplyEntity, UserEntity],
-  entitiesTs: [SupplierEntity, BaseEntity, SupplyEntity, UserEntity],
+  entities: [SupplierEntity, BaseEntity, UserEntity, SupplyEntity],
+  entitiesTs: [SupplierEntity, BaseEntity, UserEntity, SupplyEntity],
 });

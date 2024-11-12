@@ -1,5 +1,5 @@
 import { CreateSupplyRequestDto } from './create-supply.request.dto';
-import { CreateSupplyRequest } from '@app/libs';
+import { CreateSupplyRequest } from '@repo/common';
 
 export class CreateSupplyCommand implements CreateSupplyRequest {
   readonly name: string;

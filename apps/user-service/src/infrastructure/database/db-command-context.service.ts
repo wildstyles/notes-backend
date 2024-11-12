@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EntityManager } from '@mikro-orm/postgresql';
-import { IDbContextBase } from '@app/libs';
+import { IDbContextBase } from '@repo/common/database/base.repository';
 
 import { UserRepository } from './repositories/user.repository';
 

@@ -1,4 +1,4 @@
-import { SupplierCategory, CreateSupplierRequest } from '@app/libs';
+import { SupplierCategory, CreateSupplierRequest } from '@repo/common';
 
 import { CreateSupplierRequestDto } from './create-supplier.request.dto';
 

@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 
 import { UserModel } from '../../../domain/user.model';
-import { UserEntity } from '../entities/user.entity';
+import { UserEntity } from '@repo/common/database/entities/user.entity';
 
-import { IMapper } from '@app/libs/database/base.repository';
+import { IMapper } from '@repo/common/database/base.repository';
 
 @Injectable()
 export class UserMapper implements IMapper<UserModel, UserEntity> {

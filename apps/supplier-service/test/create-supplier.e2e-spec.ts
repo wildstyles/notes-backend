@@ -1,9 +1,9 @@
 import { Test } from '@nestjs/testing';
-import { setupTestGrpcMicroservice, SupplierCategory } from '@app/libs';
-import { GrpcClientModule, GrpcClientService } from '@app/libs';
+import { setupTestGrpcMicroservice, SupplierCategory } from '@repo/common';
+import { GrpcClientModule, GrpcClientService } from '@repo/common';
 import { lastValueFrom } from 'rxjs';
 import { INestApplication } from '@nestjs/common';
-import { DB_QUERY_CONTEXT_TOKEN } from '@app/libs';
+import { DB_QUERY_CONTEXT_TOKEN } from '@repo/common/database/base.repository';
 import { DbQueryContext } from '../src/infrastructure/database/db-query-context.service';
 
 import { AppModule } from '../src/app.module';

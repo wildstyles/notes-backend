@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 
-import { GrpcClientModule } from '@app/libs/grpc-client';
+import { GrpcClientModule } from '@repo/common';
 
 import { GetUserHandler, GetUserHttpController } from './get-user';
 import { CreateUserHandler, CreateUserHttpController } from './create-user';

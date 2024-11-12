@@ -1,8 +1,8 @@
 import { Controller, Post, Body, Param } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { CreateSupplyResponse } from '@app/libs';
-import { routes } from 'apps/gateway-service/src/common/routes';
+import { CreateSupplyResponse } from '@repo/common';
+import { routes } from '../../common';
 
 import { CreateSupplyCommand } from './create-supply.command';
 import { CreateSupplyRequestDto } from './create-supply.request.dto';

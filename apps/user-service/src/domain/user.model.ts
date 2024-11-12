@@ -1,6 +1,6 @@
-import { Id } from '../../../../libs/ddd/base.model';
+import { Id } from '@repo/common/ddd/base.model';
 
-import { AggregateRoot } from '@app/libs/ddd/base.aggregate-root';
+import { AggregateRoot } from '@repo/common/ddd/base.aggregate-root';
 
 interface UserProps {
   name: string;

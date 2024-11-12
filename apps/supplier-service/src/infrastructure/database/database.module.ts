@@ -1,10 +1,16 @@
 import { Module } from '@nestjs/common';
-import { PgDatabaseModule } from '@app/libs';
+import { PgDatabaseModule } from '@repo/common/database/database.module';
 
 import { DbCommandContext } from './db-command-context.service';
 import { DbQueryContext } from './db-query-context.service';
-import { DB_COMMAND_CONTEXT_TOKEN, DB_QUERY_CONTEXT_TOKEN } from '@app/libs';
-import { SupplierEntity, SupplyEntity } from './entities';
+import {
+  DB_COMMAND_CONTEXT_TOKEN,
+  DB_QUERY_CONTEXT_TOKEN,
+} from '@repo/common/database/base.repository';
+import {
+  SupplierEntity,
+  SupplyEntity,
+} from '@repo/common/database/entities/index';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 
 import { SupplierRepository } from './repositories';

@@ -1,5 +1,8 @@
 import { ICommandHandler, CommandHandler } from '@nestjs/cqrs';
-import { CreateSupplierResponse, CreateSupplyResponse } from '@app/libs';
+import {
+  CreateSupplierResponse,
+  CreateSupplyResponse,
+} from '@repo/common';
 
 import { CreateSupplierCommand } from './create-supplier.command';
 

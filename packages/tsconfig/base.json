@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2022",
+    "sourceMap": true,
+    "outDir": "./dist",
+    // "keyofStringsOnly": true,
+    "baseUrl": "./",
+    "incremental": true,
+    "strict": true,
+    "allowJs": false,
+    "strictPropertyInitialization": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "lib": [
+      "es2022"
+    ],
+    "moduleDetection": "force",
+    "moduleResolution": "NodeNext",
+    "module": "NodeNext",
+    "noUncheckedIndexedAccess": true,
+    "paths": {
+      "@app/user-service/*": [
+        "apps/user-service/src/*"
+      ],
+      "@app/shared": [
+        "libs/shared/src"
+      ],
+      "@app/shared/*": [
+        "libs/shared/src/*"
+      ],
+      "@app/libs": [
+        "libs"
+      ],
+      "@app/libs/*": [
+        "libs/*"
+      ]
+    }
+  }
+}
