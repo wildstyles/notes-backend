@@ -1,13 +1,11 @@
-import { Result, Ok, Err } from 'oxide.ts';
-
-import { SupplyModel, CreateSupplyProps, SupplyId } from './supply.model';
-
-import { Id } from '@repo/common/ddd/base.model';
+import { Err, Ok, Result } from 'oxide.ts';
 
 import { AggregateRoot } from '@repo/common/ddd/base.aggregate-root';
+import { Id } from '@repo/common/ddd/base.model';
 
-import { MaxSuppliesReachedError } from './supplier.errors';
 import { SupplierCreatedDomainEvent } from './events/supplier-created.domain-event';
+import { MaxSuppliesReachedError } from './supplier.errors';
+import { CreateSupplyProps, SupplyId, SupplyModel } from './supply.model';
 
 interface SupplierProps {
   name: string;

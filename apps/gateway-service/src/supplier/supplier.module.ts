@@ -4,8 +4,8 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { GrpcClientModule } from '@repo/common';
 
 import {
-  CreateSupplierHttpController,
   CreateSupplierHandler,
+  CreateSupplierHttpController,
   CreateSupplierSaga,
 } from './create-supplier';
 import {

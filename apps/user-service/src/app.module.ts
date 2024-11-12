@@ -1,15 +1,14 @@
 import { Module } from '@nestjs/common';
-
 import { EventEmitterModule } from '@nestjs/event-emitter';
+
 import { LoggerModule } from '@repo/common';
 
-import { DatabaseModule } from './infrastructure/database/database.module';
-
+import { CreateUserHandler, GetUserHandler } from './application';
 import {
   CreateUserGrpcController,
   GetUserGrpcController,
 } from './infrastructure/controllers';
-import { CreateUserHandler, GetUserHandler } from './application';
+import { DatabaseModule } from './infrastructure/database/database.module';
 
 @Module({
   imports: [

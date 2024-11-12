@@ -1,14 +1,13 @@
-import { Post, Controller, Body } from '@nestjs/common';
-import { ApiOkResponse } from '@nestjs/swagger';
+import { Body, Controller, Post } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+
+import { CreateUserResponse } from '@repo/common';
 
 import { routes } from '../../common';
-
+import { CreateUserCommand } from './create-user.command';
 import { CreateUserRequestDto } from './create-user.request.dto';
 import { CreateUserResponseDto } from './create-user.response.dto';
-import { CreateUserCommand } from './create-user.command';
-import { CreateUserResponse } from '@repo/common';
 
 @ApiTags(routes.createUser.apiTag)
 @Controller()

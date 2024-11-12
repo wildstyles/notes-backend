@@ -7,7 +7,7 @@ import {
   USER_SERVICE_NAME,
 } from '@repo/common';
 
-import { CreateUserHandler, CreateUserCommand } from '../../application';
+import { CreateUserCommand, CreateUserHandler } from '../../application';
 
 @Controller()
 export class CreateUserGrpcController extends GrpcController(

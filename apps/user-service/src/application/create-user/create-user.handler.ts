@@ -1,13 +1,11 @@
 import { Injectable } from '@nestjs/common';
 
+import { UserModel } from '../../domain/user.model';
 import { CommandHandler } from '../common/command.handler';
-
 import {
   CreateUserCommand as Command,
   CreateUserCommandResponse as Response,
 } from './create-user.command';
-
-import { UserModel } from '../../domain/user.model';
 
 @Injectable()
 export class CreateUserHandler extends CommandHandler<Command, Response> {

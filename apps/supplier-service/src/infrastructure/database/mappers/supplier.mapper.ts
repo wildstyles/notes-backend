@@ -1,11 +1,11 @@
 import { Injectable, NotImplementedException } from '@nestjs/common';
 
-import { SupplierModel } from '../../../domain/supplier.model';
-import { SupplierEntity } from '@repo/common/database/entities/supplier.entity';
-
-import { RequiredEntityData, Primary } from '@mikro-orm/core';
+import { Primary, RequiredEntityData } from '@mikro-orm/core';
 
 import { IMapper } from '@repo/common/database/base.repository';
+import { SupplierEntity } from '@repo/common/database/entities/supplier.entity';
+
+import { SupplierModel } from '../../../domain/supplier.model';
 import { SupplyMapper } from './supply.mapper';
 
 @Injectable()

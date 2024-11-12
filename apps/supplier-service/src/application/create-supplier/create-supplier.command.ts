@@ -1,9 +1,9 @@
 import {
-  SupplierCategory,
   CreateSupplierRequest,
   CreateSupplierResponse,
   RollbackCreateSupplierRequest,
   RollbackCreateSupplierResponse,
+  SupplierCategory,
 } from '@repo/common';
 
 export class CreateSupplierCommand {

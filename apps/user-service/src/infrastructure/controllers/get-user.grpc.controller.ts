@@ -1,9 +1,10 @@
 import { Controller } from '@nestjs/common';
+
 import {
-  GrpcController,
-  USER_SERVICE_NAME,
   GetUserRequest,
   GetUserResponse,
+  GrpcController,
+  USER_SERVICE_NAME,
 } from '@repo/common';
 
 import { GetUserHandler, GetUserQuery } from '../../application';

@@ -1,10 +1,11 @@
-import { EntityManager } from '@mikro-orm/postgresql';
 import { Injectable } from '@nestjs/common';
 
+import { EntityManager } from '@mikro-orm/postgresql';
+
 import { Repository } from '@repo/common/database/base.repository';
+import { SupplierEntity } from '@repo/common/database/entities/supplier.entity';
 
 import { SupplierModel } from '../../../domain/supplier.model';
-import { SupplierEntity } from '@repo/common/database/entities/supplier.entity';
 import { SupplierMapper } from '../mappers/supplier.mapper';
 
 @Injectable()

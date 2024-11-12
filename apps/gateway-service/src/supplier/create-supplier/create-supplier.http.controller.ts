@@ -1,13 +1,13 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { CreateSupplierResponse } from '@repo/common';
-import { CreateSupplierResponseDto } from './create-supplier.response.dto';
-import { CreateSupplierRequestDto } from './create-supplier.request.dto';
-import { CreateSupplierCommand } from './create-supplier.command';
 
 import { routes } from '../../common/routes';
+import { CreateSupplierCommand } from './create-supplier.command';
+import { CreateSupplierRequestDto } from './create-supplier.request.dto';
+import { CreateSupplierResponseDto } from './create-supplier.response.dto';
 
 @ApiTags(routes.createSupplier.apiTag)
 @Controller()

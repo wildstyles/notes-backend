@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
 import { QueryHandler } from '../common/query.handler';
-
 import {
   GetUserQuery as Query,
   GetUserQueryResponse as Response,

@@ -1,5 +1,6 @@
 import { Type } from '@sinclair/typebox';
-import { SupplierCategory, createAjvDto, EnumByKey } from '@repo/common';
+
+import { EnumByKey, SupplierCategory, createAjvDto } from '@repo/common';
 
 export const CreateSupplierRequestSchema = Type.Object({
   name: Type.String({ description: 'Supplier name' }),
@@ -8,7 +9,7 @@ export const CreateSupplierRequestSchema = Type.Object({
   categories: Type.Array(EnumByKey(SupplierCategory)),
   address: Type.Object({
     floor: Type.Number(),
-    street: Type.String()
+    street: Type.String(),
   }),
 });
 

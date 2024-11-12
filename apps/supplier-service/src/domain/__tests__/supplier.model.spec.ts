@@ -1,10 +1,10 @@
-import {
-  SupplierModel,
-  CreateSupplierProps,
-  AddSupplyProps,
-} from '../supplier.model';
 import { SupplierCreatedDomainEvent } from '../events/supplier-created.domain-event';
 import { MaxSuppliesReachedError } from '../supplier.errors';
+import {
+  AddSupplyProps,
+  CreateSupplierProps,
+  SupplierModel,
+} from '../supplier.model';
 import { SupplyModel } from '../supply.model';
 
 describe('SupplierModel', () => {

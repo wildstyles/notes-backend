@@ -1,5 +1,6 @@
 import { Type } from '@sinclair/typebox';
-import { createAjvDto, CreateUserRequest } from '@repo/common';
+
+import { createAjvDto } from '@repo/common';
 
 // export interface CreateUserRequest {
 //   name: string;

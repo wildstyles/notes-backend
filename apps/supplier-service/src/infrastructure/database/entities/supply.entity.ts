@@ -1,5 +1,6 @@
-import { SupplyEntity as BaseSupplyEntity } from '@repo/common/database/entities/supply.entity';
 import { Entity, EntityRepositoryType } from '@mikro-orm/core';
+
+import { SupplyEntity as BaseSupplyEntity } from '@repo/common/database/entities/supply.entity';
 
 import { SupplyRepository } from '../repositories/supply.repository';
 

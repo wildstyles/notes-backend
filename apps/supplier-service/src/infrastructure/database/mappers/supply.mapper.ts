@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 
-import { SupplyModel } from '../../../domain/supply.model';
+import { IMapper } from '@repo/common/database/base.repository';
 import { SupplyEntity } from '@repo/common/database/entities/supply.entity';
 
-import { IMapper } from '@repo/common/database/base.repository';
+import { SupplyModel } from '../../../domain/supply.model';
 
 @Injectable()
 export class SupplyMapper implements IMapper<SupplyModel, SupplyEntity> {

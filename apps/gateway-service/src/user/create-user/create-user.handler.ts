@@ -1,5 +1,7 @@
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
+
 import { lastValueFrom } from 'rxjs';
-import { ICommandHandler, CommandHandler } from '@nestjs/cqrs';
+
 import { CreateUserResponse, GrpcClientService } from '@repo/common';
 
 import { CreateUserCommand } from './create-user.command';

@@ -4,6 +4,11 @@
     "clean": {
       "cache": false
     },
+    "format": {
+      "dependsOn": [
+        "^format"
+      ]
+    },
     "build": {
       "dependsOn": [
         "^build"

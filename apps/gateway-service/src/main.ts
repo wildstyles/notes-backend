@@ -3,13 +3,14 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
+
 import { Logger } from 'nestjs-pino';
+
+import { AjvValidationPipe } from '@repo/common';
+import { GrpcExceptionInterceptor } from '@repo/common/grpc-client/grpc-exception.interceptor';
 
 import { AppModule } from './app.module';
 import { setupSwagger } from './common';
-
-import { GrpcExceptionInterceptor } from '@repo/common/grpc-client/grpc-exception.interceptor';
-import { AjvValidationPipe } from '@repo/common';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(

@@ -1,10 +1,11 @@
-import { EntityManager } from '@mikro-orm/postgresql';
 import { Injectable } from '@nestjs/common';
 
+import { EntityManager } from '@mikro-orm/postgresql';
+
 import { Repository } from '@repo/common/database/base.repository';
+import { UserEntity } from '@repo/common/database/entities/user.entity';
 
 import { UserModel } from '../../../domain/user.model';
-import { UserEntity } from '@repo/common/database/entities/user.entity';
 import { UserMapper } from '../mappers/user.mapper';
 
 @Injectable()
