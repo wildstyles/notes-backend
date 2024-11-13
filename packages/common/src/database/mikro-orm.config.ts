@@ -1,13 +1,13 @@
 import { ConfigService } from '@nestjs/config';
-import { config } from 'dotenv';
-import { Migrator } from '@mikro-orm/migrations';
-import { EnvironmentVariables, nodeEnv } from '../config/env.validation';
 
+import { Migrator } from '@mikro-orm/migrations';
 import { defineConfig } from '@mikro-orm/postgresql';
+import { config } from 'dotenv';
 import * as path from 'path';
 
-import { SupplyEntity, SupplierEntity, UserEntity } from './entities';
+import { EnvironmentVariables, nodeEnv } from '../config/env.validation';
 import { BaseEntity } from './base.entity';
+import { SupplierEntity, SupplyEntity, UserEntity } from './entities';
 
 // despite that we use ConfigService from @nestjs/config, which is a wrapper around dotenv,
 // we still need to call config() to load the .env file. It allows us to run migrations from the host machine

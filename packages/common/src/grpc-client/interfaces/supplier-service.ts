@@ -5,12 +5,19 @@
 // source: supplier-service.proto
 
 /* eslint-disable */
-import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
-import { Observable } from "rxjs";
+import { GrpcMethod, GrpcStreamMethod } from '@nestjs/microservices';
 
-export const SupplierCategory = { PIZZA: 0, ITALIAN: 1, UKRAINIAN: 2, BURGER: 3 } as const;
+import { Observable } from 'rxjs';
 
-export type SupplierCategory = typeof SupplierCategory[keyof typeof SupplierCategory];
+export const SupplierCategory = {
+  PIZZA: 0,
+  ITALIAN: 1,
+  UKRAINIAN: 2,
+  BURGER: 3,
+} as const;
+
+export type SupplierCategory =
+  (typeof SupplierCategory)[keyof typeof SupplierCategory];
 
 export namespace SupplierCategory {
   export type PIZZA = typeof SupplierCategory.PIZZA;
@@ -73,21 +80,31 @@ export interface RollbackCreateSupplierResponse {
 }
 
 export interface SupplierServiceClient {
-  createSupplier(request: CreateSupplierRequest): Observable<CreateSupplierResponse>;
+  createSupplier(
+    request: CreateSupplierRequest,
+  ): Observable<CreateSupplierResponse>;
 
   createSupply(request: CreateSupplyRequest): Observable<CreateSupplyResponse>;
 
-  rollbackCreateSupplier(request: RollbackCreateSupplierRequest): Observable<RollbackCreateSupplierResponse>;
+  rollbackCreateSupplier(
+    request: RollbackCreateSupplierRequest,
+  ): Observable<RollbackCreateSupplierResponse>;
 }
 
 export interface SupplierServiceController {
   createSupplier(
     request: CreateSupplierRequest,
-  ): Promise<CreateSupplierResponse> | Observable<CreateSupplierResponse> | CreateSupplierResponse;
+  ):
+    | Promise<CreateSupplierResponse>
+    | Observable<CreateSupplierResponse>
+    | CreateSupplierResponse;
 
   createSupply(
     request: CreateSupplyRequest,
-  ): Promise<CreateSupplyResponse> | Observable<CreateSupplyResponse> | CreateSupplyResponse;
+  ):
+    | Promise<CreateSupplyResponse>
+    | Observable<CreateSupplyResponse>
+    | CreateSupplyResponse;
 
   rollbackCreateSupplier(
     request: RollbackCreateSupplierRequest,
@@ -99,17 +116,35 @@ export interface SupplierServiceController {
 
 export function SupplierServiceControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = ["createSupplier", "createSupply", "rollbackCreateSupplier"];
+    const grpcMethods: string[] = [
+      'createSupplier',
+      'createSupply',
+      'rollbackCreateSupplier',
+    ];
     for (const method of grpcMethods) {
-      const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
-      GrpcMethod("SupplierService", method)(constructor.prototype[method], method, descriptor);
+      const descriptor: any = Reflect.getOwnPropertyDescriptor(
+        constructor.prototype,
+        method,
+      );
+      GrpcMethod('SupplierService', method)(
+        constructor.prototype[method],
+        method,
+        descriptor,
+      );
     }
     const grpcStreamMethods: string[] = [];
     for (const method of grpcStreamMethods) {
-      const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
-      GrpcStreamMethod("SupplierService", method)(constructor.prototype[method], method, descriptor);
+      const descriptor: any = Reflect.getOwnPropertyDescriptor(
+        constructor.prototype,
+        method,
+      );
+      GrpcStreamMethod('SupplierService', method)(
+        constructor.prototype[method],
+        method,
+        descriptor,
+      );
     }
   };
 }
 
-export const SUPPLIER_SERVICE_NAME = "SupplierService";
+export const SUPPLIER_SERVICE_NAME = 'SupplierService';

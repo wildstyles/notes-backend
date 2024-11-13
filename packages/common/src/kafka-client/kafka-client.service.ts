@@ -1,5 +1,6 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
+
 import { Observable } from 'rxjs';
 
 import { KafkaClientName } from './kafka-client.module';

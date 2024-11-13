@@ -5,8 +5,9 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { RpcException } from '@nestjs/microservices';
-import { throwError } from 'rxjs';
+
 import { status } from '@grpc/grpc-js';
+import { throwError } from 'rxjs';
 
 // https://github.com/nestjs/nest/issues/1953#issuecomment-1171032134
 @Catch()

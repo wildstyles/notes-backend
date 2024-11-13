@@ -1,10 +1,10 @@
 import {
-  Entity,
-  Property,
-  ManyToOne,
-  Ref,
   Cascade,
+  Entity,
   EntityRepositoryType,
+  ManyToOne,
+  Property,
+  Ref,
 } from '@mikro-orm/core';
 
 import { BaseEntity } from '@repo/common/database/base.entity';

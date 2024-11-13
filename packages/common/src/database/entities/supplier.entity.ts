@@ -1,7 +1,6 @@
-import { Entity, OneToMany, Property, Collection } from '@mikro-orm/core';
+import { Collection, Entity, OneToMany, Property } from '@mikro-orm/core';
 
 import { BaseEntity } from '../base.entity';
-
 import { SupplyEntity } from './supply.entity';
 
 @Entity({ tableName: 'suppliers' })

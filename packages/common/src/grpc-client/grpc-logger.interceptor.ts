@@ -1,6 +1,3 @@
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-
 import {
   CallHandler,
   ExecutionContext,
@@ -8,8 +5,12 @@ import {
   Logger,
   NestInterceptor,
 } from '@nestjs/common';
-import { ServiceName } from './grpc-client.service';
+
 import { Metadata } from '@grpc/grpc-js';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+
+import { ServiceName } from './grpc-client.service';
 
 export const REQUEST_ID_METADATA_KEY = 'reqId';
 

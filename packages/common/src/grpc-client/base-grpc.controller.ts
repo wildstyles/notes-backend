@@ -1,12 +1,14 @@
-import { EntityManager, CreateRequestContext } from '@mikro-orm/core';
 import { Inject } from '@nestjs/common';
+import { GrpcMethod } from '@nestjs/microservices';
+
+import { CreateRequestContext, EntityManager } from '@mikro-orm/core';
+
 import {
-  SupplierServiceController,
   SUPPLIER_SERVICE_NAME,
+  SupplierServiceController,
   USER_SERVICE_NAME,
   UserServiceController,
 } from './interfaces';
-import { GrpcMethod } from '@nestjs/microservices';
 
 type PickFn<T> = {
   [K in keyof T]: T[K] extends (...args: any) => any ? K : never;

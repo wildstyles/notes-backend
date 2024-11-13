@@ -1,17 +1,18 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import {
-  ClientsModule,
-  Transport,
-  GrpcOptions,
   ClientGrpc,
+  ClientsModule,
+  GrpcOptions,
+  Transport,
 } from '@nestjs/microservices';
+
+import { InterceptingCall, InterceptorOptions, NextCall } from '@grpc/grpc-js';
 import { join } from 'path';
-import { GrpcClientService } from './grpc-client.service';
-import { ServiceName } from './grpc-client.service';
-import { InterceptingCall, NextCall, InterceptorOptions } from '@grpc/grpc-js';
+
 import { RequestContextModule } from '../request-context/request-context.module';
 import { RequestContext } from '../request-context/request-context.service';
-
+import { GrpcClientService } from './grpc-client.service';
+import { ServiceName } from './grpc-client.service';
 import { REQUEST_ID_METADATA_KEY } from './grpc-logger.interceptor';
 
 @Module({})

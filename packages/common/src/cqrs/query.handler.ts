@@ -1,5 +1,6 @@
 import { Inject } from '@nestjs/common';
-import { IDbContextBase, DB_QUERY_CONTEXT_TOKEN } from '../database';
+
+import { DB_QUERY_CONTEXT_TOKEN, IDbContextBase } from '../database';
 
 export interface IQuery {}
 

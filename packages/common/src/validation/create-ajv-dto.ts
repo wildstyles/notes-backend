@@ -1,5 +1,6 @@
-import { type Static, TObject, TProperties, Type } from '@sinclair/typebox';
 import { ApiProperty } from '@nestjs/swagger';
+
+import { type Static, TObject, TProperties, Type } from '@sinclair/typebox';
 
 export const StringEnum = <T extends string[]>(values: [...T]) =>
   Type.Unsafe<T[number]>({

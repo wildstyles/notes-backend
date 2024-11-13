@@ -1,6 +1,6 @@
 import { DynamicModule } from '@nestjs/common';
 import { Module } from '@nestjs/common';
-import { ClientsModule, Transport, ClientKafka } from '@nestjs/microservices';
+import { ClientKafka, ClientsModule, Transport } from '@nestjs/microservices';
 
 import { KafkaClientService } from './kafka-client.service';
 

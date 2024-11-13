@@ -1,8 +1,8 @@
 import { Inject, Type } from '@nestjs/common';
-import { DomainEvent } from './base.domain-event';
 import { OnEvent } from '@nestjs/event-emitter';
 
 import { DB_COMMAND_CONTEXT_TOKEN, IDbContextBase } from '../database';
+import { DomainEvent } from './base.domain-event';
 
 export function DomainEventHandler<
   Event extends Type<DomainEvent>,

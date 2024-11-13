@@ -1,23 +1,25 @@
 import {
+  Inject,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
+import { EventEmitter2 } from '@nestjs/event-emitter';
+
+import {
+  EntityData,
+  EntityManager,
   EntityRepository,
   FilterQuery,
   FindOneOrFailOptions,
-  RequiredEntityData,
   FromEntityType,
-  Primary,
-  EntityData,
-  EntityManager,
   NotFoundError,
+  Primary,
+  RequiredEntityData,
 } from '@mikro-orm/postgresql';
-import { EventEmitter2 } from '@nestjs/event-emitter';
-import { BaseEntity } from './base.entity';
+
 import { AggregateRoot } from '../ddd/base.aggregate-root';
-import {
-  Inject,
-  NotFoundException,
-  InternalServerErrorException,
-} from '@nestjs/common';
 import { BaseModel } from '../ddd/base.model';
+import { BaseEntity } from './base.entity';
 
 // https://medium.com/brain-station-23/repository-pattern-for-data-access-in-nestjs-using-typeorm-bbf0a92d6d7c
 // https://dou.ua/forums/topic/47721/

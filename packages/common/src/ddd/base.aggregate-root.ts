@@ -1,6 +1,7 @@
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { BaseModel, Id } from './base.model';
+
 import { DomainEvent } from './base.domain-event';
+import { BaseModel, Id } from './base.model';
 
 export abstract class AggregateRoot<
   ModelProps extends {} = {},

@@ -1,18 +1,18 @@
-import {
-  Transport,
-  MicroserviceOptions,
-  GrpcOptions,
-} from '@nestjs/microservices';
 import { NestFactory } from '@nestjs/core';
-import { join } from 'path';
-import { Logger } from 'nestjs-pino';
-import { TestingModule } from '@nestjs/testing';
+import {
+  GrpcOptions,
+  MicroserviceOptions,
+  Transport,
+} from '@nestjs/microservices';
 import { FastifyAdapter } from '@nestjs/platform-fastify';
+import { TestingModule } from '@nestjs/testing';
+
+import { Logger } from 'nestjs-pino';
+import { join } from 'path';
 
 import { ServiceName } from './grpc-client.service';
-
-import { GrpcLoggerInterceptor } from './grpc-logger.interceptor';
 import { HttpToGrpcExceptionFilter } from './grpc-exception.filter';
+import { GrpcLoggerInterceptor } from './grpc-logger.interceptor';
 
 export const setupGrpcMicroservice = async (
   appModule: Function,

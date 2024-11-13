@@ -1,9 +1,10 @@
-import {
-  Transport,
-  MicroserviceOptions,
-  KafkaOptions,
-} from '@nestjs/microservices';
 import { NestFactory } from '@nestjs/core';
+import {
+  KafkaOptions,
+  MicroserviceOptions,
+  Transport,
+} from '@nestjs/microservices';
+
 import { Logger } from 'nestjs-pino';
 
 import { KafkaClientName } from './kafka-client.module';
