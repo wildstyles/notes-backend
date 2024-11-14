@@ -11,7 +11,7 @@ import { SupplierEntity, SupplyEntity, UserEntity } from './entities';
 
 // despite that we use ConfigService from @nestjs/config, which is a wrapper around dotenv,
 // we still need to call config() to load the .env file. It allows us to run migrations from the host machine
-config();
+config({ path: path.join(__dirname, '../../.env') });
 
 const configService = new ConfigService<EnvironmentVariables>();
 

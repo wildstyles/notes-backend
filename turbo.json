@@ -17,11 +17,13 @@
       ]
     },
     "test": {
+      "cache": false,
       "dependsOn": [
         "^test"
       ]
     },
     "test:e2e": {
+      "cache": false,
       "dependsOn": [
         "^test:e2e"
       ]
