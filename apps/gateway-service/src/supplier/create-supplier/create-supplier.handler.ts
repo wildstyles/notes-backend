@@ -1,6 +1,9 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
-import { CreateSupplierResponse, CreateSupplyResponse } from '@repo/common';
+import {
+  CreateSupplierResponse,
+  CreateSupplyResponse,
+} from '@repo/common/grpc-client';
 
 import { CreateSupplierCommand } from './create-supplier.command';
 import { CreateSupplierSaga } from './create-supplier.saga';

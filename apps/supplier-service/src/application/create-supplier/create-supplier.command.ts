@@ -4,7 +4,7 @@ import {
   RollbackCreateSupplierRequest,
   RollbackCreateSupplierResponse,
   SupplierCategory,
-} from '@repo/common';
+} from '@repo/common/grpc-client';
 
 export class CreateSupplierCommand {
   readonly name: string;

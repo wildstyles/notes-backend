@@ -6,8 +6,8 @@ import {
 
 import { Logger } from 'nestjs-pino';
 
-import { AjvValidationPipe } from '@repo/common';
-import { GrpcExceptionInterceptor } from '@repo/common/grpc-client/grpc-exception.interceptor';
+import { GrpcExceptionInterceptor } from '@repo/common/grpc-client';
+import { AjvValidationPipe } from '@repo/common/validation';
 
 import { AppModule } from './app.module';
 import { setupSwagger } from './common';

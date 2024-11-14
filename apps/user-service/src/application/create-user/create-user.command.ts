@@ -1,4 +1,7 @@
-import { CreateUserRequest, CreateUserResponse } from '@repo/common';
+import {
+  CreateUserRequest,
+  CreateUserResponse,
+} from '@repo/common/grpc-client';
 
 export class CreateUserCommand {
   readonly name: string;

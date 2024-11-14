@@ -1,4 +1,4 @@
-import { CreateUserRequest } from '@repo/common';
+import { CreateUserRequest } from '@repo/common/grpc-client';
 
 import { CreateUserRequestDto } from './create-user.request.dto';
 

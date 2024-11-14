@@ -17,8 +17,7 @@ import {
   RequiredEntityData,
 } from '@mikro-orm/postgresql';
 
-import { AggregateRoot } from '../ddd/base.aggregate-root';
-import { BaseModel } from '../ddd/base.model';
+import { AggregateRoot, BaseModel } from '../ddd';
 import { BaseEntity } from './base.entity';
 
 // https://medium.com/brain-station-23/repository-pattern-for-data-access-in-nestjs-using-typeorm-bbf0a92d6d7c

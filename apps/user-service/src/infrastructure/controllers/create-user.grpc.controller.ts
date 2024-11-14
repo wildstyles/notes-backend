@@ -5,7 +5,7 @@ import {
   CreateUserResponse,
   GrpcController,
   USER_SERVICE_NAME,
-} from '@repo/common';
+} from '@repo/common/grpc-client';
 
 import { CreateUserCommand, CreateUserHandler } from '../../application';
 

@@ -11,7 +11,7 @@ import {
   CreateSupplyResponse,
   GrpcController,
   SUPPLIER_SERVICE_NAME,
-} from '@repo/common';
+} from '@repo/common/grpc-client';
 
 import { CreateSupplyCommand, CreateSupplyHandler } from '../../application';
 import { MaxSuppliesReachedError } from '../../domain/supplier.errors';

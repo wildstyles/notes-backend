@@ -7,7 +7,7 @@ import {
   RollbackCreateSupplierRequest,
   RollbackCreateSupplierResponse,
   SUPPLIER_SERVICE_NAME,
-} from '@repo/common';
+} from '@repo/common/grpc-client';
 
 import {
   CreateSupplierCommand,

@@ -1,6 +1,9 @@
 import { Result } from 'oxide.ts';
 
-import { CreateSupplyRequest, CreateSupplyResponse } from '@repo/common';
+import {
+  CreateSupplyRequest,
+  CreateSupplyResponse,
+} from '@repo/common/grpc-client';
 
 import { MaxSuppliesReachedError } from '../../domain/supplier.errors';
 

@@ -1,4 +1,4 @@
-import { BaseModel, Id } from '@repo/common/ddd/base.model';
+import { BaseModel, Id } from '@repo/common/ddd';
 
 import { SupplierId } from './supplier.model';
 

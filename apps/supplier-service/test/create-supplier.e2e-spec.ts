@@ -3,9 +3,12 @@ import { Test } from '@nestjs/testing';
 
 import { lastValueFrom } from 'rxjs';
 
-import { SupplierCategory, setupTestGrpcMicroservice } from '@repo/common';
-import { GrpcClientModule, GrpcClientService } from '@repo/common';
-import { DB_QUERY_CONTEXT_TOKEN } from '@repo/common/database/base.repository';
+import { DB_QUERY_CONTEXT_TOKEN } from '@repo/common/database';
+import {
+  SupplierCategory,
+  setupTestGrpcMicroservice,
+} from '@repo/common/grpc-client';
+import { GrpcClientModule, GrpcClientService } from '@repo/common/grpc-client';
 
 import { AppModule } from '../src/app.module';
 import { DbQueryContext } from '../src/infrastructure/database/db-query-context.service';

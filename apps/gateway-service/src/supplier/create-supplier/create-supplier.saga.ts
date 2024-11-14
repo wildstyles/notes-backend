@@ -5,10 +5,8 @@ import { lastValueFrom } from 'rxjs';
 import {
   CreateSupplierResponse,
   GrpcClientService,
-  ISagaContext,
-  ISagaStep,
-  SagaOrchestrator,
-} from '@repo/common';
+} from '@repo/common/grpc-client';
+import { ISagaContext, ISagaStep, SagaOrchestrator } from '@repo/common/saga';
 
 import { CreateSupplierCommand } from './create-supplier.command';
 

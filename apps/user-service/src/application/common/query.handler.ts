@@ -1,7 +1,4 @@
-import {
-  QueryHandler as BaseQueryHandler,
-  IQuery,
-} from '@repo/common/cqrs/query.handler';
+import { QueryHandler as BaseQueryHandler, IQuery } from '@repo/common/cqrs';
 
 import { IDbQueryContext } from '../../infrastructure/database/db-query-context.service';
 

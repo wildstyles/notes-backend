@@ -1,7 +1,9 @@
 import { Type } from '@nestjs/common';
 
-import { DomainEvent } from '@repo/common/ddd/base.domain-event';
-import { DomainEventHandler as BaseDomainEventHandler } from '@repo/common/ddd/base.domain-event-handler';
+import {
+  DomainEventHandler as BaseDomainEventHandler,
+  DomainEvent,
+} from '@repo/common/ddd';
 
 import { IDbCommandContext } from '../../infrastructure/database/db-command-context.service';
 

@@ -1,4 +1,7 @@
-import { CreateSupplierRequest, SupplierCategory } from '@repo/common';
+import {
+  CreateSupplierRequest,
+  SupplierCategory,
+} from '@repo/common/grpc-client';
 
 import { CreateSupplierRequestDto } from './create-supplier.request.dto';
 

@@ -19,23 +19,17 @@
   "config": {
     "mikroorm": "--config ./src/database/mikro-orm.config.ts"
   },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "./dist/**"
-  ],
   "publishConfig": {
     "access": "public"
   },
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    },
-    "./*": {
-      "types": "./dist/*.d.ts",
-      "default": "./dist/*.js"
-    }
+    "./grpc-client": "./src/grpc-client/index.ts",
+    "./ddd": "./src/ddd/index.ts",
+    "./validation": "./src/validation/index.ts",
+    "./saga": "./src/saga/base.saga.ts",
+    "./database": "./src/database/index.ts",
+    "./cqrs": "./src/cqrs/index.ts",
+    "./logger": "./src/logger/logger.module.ts"
   },
   "dependencies": {
     "@fastify/static": "7.0.4",

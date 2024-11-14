@@ -1,7 +1,6 @@
 import { Err, Ok, Result } from 'oxide.ts';
 
-import { AggregateRoot } from '@repo/common/ddd/base.aggregate-root';
-import { Id } from '@repo/common/ddd/base.model';
+import { AggregateRoot, Id } from '@repo/common/ddd';
 
 import { SupplierCreatedDomainEvent } from './events/supplier-created.domain-event';
 import { MaxSuppliesReachedError } from './supplier.errors';

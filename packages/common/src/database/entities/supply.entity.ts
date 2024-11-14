@@ -7,7 +7,7 @@ import {
   Ref,
 } from '@mikro-orm/core';
 
-import { BaseEntity } from '@repo/common/database/base.entity';
+import { BaseEntity } from '@repo/common/database';
 
 import { SupplierEntity } from './supplier.entity';
 

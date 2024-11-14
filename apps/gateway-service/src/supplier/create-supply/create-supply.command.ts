@@ -1,4 +1,4 @@
-import { CreateSupplyRequest } from '@repo/common';
+import { CreateSupplyRequest } from '@repo/common/grpc-client';
 
 import { CreateSupplyRequestDto } from './create-supply.request.dto';
 

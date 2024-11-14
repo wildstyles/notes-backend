@@ -2,7 +2,7 @@ import { Controller, Get, Param } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
-import { GetUserResponse } from '@repo/common';
+import { GetUserResponse } from '@repo/common/grpc-client';
 
 import { routes } from '../../common';
 import { GetUserQuery } from './get-user.query';

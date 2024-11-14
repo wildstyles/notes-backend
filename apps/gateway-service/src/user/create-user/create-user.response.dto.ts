@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { CreateUserResponse } from '@repo/common';
+import { CreateUserResponse } from '@repo/common/grpc-client';
 
 export class CreateUserResponseDto implements CreateUserResponse {
   @ApiProperty()

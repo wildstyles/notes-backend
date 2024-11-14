@@ -1,7 +1,4 @@
-import {
-  DomainEvent,
-  IDomainEventProps,
-} from '@repo/common/ddd/base.domain-event';
+import { DomainEvent, IDomainEventProps } from '@repo/common/ddd';
 
 export class SupplierCreatedDomainEvent extends DomainEvent {
   public readonly supplierName: string;

@@ -1,7 +1,6 @@
 import { Injectable, NotImplementedException } from '@nestjs/common';
 
-import { IMapper } from '@repo/common/database/base.repository';
-import { SupplierEntity } from '@repo/common/database/entities/supplier.entity';
+import { IMapper, SupplierEntity } from '@repo/common/database';
 
 import { SupplierModel } from '../../../domain/supplier.model';
 import { SupplyMapper } from './supply.mapper';

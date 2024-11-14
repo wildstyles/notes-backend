@@ -5,12 +5,10 @@ import { MikroOrmModule } from '@mikro-orm/nestjs';
 import {
   DB_COMMAND_CONTEXT_TOKEN,
   DB_QUERY_CONTEXT_TOKEN,
-} from '@repo/common/database/base.repository';
-import { PgDatabaseModule } from '@repo/common/database/database.module';
-import {
+  PgDatabaseModule,
   SupplierEntity,
   SupplyEntity,
-} from '@repo/common/database/entities/index';
+} from '@repo/common/database';
 
 import { DbCommandContext } from './db-command-context.service';
 import { DbQueryContext } from './db-query-context.service';

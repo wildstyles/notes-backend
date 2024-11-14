@@ -1,7 +1,7 @@
 import {
   CommandHandler as BaseCommandHandler,
   ICommand,
-} from '@repo/common/cqrs/command.handler';
+} from '@repo/common/cqrs';
 
 import { IDbCommandContext } from '../../infrastructure/database/db-command-context.service';
 

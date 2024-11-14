@@ -1,4 +1,4 @@
-import { ErrorBase } from '@repo/common/ddd/base.error';
+import { ErrorBase } from '@repo/common/ddd';
 
 export class MaxSuppliesReachedError extends ErrorBase {
   readonly code = 'Supplier.MAX_SUPPLIES_REACHED';

@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { IMapper } from '@repo/common/database/base.repository';
-import { UserEntity } from '@repo/common/database/entities/user.entity';
+import { IMapper, UserEntity } from '@repo/common/database';
 
 import { UserModel } from '../../../domain/user.model';
 

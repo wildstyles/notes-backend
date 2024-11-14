@@ -2,7 +2,10 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 import { lastValueFrom } from 'rxjs';
 
-import { CreateSupplyResponse, GrpcClientService } from '@repo/common';
+import {
+  CreateSupplyResponse,
+  GrpcClientService,
+} from '@repo/common/grpc-client';
 
 import { CreateSupplyCommand } from './create-supply.command';
 

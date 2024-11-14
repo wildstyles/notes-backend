@@ -2,11 +2,11 @@ import { Injectable } from '@nestjs/common';
 
 import { EntityManager, EntityRepository } from '@mikro-orm/postgresql';
 
-import { IDbContextBase } from '@repo/common/database/base.repository';
 import {
+  IDbContextBase,
   SupplierEntity,
   SupplyEntity,
-} from '@repo/common/database/entities/index';
+} from '@repo/common/database';
 
 export interface IDbQueryContext extends IDbContextBase {
   suppliers: EntityRepository<SupplierEntity>;

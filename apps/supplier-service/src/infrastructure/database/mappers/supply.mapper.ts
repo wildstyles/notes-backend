@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { IMapper } from '@repo/common/database/base.repository';
-import { SupplyEntity } from '@repo/common/database/entities/supply.entity';
+import { IMapper, SupplyEntity } from '@repo/common/database';
 
 import { SupplyModel } from '../../../domain/supply.model';
 

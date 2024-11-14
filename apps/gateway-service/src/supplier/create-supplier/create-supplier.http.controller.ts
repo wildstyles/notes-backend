@@ -2,7 +2,7 @@ import { Body, Controller, Post } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
-import { CreateSupplierResponse } from '@repo/common';
+import { CreateSupplierResponse } from '@repo/common/grpc-client';
 
 import { routes } from '../../common/routes';
 import { CreateSupplierCommand } from './create-supplier.command';

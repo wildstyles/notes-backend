@@ -1,6 +1,7 @@
 import { Type } from '@sinclair/typebox';
 
-import { EnumByKey, SupplierCategory, createAjvDto } from '@repo/common';
+import { SupplierCategory } from '@repo/common/grpc-client';
+import { EnumByKey, createAjvDto } from '@repo/common/validation';
 
 export const CreateSupplierRequestSchema = Type.Object({
   name: Type.String({ description: 'Supplier name' }),
