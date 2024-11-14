@@ -8,6 +8,7 @@
   "packageManager": "pnpm@9.9.0",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
+    "ri": "pnpm -r exec npx rimraf node_modules && npx rimraf node_modules pnpm-lock.yaml && pnpm i",
     "format": "turbo format",
     "check-types": "turbo check-types",
     "lint": "turbo lint",

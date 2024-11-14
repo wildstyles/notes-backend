@@ -1,7 +1,7 @@
 {
   "extends": "@repo/ts-config/base.json",
   "compilerOptions": {
-    "incremental": false,
+    "declarationMap": true,
     "baseUrl": ".",
     "rootDir": "./src",
     "outDir": "./dist"

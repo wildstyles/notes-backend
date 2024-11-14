@@ -1,14 +1,6 @@
-import {
-  Cascade,
-  Entity,
-  EntityRepositoryType,
-  ManyToOne,
-  Property,
-  Ref,
-} from '@mikro-orm/core';
+import { Cascade, Entity, ManyToOne, Property, Ref } from '@mikro-orm/core';
 
-import { BaseEntity } from '@repo/common/database';
-
+import { BaseEntity } from '../base.entity';
 import { SupplierEntity } from './supplier.entity';
 
 // import { SupplyRepository } from '../repositories/supply.repository';

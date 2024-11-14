@@ -9,6 +9,8 @@
     "format": "prettier --write \"src/**/*.ts\"",
     "check-types": "tsc --pretty --noEmit",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
+    "dev": "nest build --watch",
+    "build": "nest build",
     "migration:up": "npx mikro-orm migration:up $npm_package_config_mikroorm",
     "migration:create": "npx mikro-orm migration:create $npm_package_config_mikroorm",
     "migration:down": "npx mikro-orm migration:down $npm_package_config_mikroorm",
@@ -23,13 +25,34 @@
     "access": "public"
   },
   "exports": {
-    "./grpc-client": "./src/grpc-client/index.ts",
-    "./ddd": "./src/ddd/index.ts",
-    "./validation": "./src/validation/index.ts",
-    "./saga": "./src/saga/base.saga.ts",
-    "./database": "./src/database/index.ts",
-    "./cqrs": "./src/cqrs/index.ts",
-    "./logger": "./src/logger/logger.module.ts"
+    "./grpc-client": {
+      "types": "./src/grpc-client/index.d.ts",
+      "default": "./dist/grpc-client/index.js"
+    },
+    "./ddd": {
+      "types": "./src/ddd/index.d.ts",
+      "default": "./dist/ddd/index.js"
+    },
+    "./validation": {
+      "types": "./src/validation/index.d.ts",
+      "default": "./dist/validation/index.js"
+    },
+    "./saga": {
+      "types": "./src/saga/base.saga.d.ts",
+      "default": "./dist/saga/base.saga.js"
+    },
+    "./database": {
+      "types": "./src/database/index.d.ts",
+      "default": "./dist/database/index.js"
+    },
+    "./cqrs": {
+      "types": "./src/cqrs/index.d.ts",
+      "default": "./dist/cqrs/index.js"
+    },
+    "./logger": {
+      "types": "./src/logger/logger.module.d.ts",
+      "default": "./dist/logger/logger.module.js"
+    }
   },
   "dependencies": {
     "@fastify/static": "7.0.4",
