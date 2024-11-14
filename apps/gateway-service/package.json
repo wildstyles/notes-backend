@@ -6,15 +6,14 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
-    "prebuild": "rimraf dist",
-    "build": "nest build",
-    "start": "nest start",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "check-types": "tsc --pretty --noEmit",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
     "dev": "nest start --watch",
+    "build": "nest build",
     "dev:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "format": "prettier --write \"src/**/*.ts\"",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\""
+    "prebuild": "rimraf dist"
   },
   "dependencies": {
     "@repo/common": "workspace:*",

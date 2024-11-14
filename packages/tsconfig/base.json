@@ -10,7 +10,7 @@
     "outDir": "./dist",
     // "keyofStringsOnly": true,
     "baseUrl": "./",
-    "incremental": true,
+    "incremental": false,
     "strict": true,
     "allowJs": false,
     "strictPropertyInitialization": false,

@@ -8,28 +8,15 @@
   "packageManager": "pnpm@9.9.0",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "prebuild": "rimraf dist",
-    "build": "nest build",
-    "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
-    "start": "nest start",
-    "start:dev": "nest start --watch",
-    "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/apps/notes-backend/main",
-    "lint": "tsc & eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./apps/supplier-service/test/jest-e2e.ts",
-    "mikro-orm": "npx mikro-orm --config ./libs/database/mikro-orm.config.ts",
-    "migration:create": "yarn mikro-orm migration:create",
-    "migration:up": "yarn mikro-orm migration:up",
-    "migration:down": "yarn mikro-orm migration:down",
-    "migration:fresh": "yarn mikro-orm migration:fresh",
-    "database:create": "yarn mikro-orm database:create",
-    "proto:generate": "protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --proto_path=proto --ts_proto_out=./libs/grpc-client/interfaces --ts_proto_opt=exportCommonSymbols=false --ts_proto_opt=enumsAsLiterals=true --ts_proto_opt=unrecognizedEnum=false --ts_proto_opt=nestJs=true ./proto/*.proto"
+    "format": "turbo format",
+    "check-types": "turbo check-types",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "test:e2e": "turbo test:e2e",
+    "dev": "turbo dev"
   },
   "devDependencies": {
+    "@dotenvx/dotenvx": "^1.22.0",
     "prettier": "^3.3.3",
     "turbo": "^2.2.3"
   }

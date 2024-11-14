@@ -20,10 +20,11 @@ export default defineConfig({
   user: configService.getOrThrow('DB_USER'),
   password: configService.getOrThrow('DB_PASSWORD'),
   dbName: configService.getOrThrow('DB_NAME'),
-  host:
-    configService.getOrThrow('NODE_ENV') === nodeEnv.development
-      ? configService.getOrThrow('DB_HOST')
-      : 'localhost',
+  host: 'localhost',
+  // host:
+  //   configService.getOrThrow('NODE_ENV') === nodeEnv.development
+  //     ? configService.getOrThrow('DB_HOST')
+  //     : 'localhost',
   debug: configService.getOrThrow('NODE_ENV') !== nodeEnv.test,
   allowGlobalContext: configService.getOrThrow('NODE_ENV') === nodeEnv.test,
   migrations: {

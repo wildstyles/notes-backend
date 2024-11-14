@@ -1,7 +1,5 @@
 import { Injectable, NotImplementedException } from '@nestjs/common';
 
-import { Primary, RequiredEntityData } from '@mikro-orm/core';
-
 import { IMapper } from '@repo/common/database/base.repository';
 import { SupplierEntity } from '@repo/common/database/entities/supplier.entity';
 

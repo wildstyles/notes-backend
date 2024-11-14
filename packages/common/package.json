@@ -6,12 +6,18 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "clean": "rm -rf dist",
-    "preinstall": "npx only-allow pnpm",
-    "dev": "pnpm build --watch",
     "format": "prettier --write \"src/**/*.ts\"",
-    "lint": "eslint \"{src,test}/**/*.ts\" --fix",
-    "build": "nest build"
+    "check-types": "tsc --pretty --noEmit",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
+    "migration:up": "npx mikro-orm migration:up $npm_package_config_mikroorm",
+    "migration:create": "npx mikro-orm migration:create $npm_package_config_mikroorm",
+    "migration:down": "npx mikro-orm migration:down $npm_package_config_mikroorm",
+    "migration:fresh": "npx mikro-orm migration:fresh $npm_package_config_mikroorm",
+    "database:create": "npx mikro-orm database:create $npm_package_config_mikroorm",
+    "proto:generate": "protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --proto_path=proto --ts_proto_out=./src/grpc-client/interfaces --ts_proto_opt=exportCommonSymbols=false --ts_proto_opt=enumsAsLiterals=true --ts_proto_opt=unrecognizedEnum=false --ts_proto_opt=nestJs=true ../../proto/*.proto"
+  },
+  "config": {
+    "mikroorm": "--config ./src/database/mikro-orm.config.ts"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
