@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
-    "@repo/tsconfig": "workspace:*",
+    "@repo/ts-config": "workspace:*",
     "@repo/jest-config": "workspace:*",
     "@nestjs/testing": "^10.4.7",
     "@types/jest": "28.1.8",

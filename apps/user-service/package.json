@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
-    "@repo/tsconfig": "workspace:*",
+    "@repo/ts-config": "workspace:*",
     "@repo/jest-config": "workspace:*",
     "@types/jest": "28.1.8",
     "jest": "28.1.3",
