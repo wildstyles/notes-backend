@@ -2,11 +2,13 @@
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
     "format": {
+      "cache": false,
       "dependsOn": [
         "^format"
       ]
     },
     "format:check": {
+      "cache": false,
       "dependsOn": [
         "^format:check"
       ]
