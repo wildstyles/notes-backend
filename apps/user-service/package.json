@@ -6,6 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "format:check": "prettier --check \"src/**/*.ts\"",
     "format": "prettier --write \"src/**/*.ts\"",
     "check-types": "tsc --pretty --noEmit",
     "lint": "eslint \"{src,test}/**/*.ts\"",
