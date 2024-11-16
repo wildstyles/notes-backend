@@ -1,4 +1,5 @@
 import { DynamicModule, Module } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import {
   ClientGrpc,
   ClientsModule,
@@ -7,13 +8,19 @@ import {
 } from '@nestjs/microservices';
 
 import { InterceptingCall, InterceptorOptions, NextCall } from '@grpc/grpc-js';
+import { config } from 'dotenv';
 import { join } from 'path';
 
+import { EnvironmentVariables } from '../config/env.validation';
 import { RequestContextModule } from '../request-context/request-context.module';
 import { RequestContext } from '../request-context/request-context.service';
 import { GrpcClientService } from './grpc-client.service';
 import { ServiceName } from './grpc-client.service';
 import { REQUEST_ID_METADATA_KEY } from './grpc-logger.interceptor';
+
+config({ path: join(__dirname, '../../.env') });
+
+const configService = new ConfigService<EnvironmentVariables>();
 
 @Module({})
 export class GrpcClientModule {
@@ -71,16 +78,13 @@ const serviceConfigByName: Record<
   Required<Pick<GrpcOptions['options'], 'url' | 'package' | 'protoPath'>>
 > = {
   UserService: {
-    url: 'localhost:5001',
+    url: `${configService.getOrThrow('USER_SERVICE_URL')}:${configService.getOrThrow('USER_SERVICE_PORT')}`,
     package: 'user_service',
     protoPath: join(__dirname, '../../../../proto/user-service.proto'),
   },
   SupplierService: {
-    url: process.env.NODE_ENV === 'test' ? 'localhost:5002' : 'localhost:5002',
+    url: `${configService.getOrThrow('SUPPLIER_SERVICE_URL')}:${configService.getOrThrow('SUPPLIER_SERVICE_PORT')}`,
     package: 'supplier_service',
-    protoPath:
-      process.env.NODE_ENV === 'test'
-        ? join(__dirname, '../../../../proto/supplier-service.proto')
-        : join(__dirname, '../../../../proto/supplier-service.proto'),
+    protoPath: join(__dirname, '../../../../proto/supplier-service.proto'),
   },
 };

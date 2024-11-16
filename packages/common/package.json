@@ -88,10 +88,10 @@
     "uuid": "^10.0.0"
   },
   "devDependencies": {
+    "@nestjs/cli": "^10.4.7",
+    "@nestjs/testing": "^10.4.7",
     "@repo/eslint-config": "workspace:*",
     "@repo/ts-config": "workspace:*",
-    "@dotenvx/dotenvx": "^1.22.0",
-    "@nestjs/testing": "^10.4.7",
     "@types/jest": "28.1.8",
     "@types/node": "^16.0.0",
     "jest": "28.1.3",

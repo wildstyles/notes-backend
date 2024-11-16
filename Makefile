@@ -1,9 +1,8 @@
-COMPOSE_LOKI_FILE := docker-compose-loki.yml
-COMPOSE_SERVICES_FILE := docker-compose.yml
+COMPOSE_LOCAL_FILE := ./docker/docker-compose.local.yml
 
 up:
-	docker-compose -f $(COMPOSE_LOKI_FILE) -f $(COMPOSE_SERVICES_FILE) up -d
-	docker-compose logs -f
+	docker-compose --env-file ./packages/common/.env -f $(COMPOSE_LOCAL_FILE) -p nodes-backend up -d
+	turbo dev
 
 stop:
-	docker-compose -f $(COMPOSE_LOKI_FILE) -f $(COMPOSE_SERVICES_FILE) stop
+	docker-compose -p nodes-backend stop

@@ -1,3 +1,4 @@
+import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import {
   GrpcOptions,
@@ -7,12 +8,19 @@ import {
 import { FastifyAdapter } from '@nestjs/platform-fastify';
 import { TestingModule } from '@nestjs/testing';
 
+import { config } from 'dotenv';
 import { Logger } from 'nestjs-pino';
 import { join } from 'path';
+import * as path from 'path';
 
+import { EnvironmentVariables } from '../config/env.validation';
 import { ServiceName } from './grpc-client.service';
 import { HttpToGrpcExceptionFilter } from './grpc-exception.filter';
 import { GrpcLoggerInterceptor } from './grpc-logger.interceptor';
+
+config({ path: path.join(__dirname, '../../.env') });
+
+const configService = new ConfigService<EnvironmentVariables>();
 
 export const setupGrpcMicroservice = async (
   appModule: Function,
@@ -57,16 +65,13 @@ export const setupTestGrpcMicroservice = async (
 
 const configByServiceName: Record<ServiceName, GrpcOptions['options']> = {
   UserService: {
-    url: 'localhost:5001',
+    url: `${configService.getOrThrow('USER_SERVICE_URL')}:${configService.getOrThrow('USER_SERVICE_PORT')}`,
     protoPath: join(__dirname, '../../../../proto/user-service.proto'),
     package: 'user_service',
   },
   SupplierService: {
-    url: process.env.NODE_ENV === 'test' ? 'localhost:5002' : 'localhost:5002',
-    protoPath:
-      process.env.NODE_ENV === 'test'
-        ? join(__dirname, '../../../../proto/supplier-service.proto')
-        : join(__dirname, '../../../../proto/supplier-service.proto'),
+    url: `${configService.getOrThrow('SUPPLIER_SERVICE_URL')}:${configService.getOrThrow('SUPPLIER_SERVICE_PORT')}`,
+    protoPath: join(__dirname, '../../../../proto/supplier-service.proto'),
     package: 'supplier_service',
   },
 };

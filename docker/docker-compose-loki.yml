@@ -5,7 +5,7 @@ services:
     command: -config.file=/etc/loki/loki-config.yml
     restart: unless-stopped
     volumes:
-      - ./config/loki-config.yml:/etc/loki/loki-config.yml
+      - ../config/loki-config.yml:/etc/loki/loki-config.yml
     networks:
       - loki
     ports:
@@ -14,7 +14,7 @@ services:
   promtail:
     image: grafana/promtail:2.9.10
     volumes:
-      - ./config/promtail-config.yml:/etc/promtail/promtail-config.yml
+      - ../config/promtail-config.yml:/etc/promtail/promtail-config.yml
       - /var/lib/docker/containers:/var/lib/docker/containers:ro # https://ruanbekker.medium.com/logging-with-docker-promtail-and-grafana-loki-d920fd790ca8
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
@@ -29,8 +29,8 @@ services:
     user: '501'
     restart: unless-stopped
     volumes:
-      - ./config/grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yaml
-      - ./grafana:/var/lib/grafana
+      - ../config/grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yaml
+      - ../grafana:/var/lib/grafana
     ports:
       - '9000:3000'
     networks:

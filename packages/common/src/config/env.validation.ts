@@ -16,6 +16,10 @@ const schema = Type.Object({
   DB_USER: Type.String(),
   DB_NAME: Type.String(),
   DB_PASSWORD: Type.String(),
+  USER_SERVICE_URL: Type.String(),
+  USER_SERVICE_PORT: Type.String(),
+  SUPPLIER_SERVICE_URL: Type.String(),
+  SUPPLIER_SERVICE_PORT: Type.String(),
 });
 
 export type EnvironmentVariables = Static<typeof schema>;
