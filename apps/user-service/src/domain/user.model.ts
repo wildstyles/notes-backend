@@ -18,6 +18,6 @@ export class UserModel extends AggregateRoot<UserProps, UserId> {
       props: { ...props, password: `${props.password}hashed` },
     });
 
-    return '';
+    return supplier;
   }
 }
