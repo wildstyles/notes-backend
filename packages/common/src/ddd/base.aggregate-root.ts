@@ -4,7 +4,7 @@ import { DomainEvent } from './base.domain-event';
 import { BaseModel, Id } from './base.model';
 
 export abstract class AggregateRoot<
-  ModelProps extends {} = {},
+  ModelProps extends object = object,
   ModelId extends Id<string> = string,
 > extends BaseModel<ModelProps, ModelId> {
   private _domainEvents: DomainEvent[] = [];

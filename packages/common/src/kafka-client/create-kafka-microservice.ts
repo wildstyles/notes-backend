@@ -12,7 +12,7 @@ import { KafkaClientName } from './kafka-client.module';
 type KafkaServerName = Exclude<KafkaClientName, 'gateway'>;
 
 export const createKafkaMicroservice = async (
-  appModule: Function,
+  appModule: new (...args: unknown[]) => unknown,
   serverName: KafkaServerName,
 ) => {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(

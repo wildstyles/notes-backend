@@ -23,7 +23,7 @@ config({ path: path.join(__dirname, '../../.env') });
 const configService = new ConfigService<EnvironmentVariables>();
 
 export const setupGrpcMicroservice = async (
-  appModule: Function,
+  appModule: new (...args: unknown[]) => unknown,
   serverName: ServiceName,
 ) => {
   // check that logger module imported in appModule

@@ -2,17 +2,12 @@ import { Inject } from '@nestjs/common';
 
 import { DB_COMMAND_CONTEXT_TOKEN, IDbContextBase } from '../database';
 
-export interface ICommand {}
-
-export interface ICommandHandler<
-  TCommand extends ICommand = any,
-  TResult = any,
-> {
+export interface ICommandHandler<TCommand extends object, TResult = any> {
   execute(command: TCommand): Promise<TResult>;
 }
 
 export abstract class CommandHandler<
-  Command extends ICommand,
+  Command extends object,
   Response,
   DbContext extends IDbContextBase = IDbContextBase,
 > implements ICommandHandler<Command, Response>

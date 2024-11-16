@@ -1,10 +1,10 @@
-export interface ISagaContext<Params extends {} = {}> {
+export interface ISagaContext<Params extends object = object> {
   initialParams: Params;
 }
 
 export interface ISagaStep<
   Context extends ISagaContext,
-  UpdatedContext extends {},
+  UpdatedContext extends object,
 > {
   execute: (context: Context) => Promise<Required<UpdatedContext>>;
   rollback: (context: Context) => Promise<void>;
@@ -13,7 +13,7 @@ export interface ISagaStep<
 export class SagaOrchestrator<
   Context extends ISagaContext<Params>,
   Steps extends readonly ISagaStep<Context, any>[],
-  Params extends {},
+  Params extends object,
 > {
   protected steps: Steps;
   protected context: Context;

@@ -15,7 +15,7 @@ type ServiceByName = {
 };
 
 type TransformService<N extends keyof ServiceByName> = {
-  // @ts-ignore
+  // @ts-expect-error it's needed
   [K in keyof ServiceByName[N] as `${N}.${K}`]: ServiceByName[N][K] extends (
     ...args: infer P
   ) => infer R

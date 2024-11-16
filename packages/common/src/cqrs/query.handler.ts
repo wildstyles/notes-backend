@@ -2,14 +2,12 @@ import { Inject } from '@nestjs/common';
 
 import { DB_QUERY_CONTEXT_TOKEN, IDbContextBase } from '../database';
 
-export interface IQuery {}
-
-export interface IQueryHandler<TQuery extends IQuery = any, TResult = any> {
+export interface IQueryHandler<TQuery extends object, TResult = any> {
   execute(command: TQuery): Promise<TResult>;
 }
 
 export abstract class QueryHandler<
-  Query extends IQuery,
+  Query extends object,
   Response,
   DbContext extends IDbContextBase = IDbContextBase,
 > implements IQueryHandler<Query, Response>
