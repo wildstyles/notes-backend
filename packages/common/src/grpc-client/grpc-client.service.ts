@@ -8,9 +8,9 @@ import {
   UserServiceClient,
 } from './interfaces';
 
-const services = [USER_SERVICE_NAME, SUPPLIER_SERVICE_NAME] as const;
+const _services = [USER_SERVICE_NAME, SUPPLIER_SERVICE_NAME] as const;
 
-export type ServiceName = (typeof services)[number];
+export type ServiceName = (typeof _services)[number];
 
 type ServiceClientByName = {
   [USER_SERVICE_NAME]: UserServiceClient;
@@ -20,7 +20,7 @@ type ServiceClientByName = {
 @Injectable()
 export class GrpcClientService<
   T extends ServiceName,
-  S extends {} = ServiceClientByName[T],
+  S extends object = ServiceClientByName[T],
 > implements OnModuleInit
 {
   public methods: S;

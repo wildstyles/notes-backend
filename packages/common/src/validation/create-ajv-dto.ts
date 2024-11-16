@@ -17,7 +17,7 @@ export const EnumByKey = <T extends Record<string, number>>(enumObj: T) => {
   });
 };
 
-export interface AjvDto<T extends TProperties> {
+export interface AjvDto<T extends TProperties = TProperties> {
   new (): Static<TObject<T>>;
   isAjvDto: true;
   schema: TObject<T>;
@@ -35,12 +35,12 @@ export const createAjvDto = <T extends TProperties>(
   return AugmentedDto as unknown as AjvDto<T>;
 };
 
-export function isAjvDto(metatype: any): metatype is AjvDto<{}> {
+export function isAjvDto(metatype: any): metatype is AjvDto {
   return metatype?.isAjvDto;
 }
 
 export function PopulateApiProperty<T extends TProperties>(schema: TObject<T>) {
-  return function (constructor: Function) {
+  return function (constructor: new (...args: unknown[]) => unknown) {
     for (const key in schema.properties) {
       Reflect.decorate(
         // TODO: has poor required* support

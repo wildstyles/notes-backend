@@ -1,11 +1,8 @@
-import {
-  CommandHandler as BaseCommandHandler,
-  ICommand,
-} from '@repo/common/cqrs';
+import { CommandHandler as BaseCommandHandler } from '@repo/common/cqrs';
 
 import { IDbCommandContext } from '../../infrastructure/database/db-command-context.service';
 
 export abstract class CommandHandler<
-  Command extends ICommand,
+  Command extends object,
   Response,
 > extends BaseCommandHandler<Command, Response, IDbCommandContext> {}
