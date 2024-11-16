@@ -14,11 +14,13 @@
       ]
     },
     "check-types": {
+      "cache": false,
       "dependsOn": [
         "^check-types"
       ]
     },
     "lint": {
+      "cache": false,
       "dependsOn": [
         "^lint"
       ]
