@@ -1,17 +1,8 @@
-name: Lint Workflow
-
 on:
-  # workflow_dispatch
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+  workflow_call:
 
 jobs:
-  run-format-check:
-    name: Run Format Check
+  run-lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -40,9 +31,3 @@ jobs:
 
       - name: Types Check
         run: pnpm check-types
-
-      # - name: Upload Directory As Artifact
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: lint-workflow-artifact
-      #     path: ./
