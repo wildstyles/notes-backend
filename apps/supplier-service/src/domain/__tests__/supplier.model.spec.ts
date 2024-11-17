@@ -65,7 +65,7 @@ describe('SupplierModel', () => {
 
       const props = supplier.getProps();
 
-      expect(createSupplySpy).toHaveBeenCalledTimes(1);
+      expect(createSupplySpy).toHaveBeenCalledTimes(2);
       expect(createSupplySpy).toHaveBeenCalledWith({
         ...supplyPayload,
         supplierId: props.id,
