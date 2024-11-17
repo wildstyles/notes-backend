@@ -1,0 +1,26 @@
+name: Test Workflow
+
+on:
+  workflow_run:
+    workflows: [Lint Workflow]
+    branches: [master]
+    types: [completed]
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  run-test:
+    name: Run Test
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Download Artifact From Lint Workflow
+        uses: actions/download-artifact@v4
+        with:
+          name: lint-workflow-artifact
+          # run-id: ${{ github.event.workflow_run.id }}
+          # github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run Unit Test
+        run: pnpm test
