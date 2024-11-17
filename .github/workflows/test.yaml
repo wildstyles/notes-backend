@@ -1,11 +1,8 @@
-name: Unit Tests Workflow
-
 on:
   workflow_call:
 
 jobs:
   run-unit-tests:
-    name: Run Unit Tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

@@ -1,16 +1,8 @@
-name: Lint Workflow
-
 on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+  workflow_call:
 
 jobs:
-  run-format-check:
-    name: Run Format Check
+  run-lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -39,10 +31,3 @@ jobs:
 
       - name: Types Check
         run: pnpm check-types
-
-  run-unit-tests:
-    uses: ./.github/workflows/test.yaml
-
-  run-e2e-tests:
-    needs: run-unit-tests
-    uses: ./.github/workflows/test:e2e.yaml
