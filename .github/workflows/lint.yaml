@@ -1,7 +1,6 @@
 name: Lint Workflow
 
 on:
-  # workflow_dispatch
   push:
     branches:
       - master
@@ -46,3 +45,6 @@ jobs:
       #   with:
       #     name: lint-workflow-artifact
       #     path: ./
+
+  call-test-workflow:
+    uses: ./.github/workflows/test.yaml

@@ -1,9 +1,10 @@
 name: Test Workflow
 
 on:
-  workflow_run:
-    workflows: [Lint Workflow]
-    types: [completed]
+  workflow_call:
+  # workflow_run:
+  #   workflows: [Lint Workflow]
+  #   types: [completed]
   # pull_request:
   #   branches:
   #     - master
