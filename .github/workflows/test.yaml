@@ -3,7 +3,6 @@ name: Test Workflow
 on:
   workflow_run:
     workflows: [Lint Workflow]
-    branches: ['*']
     types: [completed]
   # pull_request:
   #   branches:
