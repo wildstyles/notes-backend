@@ -41,8 +41,8 @@ jobs:
       - name: Types Check
         run: pnpm check-types
 
-      - name: Upload Directory As Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: lint-workflow-artifact
-          path: ./
+      # - name: Upload Directory As Artifact
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: lint-workflow-artifact
+      #     path: ./
