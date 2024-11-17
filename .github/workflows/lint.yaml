@@ -47,4 +47,5 @@ jobs:
       #     path: ./
 
   call-test-workflow:
+    needs: run-format-check
     uses: ./.github/workflows/test.yaml
