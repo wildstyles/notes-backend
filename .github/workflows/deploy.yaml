@@ -34,21 +34,21 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: gateway-service
           IMAGE_TAG: ${{ steps.commit.outputs.short }}
-        run: make build_and_push_to_ecr project=$ECR_REGISTRY/$ECR_REPOSITORY_PREFIX/$ECR_REPOSITORY tag=$IMAGE_TAG port=3000
+        run: make build_and_push_to_ecr prefix=$ECR_REGISTRY/$ECR_REPOSITORY_PREFIX project=$ECR_REPOSITORY tag=$IMAGE_TAG port=3000
 
       - name: Build, tag, and push supplier-service image to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: supplier-service
           IMAGE_TAG: ${{ steps.commit.outputs.short }}
-        run: make build_and_push_to_ecr project=$ECR_REGISTRY/$ECR_REPOSITORY_PREFIX/$ECR_REPOSITORY tag=$IMAGE_TAG
+        run: make build_and_push_to_ecr prefix=$ECR_REGISTRY/$ECR_REPOSITORY_PREFIX project=$ECR_REPOSITORY tag=$IMAGE_TAG
 
       - name: Build, tag, and push user-service image to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: user-service
           IMAGE_TAG: ${{ steps.commit.outputs.short }}
-        run: make build_and_push_to_ecr project=$ECR_REGISTRY/$ECR_REPOSITORY_PREFIX/$ECR_REPOSITORY tag=$IMAGE_TAG
+        run: make build_and_push_to_ecr prefix=$ECR_REGISTRY/$ECR_REPOSITORY_PREFIX project=$ECR_REPOSITORY tag=$IMAGE_TAG
 
     # - name: Update kube config
     #   run: aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --region $AWS_REGION

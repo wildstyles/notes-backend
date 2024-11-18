@@ -11,8 +11,8 @@ stop:
 	docker-compose -p nodes-backend stop
 
 build_and_push_to_ecr:
-	docker build -t $(project):$(tag) --build-arg PROJECT=$(project) --build-arg PORT=$(port) -f ./docker/Dockerfile .
-	docker push $(project):$(tag)
+	docker build -t $(prefix)/$(project):$(tag) --build-arg PROJECT=$(project) --build-arg PORT=$(port) -f ./docker/Dockerfile .
+	docker push $(prefix)/$(project):$(tag)
 
 build_gateway_service:
 	docker build -t gateway-service:latest --build-arg PROJECT=gateway-service --build-arg PORT=3000 -f ./docker/Dockerfile .
