@@ -78,12 +78,12 @@ const serviceConfigByName: Record<
   Required<Pick<GrpcOptions['options'], 'url' | 'package' | 'protoPath'>>
 > = {
   UserService: {
-    url: `${configService.getOrThrow('USER_SERVICE_URL')}:${configService.getOrThrow('USER_SERVICE_PORT')}`,
+    url: `${configService.getOrThrow('USER_SERVICE_CLIENT_URL')}:${configService.getOrThrow('USER_SERVICE_PORT')}`,
     package: 'user_service',
     protoPath: join(__dirname, '../../../../proto/user-service.proto'),
   },
   SupplierService: {
-    url: `${configService.getOrThrow('SUPPLIER_SERVICE_URL')}:${configService.getOrThrow('SUPPLIER_SERVICE_PORT')}`,
+    url: `${configService.getOrThrow('SUPPLIER_SERVICE_CLIENT_URL')}:${configService.getOrThrow('SUPPLIER_SERVICE_PORT')}`,
     package: 'supplier_service',
     protoPath: join(__dirname, '../../../../proto/supplier-service.proto'),
   },

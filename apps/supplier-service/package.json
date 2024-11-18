@@ -15,7 +15,7 @@
     "test": "jest",
     "test:e2e": "make test_e2e",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "node dist/src/main",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "prebuild": "rimraf dist"
