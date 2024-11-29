@@ -2,11 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gateway-service
-  namespace: notes-backend
+  namespace: {{.Release.Namespace}}
   labels:
     app: gateway-service
 spec:
-  replicas: 1
+  replicas: {{.Values.deployment.replicas}}
   selector:
     matchLabels:
       app: gateway-service
@@ -17,8 +17,8 @@ spec:
     spec:
       containers:
         - name: gateway-service
-          image: notes-backend/gateway-service:latest
-          imagePullPolicy: Never
+          image: '{{.Values.deployment.image.repository}}:{{.Values.deployment.image.tag}}'
+          imagePullPolicy: {{.Values.deployment.imagePullPolicy}}
           envFrom:
             - configMapRef:
                 name: notes-config

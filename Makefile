@@ -27,3 +27,14 @@ build_supplier_service:
 
 build_user_service:
 	docker build -t notes-backend/user-service:latest --build-arg PROJECT=user-service -f ./docker/Dockerfile .
+
+helm_upgrade:
+	helm upgrade \
+	--namespace notes-backend \
+	--create-namespace \
+	--install \
+	--wait \
+	--timeout 10s \
+	-f k8s/gateway-service/values/values.local.yaml \
+	gateway-service-local \
+	k8s/gateway-service
