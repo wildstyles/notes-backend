@@ -1,29 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-service
-  namespace: notes-backend
+  name: gateway-service
+  namespace: {{.Release.Namespace}}
   labels:
-    app: user-service
+    app: gateway-service
 spec:
-  replicas: 1
+  replicas: {{.Values.deployment.replicas}}
   selector:
     matchLabels:
-      app: user-service
+      app: gateway-service
   template:
     metadata:
       labels:
-        app: user-service
+        app: gateway-service
     spec:
       containers:
-        - name: user-service
-          image: notes-backend/user-service:latest
-          imagePullPolicy: Never
+        - name: gateway-service
+          image: '{{.Values.deployment.image.repository}}:{{.Values.global.image.tag}}'
+          imagePullPolicy: {{.Values.deployment.imagePullPolicy}}
           envFrom:
             - configMapRef:
                 name: notes-config
           ports:
-            - containerPort: 5001
+            - containerPort: 3000
           resources:
             requests:
               memory: '300Mi'

@@ -1,29 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: supplier-service
-  namespace: notes-backend
+  name: user-service
+  namespace: {{.Release.Namespace}}
   labels:
-    app: supplier-service
+    app: user-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: supplier-service
+      app: user-service
   template:
     metadata:
       labels:
-        app: supplier-service
+        app: user-service
     spec:
       containers:
-        - name: supplier-service
-          image: notes-backend/supplier-service:latest
-          imagePullPolicy: Never
+        - name: user-service
+          image: '{{.Values.deployment.image.repository}}:{{.Values.global.image.tag}}'
+          imagePullPolicy: {{.Values.deployment.imagePullPolicy}}
           envFrom:
             - configMapRef:
                 name: notes-config
           ports:
-            - containerPort: 5002
+            - containerPort: 5001
           resources:
             requests:
               memory: '300Mi'

@@ -1,0 +1,5 @@
+deployment:
+  replicas: 1
+  imagePullPolicy: Never
+  image:
+    repository: notes-backend/supplier-service

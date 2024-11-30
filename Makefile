@@ -14,19 +14,22 @@ up_prod:
 
 stop:
 	docker-compose -p nodes-backend stop
+	
+build:
+	docker build -t $(prefix)/$(project):$(tag) --build-arg PROJECT=$(project) --build-arg PORT=$(port) -f ./docker/Dockerfile .
 
 build_and_push_to_ecr:
-	docker build -t $(prefix)/$(project):$(tag) --build-arg PROJECT=$(project) --build-arg PORT=$(port) -f ./docker/Dockerfile .
+	make build prefix=$(prefix) project=$(project) port=$(port) tag=$(tag)
 	docker push $(prefix)/$(project):$(tag)
 
 build_gateway_service:
-	docker build -t notes-backend/gateway-service:latest --build-arg PROJECT=gateway-service --build-arg PORT=3000 -f ./docker/Dockerfile .
+	make build prefix=notes-backend project=gateway-service port=3000 tag=0.1.0
 
 build_supplier_service:
-	docker build -t notes-backend/supplier-service:latest --build-arg PROJECT=supplier-service -f ./docker/Dockerfile .
+	make build prefix=notes-backend project=supplier-service tag=0.1.0
 
 build_user_service:
-	docker build -t notes-backend/user-service:latest --build-arg PROJECT=user-service -f ./docker/Dockerfile .
+	make build prefix=notes-backend project=user-service tag=0.1.0
 
 helm_upgrade:
 	helm upgrade \
@@ -35,6 +38,7 @@ helm_upgrade:
 	--install \
 	--wait \
 	--timeout 10s \
-	-f k8s/gateway-service/values/values.local.yaml \
-	gateway-service-local \
-	k8s/gateway-service
+	--render-subchart-notes \
+	--set global.image.tag=0.1.0 \
+	notes-backend-local \
+	helm
