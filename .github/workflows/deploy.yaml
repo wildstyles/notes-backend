@@ -59,7 +59,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ matrix.service-name }}
           IMAGE_TAG: ${{ needs.generate-image-tag.outputs.image_tag }}
-          PORT: ${{ (matrix.service-name == 'gateway-service') && '3000' }}
+          PORT: ${{ (matrix.service-name == 'gateway-service') && '3000' || '' }}
         run: make build_and_push_to_ecr prefix=$ECR_REGISTRY/$ECR_REPOSITORY_PREFIX project=$ECR_REPOSITORY tag=$IMAGE_TAG port=$PORT
 
       # - name: Build, tag, and push supplier-service image to Amazon ECR
