@@ -28,11 +28,16 @@ jobs:
           image_tag=$(git describe --tags --always --first-parent --match "[0-9]*.[0-9]*.[0-9]*")
           echo "image_tag=$image_tag" >> $GITHUB_OUTPUT
           echo "$image_tag"
-          echo "${{  github.ref_name }}"
 
   run-build:
     runs-on: ubuntu-latest
     needs: generate-image-tag
+    strategy:
+      matrix:
+        service-name:
+          - gateway-service
+          - user-service
+          - supplier-service
 
     steps:
       - name: Checkout
@@ -49,12 +54,13 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Build, tag, and push gateway-service image to Amazon ECR
+      - name: Build, tag, and push ${{ matrix.service-name }} image to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: gateway-service
+          ECR_REPOSITORY: ${{ matrix.service-name }}
           IMAGE_TAG: ${{ needs.generate-image-tag.outputs.image_tag }}
-        run: make build_and_push_to_ecr prefix=$ECR_REGISTRY/$ECR_REPOSITORY_PREFIX project=$ECR_REPOSITORY tag=$IMAGE_TAG port=3000
+          PORT: ${{ (matrix.service-name == 'gateway-service') && '3000' }}
+        run: make build_and_push_to_ecr prefix=$ECR_REGISTRY/$ECR_REPOSITORY_PREFIX project=$ECR_REPOSITORY tag=$IMAGE_TAG port=$PORT
 
       # - name: Build, tag, and push supplier-service image to Amazon ECR
       #   env:
