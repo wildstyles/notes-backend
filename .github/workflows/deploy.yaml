@@ -1,7 +1,9 @@
 on:
   push:
-    tags:
-      - '[0-9]*.[0-9]*.[0-9]*'
+    branches:
+      - tag-playgroud
+    # tags:
+    #   - '[0-9]*.[0-9]*.[0-9]*'
 
 env:
   ECR_REPOSITORY_PREFIX: notes-backend
@@ -25,6 +27,7 @@ jobs:
         run: |
           image_tag=$(git describe --tags --always --first-parent --match "[0-9]*.[0-9]*.[0-9]*")
           echo "image_tag=$image_tag" >> $GITHUB_OUTPUT
+          echo "$image_tag"
 
   run-build:
     runs-on: ubuntu-latest
