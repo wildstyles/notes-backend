@@ -12,6 +12,7 @@ env:
 
 jobs:
   generate-image-tag:
+    if: github.event_name == 'tags'
     runs-on: ubuntu-latest
     outputs:
       image_tag: ${{ steps.generate-image-tag.outputs.image_tag }}
