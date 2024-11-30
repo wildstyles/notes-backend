@@ -12,7 +12,7 @@ env:
 
 jobs:
   generate-image-tag:
-    if: github.event_name == 'tags'
+    if: (github.event_name == 'tags' && github.ref == 'refs/heads/master') || (github.ref != 'refs/heads/master' && github.event_name == 'push')
     runs-on: ubuntu-latest
     outputs:
       image_tag: ${{ steps.generate-image-tag.outputs.image_tag }}
