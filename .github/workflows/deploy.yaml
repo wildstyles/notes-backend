@@ -1,7 +1,7 @@
 on:
   push:
     tags:
-      - 'v[0-9]*.[0-9]*.[0-9]*'
+      - '[0-9]*.[0-9]*.[0-9]*'
 
 env:
   ECR_REPOSITORY_PREFIX: notes-backend
@@ -13,6 +13,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Generate Image Tag
+        id: generate-image-tag
+        run: |
+          image_tag=$(git describe --tags --always --first-parent --match "[0-9]*.[0-9]*.[0-9]*")
+          echo "image_tag=$image_tag" >> $GITHUB_OUTPUT
+
       - name: Set short git commit SHA
         id: commit
         uses: prompt/actions-commit-hash@v2
