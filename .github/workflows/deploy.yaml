@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - tag-playgroud
+      - develop
     tags:
       - '[0-9]*.[0-9]*.[0-9]*'
 
@@ -12,7 +12,8 @@ env:
 
 jobs:
   generate-image-tag:
-    if: (github.event_name == 'tags' && github.ref == 'refs/heads/master') || (github.ref != 'refs/heads/master' && github.event_name == 'push')
+    if: (github.event_name == 'tags' && github.ref == 'refs/heads/master') ||
+      (contains('refs/heads/develop refs/heads/stage', github.ref) && github.event_name == 'push')
     runs-on: ubuntu-latest
     outputs:
       image_tag: ${{ steps.generate-image-tag.outputs.image_tag }}
