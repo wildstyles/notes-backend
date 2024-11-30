@@ -62,29 +62,17 @@ services:
     # - kafka
     container_name: gateway-service
     build:
+      args:
+        - APP=gateway-service
       context: .
-    command: yarn start:dev gateway-service
+      dockerfile: ../docker/Dockerfile.local2
     volumes:
-      - .:/app
+      - ../:/app
     ports:
       - 3000:3000
     networks:
-      - loki
-
-  user-service:
-    image: notes-backend/user-service
-    depends_on:
-      - postgres-db
-      - gateway-service
-    container_name: user-service
-    build:
-      context: .
-    command: yarn start:dev user-service
-    networks:
-      - postgres-network
-      - loki
-    volumes:
-      - .:/app
+      # - loki
+      - ms-network
 
   supplier-service:
     image: notes-backend/supplier-service
@@ -93,20 +81,40 @@ services:
       - gateway-service
     container_name: supplier-service
     build:
+      args:
+        - APP=supplier-service
       context: .
-    command: yarn start:dev supplier-service
+      dockerfile: ../docker/Dockerfile.local2
     networks:
-      - loki
+      # - loki
+      - ms-network
       - postgres-network
     volumes:
-      - .:/app
+      - ../:/app
+
+  # user-service:
+  #   image: notes-backend/user-service
+  #   depends_on:
+  #     - postgres-db
+  #     - gateway-service
+  #   container_name: user-service
+  #   build:
+  #     context: .
+  #   command: yarn start:dev user-service
+  #   networks:
+  #     - postgres-network
+  #     - loki
+  #   volumes:
+  #     - .:/app
 
 networks:
   postgres-network:
     driver: bridge
-  loki:
-    external: true
-    name: notes-backend_loki
+  ms-network:
+    driver: bridge
+  # loki:
+  #   external: true
+  #   name: notes-backend_loki
 
 volumes:
   pgdata:

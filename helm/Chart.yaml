@@ -1,0 +1,22 @@
+apiVersion: v2
+name: notes-backend
+description: A Parent Helm chart for Kubernetes
+type: application
+# This is the chart version. This version number should be incremented each time you make changes
+# to the chart and its templates
+version: 0.1.0
+
+# versions needs to be changed, whenever corresponding the sub chart versions are changing
+dependencies:
+  - name: gateway-service
+    repository: ./charts/gateway-service
+    version: 0.1.0
+    condition: gateway-service.enabled
+  - name: supplier-service
+    repository: ./charts/supplier-service
+    version: 0.1.0
+    condition: supplier-service.enabled
+  - name: user-service
+    repository: ./charts/user-service
+    version: 0.1.0
+    condition: user-service.enabled

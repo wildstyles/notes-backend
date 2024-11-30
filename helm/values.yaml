@@ -1,0 +1,12 @@
+gateway-service:
+  enabled: true
+
+supplier-service:
+  enabled: true
+
+user-service:
+  enabled: true
+
+global:
+  image:
+    tag: ''

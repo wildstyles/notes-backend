@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: supplier-service
+  namespace: {{.Release.Namespace}}
+  labels:
+    app: supplier-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: supplier-service
+  template:
+    metadata:
+      labels:
+        app: supplier-service
+    spec:
+      containers:
+        - name: supplier-service
+          image: '{{.Values.deployment.image.repository}}:{{.Values.global.image.tag}}'
+          imagePullPolicy: {{.Values.deployment.imagePullPolicy}}
+          envFrom:
+            - configMapRef:
+                name: notes-config
+          ports:
+            - containerPort: 5002
+          resources:
+            requests:
+              memory: '300Mi'
+              cpu: '200m'
+            limits:
+              memory: '400Mi'

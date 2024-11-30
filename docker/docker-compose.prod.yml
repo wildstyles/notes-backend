@@ -1,0 +1,77 @@
+version: '3.8'
+services:
+  postgres-db:
+    container_name: postgres-db
+    restart: always
+    image: postgres:15.6-alpine
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      # postgres doesn't create DB automatically. Find a way to create DB automatically on init
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - '${DB_PORT}:5432'
+    networks:
+      - postgres-network
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -d ${DB_NAME} -U ${DB_USER}']
+      interval: 10s
+      timeout: 2s
+      retries: 10
+
+  gateway-service:
+    image: notes-backend/gateway-service
+    container_name: gateway-service
+    build:
+      args:
+        - PROJECT=gateway-service
+        - PORT=3000
+      context: ..
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - 3000:3000
+    networks:
+      - ms-network
+
+  supplier-service:
+    image: notes-backend/supplier-service
+    depends_on:
+      - postgres-db
+      - gateway-service
+    container_name: supplier-service
+    build:
+      args:
+        - PROJECT=supplier-service
+      context: ..
+      dockerfile: ./docker/Dockerfile
+    networks:
+      - ms-network
+      - postgres-network
+
+  user-service:
+    image: notes-backend/user-service
+    depends_on:
+      - postgres-db
+      - gateway-service
+    container_name: user-service
+    build:
+      args:
+        - PROJECT=user-service
+      context: ..
+      dockerfile: ./docker/Dockerfile
+    networks:
+      - postgres-network
+      - ms-network
+
+networks:
+  postgres-network:
+    driver: bridge
+  ms-network:
+    driver: bridge
+
+volumes:
+  pgdata:
+    name: postgres_delivery
+    driver: local

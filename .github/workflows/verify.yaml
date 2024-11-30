@@ -19,7 +19,8 @@ jobs:
     needs: [run-unit-tests, run-lint]
     uses: ./.github/workflows/test:e2e.yaml
 
-  deploy:
-    if: github.ref == 'refs/heads/master'
-    needs: [run-lint, run-unit-tests, run-e2e-tests]
-    uses: ./.github/workflows/deploy.yaml
+  # deploy:
+  #   # if: github.ref == 'refs/heads/master'
+  #   # needs: [run-lint, run-unit-tests, run-e2e-tests]
+  #   uses: ./.github/workflows/deploy.yaml
+  #   secrets: inherit
