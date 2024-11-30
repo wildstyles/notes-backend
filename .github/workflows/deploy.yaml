@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - 'master'
+      - tag-playgroud
     tags:
       - '[0-9]*.[0-9]*.[0-9]*'
 
@@ -11,48 +11,57 @@ env:
   AWS_REGION: eu-west-1
 
 jobs:
+  generate-image-tag:
+    if: (github.event_name == 'tags' && github.ref == 'refs/heads/master') || (github.ref != 'refs/heads/master' && github.event_name == 'push')
+    runs-on: ubuntu-latest
+    outputs:
+      image_tag: ${{ steps.generate-image-tag.outputs.image_tag }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Necessary to get all tags for IMAGE_TAG generation with git describe
+          fetch-depth: 0
+
+      - name: Generate Image Tag
+        id: generate-image-tag
+        run: |
+          image_tag=$(git describe --tags --always --first-parent --match "[0-9]*.[0-9]*.[0-9]*")
+          echo "image_tag=$image_tag" >> $GITHUB_OUTPUT
+          echo "$image_tag"
+
   run-build:
     runs-on: ubuntu-latest
+    needs: generate-image-tag
+    strategy:
+      matrix:
+        service-name:
+          - gateway-service
+          - user-service
+          - supplier-service
 
     steps:
-      - name: Set short git commit SHA
-        id: commit
-        uses: prompt/actions-commit-hash@v2
-
       - name: Checkout
         uses: actions/checkout@v4
 
-      # - name: Configure AWS credentials
-      #   uses: aws-actions/configure-aws-credentials@v4
-      #   with:
-      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #     aws-region: ${{ env.AWS_REGION }}
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
 
-      # - name: Login to Amazon ECR
-      #   id: login-ecr
-      #   uses: aws-actions/amazon-ecr-login@v2
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
 
-      # - name: Build, tag, and push gateway-service image to Amazon ECR
-      #   env:
-      #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-      #     ECR_REPOSITORY: gateway-service
-      #     IMAGE_TAG: ${{ steps.commit.outputs.short }}
-      #   run: make build_and_push_to_ecr prefix=$ECR_REGISTRY/$ECR_REPOSITORY_PREFIX project=$ECR_REPOSITORY tag=$IMAGE_TAG port=3000
-
-      # - name: Build, tag, and push supplier-service image to Amazon ECR
-      #   env:
-      #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-      #     ECR_REPOSITORY: supplier-service
-      #     IMAGE_TAG: ${{ steps.commit.outputs.short }}
-      #   run: make build_and_push_to_ecr prefix=$ECR_REGISTRY/$ECR_REPOSITORY_PREFIX project=$ECR_REPOSITORY tag=$IMAGE_TAG
-
-      # - name: Build, tag, and push user-service image to Amazon ECR
-      #   env:
-      #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-      #     ECR_REPOSITORY: user-service
-      #     IMAGE_TAG: ${{ steps.commit.outputs.short }}
-      #   run: make build_and_push_to_ecr prefix=$ECR_REGISTRY/$ECR_REPOSITORY_PREFIX project=$ECR_REPOSITORY tag=$IMAGE_TAG
+      - name: Build, tag, and push ${{ matrix.service-name }} image to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ matrix.service-name }}
+          IMAGE_TAG: ${{ needs.generate-image-tag.outputs.image_tag }}
+          PORT: ${{ (matrix.service-name == 'gateway-service') && '3000' || '' }}
+        run: make build_and_push_to_ecr prefix=$ECR_REGISTRY/$ECR_REPOSITORY_PREFIX project=$ECR_REPOSITORY tag=$IMAGE_TAG port=$PORT
 
     # - name: Update kube config
     #   run: aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --region $AWS_REGION
