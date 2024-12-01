@@ -2,6 +2,7 @@ on:
   push:
     branches:
       - develop
+      - stage
     tags:
       - '[0-9]*.[0-9]*.[0-9]*'
 
@@ -12,8 +13,10 @@ env:
 
 jobs:
   generate-image-tag:
-    if: (github.event_name == 'tags' && github.ref == 'refs/heads/master') ||
-      (contains('refs/heads/develop refs/heads/stage', github.ref) && github.event_name == 'push')
+    # Only run this on master tag or develop/stage branch push
+    if:
+      (github.event.base_ref == 'refs/heads/master' && startsWith(github.ref, 'refs/tags/')) ||
+      contains('refs/heads/develop refs/heads/stage', github.ref)
     runs-on: ubuntu-latest
     outputs:
       image_tag: ${{ steps.generate-image-tag.outputs.image_tag }}
