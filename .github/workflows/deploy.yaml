@@ -14,9 +14,11 @@ env:
 jobs:
   generate-image-tag:
     # Only run this on master tag or develop/stage branch push
+    # only run if there are added commits(prevents running on commit revert)
     if:
-      (github.event.base_ref == 'refs/heads/master' && startsWith(github.ref, 'refs/tags/')) ||
-      contains('refs/heads/develop refs/heads/stage', github.ref)
+      (github.event.commits[0] != null) &&
+      ((github.event.base_ref == 'refs/heads/master' && startsWith(github.ref, 'refs/tags/')) ||
+      contains('refs/heads/develop refs/heads/stage', github.ref))
     runs-on: ubuntu-latest
     outputs:
       image_tag: ${{ steps.generate-image-tag.outputs.image_tag }}
